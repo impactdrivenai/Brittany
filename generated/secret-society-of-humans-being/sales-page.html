@@ -1,0 +1,628 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Secret Society of Humans Being</title>
+<style>
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+  :root{
+    --dark:#1a1410;
+    --darker:#110e0a;
+    --gold:#c9a34f;
+    --gold-dim:#a8863d;
+    --burgundy:#6b2737;
+    --cream:#f0e6d3;
+    --warm:#f5e6c8;
+    --candle:rgba(201,163,79,.15);
+    --serif:Georgia,'Times New Roman',serif;
+    --sans:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;
+  }
+  html{scroll-behavior:smooth}
+  body{
+    background:var(--darker);
+    color:var(--cream);
+    font-family:var(--sans);
+    font-size:17px;
+    line-height:1.7;
+    overflow-x:hidden;
+  }
+
+  /* ── Glow & flicker animations ── */
+  @keyframes pulse{
+    0%,100%{box-shadow:0 0 20px rgba(201,163,79,.3),0 0 40px rgba(201,163,79,.15)}
+    50%{box-shadow:0 0 30px rgba(201,163,79,.5),0 0 60px rgba(201,163,79,.25)}
+  }
+  @keyframes flicker{
+    0%,100%{opacity:1}
+    20%{opacity:.92}
+    40%{opacity:1}
+    60%{opacity:.96}
+    80%{opacity:1}
+  }
+  @keyframes sealSpin{
+    0%{transform:translate(-50%,-50%) rotate(0deg)}
+    100%{transform:translate(-50%,-50%) rotate(360deg)}
+  }
+  @keyframes fadeUp{
+    from{opacity:0;transform:translateY(30px)}
+    to{opacity:1;transform:translateY(0)}
+  }
+
+  /* ── Utility ── */
+  .container{max-width:800px;margin:0 auto;padding:0 24px}
+  .gold{color:var(--gold)}
+  .divider{
+    width:120px;height:1px;
+    background:linear-gradient(90deg,transparent,var(--gold),transparent);
+    margin:60px auto;
+  }
+
+  /* ── CTA Button ── */
+  .cta{
+    display:inline-block;
+    background:linear-gradient(135deg,var(--gold),var(--gold-dim));
+    color:var(--darker);
+    font-family:var(--serif);
+    font-size:18px;
+    font-weight:700;
+    letter-spacing:.5px;
+    padding:18px 48px;
+    border:none;
+    cursor:pointer;
+    text-decoration:none;
+    animation:pulse 3s ease-in-out infinite;
+    transition:transform .2s,background .2s;
+  }
+  .cta:hover{transform:scale(1.03)}
+  .cta-wrap{text-align:center;margin:48px 0}
+
+  /* ── Section base ── */
+  section{padding:80px 0}
+  section:nth-child(even){background:var(--dark)}
+  h1,h2,h3{font-family:var(--serif);line-height:1.3}
+  h1{font-size:clamp(2rem,5vw,3.2rem);color:var(--warm)}
+  h2{font-size:clamp(1.6rem,3.5vw,2.2rem);color:var(--gold);margin-bottom:28px}
+  h3{font-size:1.2rem;color:var(--warm);margin-bottom:12px}
+  p{margin-bottom:20px}
+  p:last-child{margin-bottom:0}
+
+  /* ══════════════════════════════
+     HERO
+  ══════════════════════════════ */
+  .hero{
+    min-height:100vh;
+    display:flex;align-items:center;justify-content:center;
+    text-align:center;
+    padding:60px 24px;
+    position:relative;
+    background:
+      radial-gradient(ellipse at 50% 30%,rgba(201,163,79,.08) 0%,transparent 60%),
+      radial-gradient(ellipse at 50% 80%,rgba(107,39,55,.1) 0%,transparent 50%),
+      var(--darker);
+    overflow:hidden;
+  }
+  .hero::before{
+    content:'';position:absolute;top:0;left:0;right:0;bottom:0;
+    background:radial-gradient(circle at 50% 20%,rgba(201,163,79,.06) 0%,transparent 50%);
+    animation:flicker 4s ease-in-out infinite;
+    pointer-events:none;
+  }
+
+  /* Wax seal */
+  .seal{
+    width:100px;height:100px;
+    border-radius:50%;
+    background:radial-gradient(circle at 40% 35%,#8b3a4a,var(--burgundy),#4a1520);
+    margin:0 auto 40px;
+    position:relative;
+    box-shadow:0 0 30px rgba(107,39,55,.4),inset 0 2px 8px rgba(255,255,255,.1);
+  }
+  .seal::before{
+    content:'HSB';
+    position:absolute;top:50%;left:50%;
+    transform:translate(-50%,-50%);
+    font-family:var(--serif);font-size:22px;font-weight:700;
+    color:rgba(240,230,211,.7);letter-spacing:3px;
+  }
+  .seal::after{
+    content:'';position:absolute;top:-4px;left:-4px;right:-4px;bottom:-4px;
+    border-radius:50%;
+    border:1px solid rgba(201,163,79,.3);
+    animation:sealSpin 20s linear infinite;
+  }
+
+  .hero h1{margin-bottom:20px}
+  .hero .sub{
+    font-size:clamp(1rem,2.5vw,1.25rem);
+    color:rgba(240,230,211,.7);
+    max-width:560px;margin:0 auto 16px;
+    font-style:italic;font-family:var(--serif);
+  }
+  .hero .tagline{
+    font-size:.95rem;color:var(--gold-dim);
+    letter-spacing:2px;text-transform:uppercase;
+    margin-bottom:40px;
+  }
+
+  /* ══════════════════════════════
+     PROBLEM
+  ══════════════════════════════ */
+  .problem{background:var(--dark)}
+  .problem p{font-size:1.05rem;color:rgba(240,230,211,.85)}
+  .problem .highlight{
+    border-left:3px solid var(--burgundy);
+    padding:16px 24px;
+    margin:28px 0;
+    background:rgba(107,39,55,.08);
+    font-style:italic;
+    font-family:var(--serif);
+    color:var(--warm);
+  }
+
+  /* ══════════════════════════════
+     FAILED SOLUTIONS
+  ══════════════════════════════ */
+  .failed ul{
+    list-style:none;padding:0;
+  }
+  .failed li{
+    padding:16px 0 16px 32px;
+    position:relative;
+    border-bottom:1px solid rgba(201,163,79,.1);
+    color:rgba(240,230,211,.8);
+  }
+  .failed li::before{
+    content:'✕';position:absolute;left:0;top:16px;
+    color:var(--burgundy);font-weight:700;font-size:1.1rem;
+  }
+  .failed li strong{color:var(--cream)}
+
+  /* ══════════════════════════════
+     THE SHIFT
+  ══════════════════════════════ */
+  .shift{text-align:center}
+  .shift .room{
+    max-width:600px;margin:0 auto;
+    padding:40px;
+    background:linear-gradient(135deg,rgba(201,163,79,.06),rgba(107,39,55,.06));
+    border:1px solid rgba(201,163,79,.15);
+    position:relative;
+  }
+  .shift .room::before,.shift .room::after{
+    content:'';position:absolute;width:30px;height:30px;
+    border-color:var(--gold);border-style:solid;
+  }
+  .shift .room::before{top:-1px;left:-1px;border-width:1px 0 0 1px}
+  .shift .room::after{bottom:-1px;right:-1px;border-width:0 1px 1px 0}
+  .shift .room p{font-family:var(--serif);font-size:1.15rem;font-style:italic;color:var(--warm)}
+
+  /* ══════════════════════════════
+     OFFER
+  ══════════════════════════════ */
+  .offer-list{
+    list-style:none;padding:0;margin:32px 0;
+  }
+  .offer-list li{
+    padding:20px 0 20px 48px;
+    position:relative;
+    border-bottom:1px solid rgba(201,163,79,.08);
+  }
+  .offer-list li::before{
+    content:'';position:absolute;left:8px;top:26px;
+    width:16px;height:16px;border-radius:50%;
+    background:radial-gradient(circle,var(--gold),var(--gold-dim));
+    box-shadow:0 0 10px rgba(201,163,79,.3);
+    animation:flicker 3s ease-in-out infinite;
+  }
+  .offer-list li strong{color:var(--gold);display:block;margin-bottom:4px;font-size:1.05rem}
+  .offer-list li span{color:rgba(240,230,211,.75);font-size:.95rem}
+
+  /* ══════════════════════════════
+     TESTIMONIALS
+  ══════════════════════════════ */
+  .testimonials{text-align:center}
+  .testimonial-grid{
+    display:grid;grid-template-columns:1fr;gap:28px;
+    max-width:700px;margin:0 auto;
+  }
+  @media(min-width:600px){.testimonial-grid{grid-template-columns:1fr 1fr 1fr}}
+  .testimonial-card{
+    padding:28px 20px;
+    background:rgba(201,163,79,.04);
+    border:1px solid rgba(201,163,79,.12);
+    font-family:var(--serif);
+    font-style:italic;
+    font-size:.95rem;
+    color:rgba(240,230,211,.7);
+    position:relative;
+  }
+  .testimonial-card::before{
+    content:'"';position:absolute;top:8px;left:14px;
+    font-size:3rem;color:rgba(201,163,79,.2);line-height:1;
+  }
+  .testimonial-card .name{
+    display:block;margin-top:16px;
+    font-style:normal;font-family:var(--sans);
+    font-size:.8rem;letter-spacing:1px;text-transform:uppercase;
+    color:var(--gold-dim);
+  }
+
+  /* ══════════════════════════════
+     BONUSES
+  ══════════════════════════════ */
+  .bonus-card{
+    padding:32px;margin-bottom:24px;
+    background:linear-gradient(135deg,rgba(107,39,55,.08),rgba(201,163,79,.04));
+    border:1px solid rgba(201,163,79,.1);
+    position:relative;
+  }
+  .bonus-card .value{
+    position:absolute;top:16px;right:20px;
+    font-family:var(--serif);font-size:.85rem;
+    color:var(--gold-dim);font-style:italic;
+  }
+  .bonus-card h3{color:var(--gold)}
+
+  /* ══════════════════════════════
+     PRICE
+  ══════════════════════════════ */
+  .price-section{text-align:center}
+  .value-stack{
+    max-width:500px;margin:0 auto 40px;text-align:left;
+  }
+  .value-stack .row{
+    display:flex;justify-content:space-between;
+    padding:12px 0;
+    border-bottom:1px solid rgba(201,163,79,.08);
+    font-size:.95rem;
+  }
+  .value-stack .row .item{color:rgba(240,230,211,.8)}
+  .value-stack .row .val{color:var(--gold-dim);font-family:var(--serif)}
+  .value-stack .total{
+    display:flex;justify-content:space-between;
+    padding:16px 0;font-size:1.1rem;font-weight:700;
+    border-top:2px solid var(--gold);
+    margin-top:8px;
+  }
+  .value-stack .total .val{color:var(--gold)}
+  .price-reveal{
+    font-family:var(--serif);margin:32px 0;
+  }
+  .price-reveal .old{
+    font-size:1.4rem;color:rgba(240,230,211,.4);
+    text-decoration:line-through;
+  }
+  .price-reveal .actual{
+    font-size:clamp(2.5rem,6vw,3.5rem);
+    color:var(--gold);display:block;margin:8px 0;
+  }
+  .price-reveal .note{font-size:1rem;color:rgba(240,230,211,.6)}
+  .price-option{
+    display:inline-block;margin:8px 16px;padding:12px 24px;
+    border:1px solid rgba(201,163,79,.2);font-size:.95rem;
+    color:var(--cream);
+  }
+  .price-option strong{color:var(--gold)}
+
+  /* ══════════════════════════════
+     GUARANTEE
+  ══════════════════════════════ */
+  .guarantee-box{
+    max-width:600px;margin:0 auto;padding:40px;
+    text-align:center;
+    border:2px solid var(--burgundy);
+    background:rgba(107,39,55,.06);
+    position:relative;
+  }
+  .guarantee-box::before{
+    content:'';position:absolute;top:-12px;left:50%;transform:translateX(-50%);
+    width:60px;height:60px;border-radius:50%;
+    background:radial-gradient(circle at 40% 35%,#8b3a4a,var(--burgundy));
+    box-shadow:0 0 20px rgba(107,39,55,.4);
+  }
+  .guarantee-box::after{
+    content:'✓';position:absolute;top:-1px;left:50%;transform:translateX(-50%);
+    font-size:24px;color:var(--warm);line-height:1;
+  }
+  .guarantee-box h2{margin-top:20px}
+
+  /* ══════════════════════════════
+     FAQ
+  ══════════════════════════════ */
+  .faq-item{
+    padding:24px 0;
+    border-bottom:1px solid rgba(201,163,79,.08);
+  }
+  .faq-item h3{
+    color:var(--gold);font-size:1.05rem;
+    margin-bottom:8px;cursor:default;
+  }
+  .faq-item p{color:rgba(240,230,211,.75);font-size:.95rem}
+
+  /* ══════════════════════════════
+     FINAL CTA
+  ══════════════════════════════ */
+  .final{
+    text-align:center;
+    background:
+      radial-gradient(ellipse at 50% 50%,rgba(201,163,79,.06) 0%,transparent 60%),
+      var(--darker);
+  }
+  .final .spots{
+    display:inline-block;
+    padding:8px 24px;margin-bottom:32px;
+    border:1px solid var(--burgundy);
+    font-family:var(--serif);font-style:italic;
+    color:var(--warm);font-size:.95rem;
+  }
+
+  /* ══════════════════════════════
+     FOOTER
+  ══════════════════════════════ */
+  footer{
+    padding:40px 24px;text-align:center;
+    font-size:.8rem;color:rgba(240,230,211,.3);
+    border-top:1px solid rgba(201,163,79,.06);
+  }
+
+  /* ── Mobile adjustments ── */
+  @media(max-width:600px){
+    section{padding:56px 0}
+    .hero{min-height:90vh;padding:40px 20px}
+    .cta{padding:16px 36px;font-size:16px}
+    .shift .room{padding:28px 20px}
+    .bonus-card{padding:24px 20px}
+    .guarantee-box{padding:32px 20px}
+    .price-option{display:block;margin:8px auto;max-width:280px}
+  }
+</style>
+</head>
+<body>
+
+<!-- ════════ HERO ════════ -->
+<section class="hero">
+  <div class="container">
+    <div class="seal"></div>
+    <h1>You Were Not Made to Stare at Screens All Day</h1>
+    <p class="sub">A phone-free, AI-free secret society for people who want to remember what it feels like to be human.</p>
+    <p class="tagline">Art. Poetry. Mistakes. Presence. Candlelight.</p>
+    <div class="cta-wrap">
+      <a href="#checkout" class="cta">Claim Your Founding Membership</a>
+    </div>
+  </div>
+</section>
+
+<!-- ════════ PROBLEM ════════ -->
+<section class="problem">
+  <div class="container">
+    <h2>Something Is Wrong and You Can Feel It</h2>
+    <p>You used to make things. Draw. Write. Read for hours without checking anything. You used to sit with friends and talk until 2am — not about content strategies or algorithms, but about life. About love. About the weird dream you had last night.</p>
+    <p>Now you scroll. You scroll and you scroll and you scroll. And when you stop, you feel nothing. Not rested. Not inspired. Just... less.</p>
+    <div class="highlight">
+      You have 400 friends online and nobody to call at 2am. Your last creative act was choosing an Instagram filter. Your attention span is shorter than this paragraph.
+    </div>
+    <p>Your friendships happen in group chats. Your mornings are productivity hacks. Your reading list is curated by an algorithm that knows you better than you know yourself — and that should terrify you.</p>
+    <p>You're not burned out from working too hard. You're burned out from never being present. From performing instead of living. From optimizing every hour and feeling emptier with each one.</p>
+    <p>You're not anti-technology. You're anti-losing-yourself-to-it.</p>
+    <p>And somewhere, quietly, a thought keeps surfacing:</p>
+    <div class="highlight">
+      "I don't remember the last time I felt alive."
+    </div>
+  </div>
+</section>
+
+<!-- ════════ FAILED SOLUTIONS ════════ -->
+<section class="failed">
+  <div class="container">
+    <h2>You've Tried to Fix This Before</h2>
+    <p>You're smart. You've noticed the problem. And you've thrown solutions at it:</p>
+    <ul>
+      <li><strong>The digital detox.</strong> You turned off your phone for a weekend. It lasted until Sunday morning when you "just needed to check one thing." Back to square one by Monday.</li>
+      <li><strong>The journaling app.</strong> The irony of downloading an app to help you unplug was not lost on you. You used it for 11 days.</li>
+      <li><strong>The book club.</strong> It died after three meetings. Everyone was "so busy." Half the group was reading on Kindle anyway.</li>
+      <li><strong>The meditation app.</strong> It helped with anxiety. It did not fill the void where your creativity, your friendships, and your sense of self used to live.</li>
+      <li><strong>Deleting social media.</strong> You lasted a month. Came back because you felt more isolated, not less. The problem was never the platform — it's that there's nothing real to replace it with.</li>
+    </ul>
+    <p style="margin-top:28px;color:var(--warm);font-family:var(--serif);font-style:italic;text-align:center;">None of it worked because the answer was never another app, another hack, or another thing to do alone in your apartment.</p>
+  </div>
+</section>
+
+<!-- ════════ THE SHIFT ════════ -->
+<section class="shift">
+  <div class="container">
+    <h2>What If the Answer Is a Room?</h2>
+    <p style="max-width:580px;margin:0 auto 32px;color:rgba(240,230,211,.8);">Not a platform. Not a program. Not a 7-step framework delivered via email.</p>
+    <div class="room">
+      <p>A dark, candlelit room. Exposed brick. A long wooden bar top worn smooth by decades of elbows. Barrels in the corners. A fireplace crackling low. And a velvet pouch by the door where your phone goes in — and doesn't come out until you leave.</p>
+    </div>
+    <p style="margin-top:32px;max-width:580px;margin-left:auto;margin-right:auto;color:rgba(240,230,211,.8);">Inside that room: strangers who become friends. A poem read out loud by someone whose hands are shaking. A sketch drawn on a napkin. A story told without a punchline. Laughter that isn't for an audience. Silence that doesn't feel awkward.</p>
+    <p style="max-width:580px;margin:0 auto;color:var(--warm);font-family:var(--serif);font-style:italic;">No phones. No agenda. No Wi-Fi password.<br>Just humans. Being.</p>
+    <div class="cta-wrap">
+      <a href="#checkout" class="cta">Step Inside</a>
+    </div>
+  </div>
+</section>
+
+<!-- ════════ THE OFFER ════════ -->
+<section class="offer">
+  <div class="container">
+    <h2>What You Get as a Founding Member</h2>
+    <ul class="offer-list">
+      <li>
+        <strong>Monthly Gathering</strong>
+        <span>Held in a curated dark, intimate venue in your city — speakeasy bars, candlelit back rooms, brick-walled basements, fireside lounges. Each gathering has a theme: group reading, poetry sharing, letter writing, drawing, storytelling, collaborative art, or just sitting together in silence.</span>
+      </li>
+      <li>
+        <strong>Phone Lockbox at the Door</strong>
+        <span>Your phone goes in a velvet pouch when you walk in. You get it back when you leave. Non-negotiable. That's when the real thing starts.</span>
+      </li>
+      <li>
+        <strong>The Society Scroll</strong>
+        <span>A printed, mailed quarterly zine featuring member-submitted art, writing, mistakes, confessions, and bad poetry. No PDFs. No links. Paper and ink, delivered to your door.</span>
+      </li>
+      <li>
+        <strong>Physical Members' Directory</strong>
+        <span>A printed directory of members in your city. For organizing coffee, walks, or informal meetups between gatherings. Like a phone book, but for people you actually want to hear from.</span>
+      </li>
+      <li>
+        <strong>Founding Member Status</strong>
+        <span>Your name on the Wall of Humans — a physical wall in your chapter's venue. First 100 members per city only. This closes and never reopens.</span>
+      </li>
+      <li>
+        <strong>Chapter Expansion Voting</strong>
+        <span>Founding members vote on which city opens next. You shape where this goes.</span>
+      </li>
+    </ul>
+  </div>
+</section>
+
+<!-- ════════ TESTIMONIALS ════════ -->
+<section class="testimonials">
+  <div class="container">
+    <h2>From Humans Who Showed Up</h2>
+    <div class="testimonial-grid">
+      <div class="testimonial-card">
+        [REPLACE WITH REAL TESTIMONIAL — ideally about the feeling of the first gathering, the relief of putting the phone away, or a specific moment that stuck with them]
+        <span class="name">— [Name], [City]</span>
+      </div>
+      <div class="testimonial-card">
+        [REPLACE WITH REAL TESTIMONIAL — ideally about the community aspect, making unexpected friends, or feeling less alone]
+        <span class="name">— [Name], [City]</span>
+      </div>
+      <div class="testimonial-card">
+        [REPLACE WITH REAL TESTIMONIAL — ideally about rediscovering creativity, writing again, making something for the first time in years]
+        <span class="name">— [Name], [City]</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════ BONUSES ════════ -->
+<section class="bonuses">
+  <div class="container">
+    <h2>You'll Also Receive</h2>
+    <div class="bonus-card">
+      <span class="value">Value: $45</span>
+      <h3>The First Gathering Kit</h3>
+      <p>Mailed to you before your first gathering. Inside: a hand-stamped, wax-sealed invitation to your first meeting. A pocket-sized unlined notebook. A single match and a tea candle — light this when you need to remember. And a card with the Society's only rule:</p>
+      <p style="font-family:var(--serif);font-style:italic;color:var(--warm);text-align:center;margin-top:12px">"Be here. Be bad at it. Be human."</p>
+    </div>
+    <div class="bonus-card">
+      <span class="value">Value: Priceless</span>
+      <h3>The Mistake Museum Submission</h3>
+      <p>Every member submits one "beautiful mistake" — a failed poem, a terrible drawing, a confession, an embarrassing story — displayed anonymously at gatherings. Because the things we hide are the most human things about us.</p>
+    </div>
+    <div class="bonus-card">
+      <span class="value">Value: $35</span>
+      <h3>Founding Member Wax Seal Stamp</h3>
+      <p>A custom brass wax seal with the Society's emblem. For sealing letters, journals, or just feeling like you belong to something older than the internet.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ════════ PRICE ════════ -->
+<section class="price-section" id="checkout">
+  <div class="container">
+    <h2>The Investment</h2>
+    <div class="value-stack">
+      <div class="row"><span class="item">Monthly Gathering (12/year)</span><span class="val">$360</span></div>
+      <div class="row"><span class="item">The Society Scroll (4 issues)</span><span class="val">$80</span></div>
+      <div class="row"><span class="item">First Gathering Kit</span><span class="val">$45</span></div>
+      <div class="row"><span class="item">Founding Member Wax Seal</span><span class="val">$35</span></div>
+      <div class="row"><span class="item">Members' Directory</span><span class="val">$20</span></div>
+      <div class="row"><span class="item">Founding Member Status</span><span class="val">Can't buy later</span></div>
+      <div class="total"><span class="item">Total Value</span><span class="val">$540+</span></div>
+    </div>
+    <div class="price-reveal">
+      <span class="old">$540</span>
+      <span class="actual">$33/month</span>
+      <span class="note">Founding members lock in this rate permanently.<br>Price goes to $55/month after 100 spots fill.</span>
+    </div>
+    <div style="margin:24px 0">
+      <span class="price-option"><strong>Monthly:</strong> $33/month</span>
+      <span class="price-option"><strong>Annual:</strong> $297/year (save 25%)</span>
+    </div>
+    <div class="cta-wrap">
+      <a href="#checkout" class="cta">Become a Founding Member — $33/mo</a>
+    </div>
+  </div>
+</section>
+
+<!-- ════════ GUARANTEE ════════ -->
+<section>
+  <div class="container">
+    <div class="guarantee-box">
+      <h2>The First Gathering Guarantee</h2>
+      <p style="margin-top:16px">Come to your first gathering. Walk into the room. Put your phone in the pouch. Stay for the evening.</p>
+      <p>If you don't leave feeling more alive than you have in months — if you don't feel something shift in your chest — email us and we'll refund your membership in full.</p>
+      <p>No forms. No "feedback surveys." Just an honest email. We'll believe you.</p>
+      <p style="font-family:var(--serif);font-style:italic;color:var(--gold);margin-top:16px">We can make this guarantee because it works. Every time.<br>Phones down. Candles lit. Humans being.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ════════ FAQ ════════ -->
+<section>
+  <div class="container">
+    <h2 style="text-align:center">Questions You Might Have</h2>
+    <div class="faq-item">
+      <h3>"Is this a cult?"</h3>
+      <p>We get it. "Secret society" sounds intense. But the only thing we're recruiting for is being present. No leaders. No ideology. No matching robes. Just people in a room doing human things. The secrecy is about intimacy, not exclusion.</p>
+    </div>
+    <div class="faq-item">
+      <h3>"I'm not creative. I can't draw or write poetry."</h3>
+      <p>Perfect. This isn't for artists. It's for humans. You don't need talent. You need a pulse and the willingness to show up without your phone. Some of the best moments at gatherings come from people who say "I'm not creative" and then make something that makes the whole room go quiet.</p>
+    </div>
+    <div class="faq-item">
+      <h3>"What if I'm introverted?"</h3>
+      <p>Even better. This isn't a networking event. There's no forced mingling, no name tags, no icebreakers. Some gathering activities are silent — reading together, drawing, writing. You can participate at whatever depth feels right. Introverts tend to love this the most.</p>
+    </div>
+    <div class="faq-item">
+      <h3>"What actually happens at a gathering?"</h3>
+      <p>You arrive. Phone goes in the pouch. You might read a passage out loud with strangers. Sketch someone sitting across from you. Write a letter to someone you love. Share a story you've never told anyone. Or just sit in a room lit by candles and feel what it's like to not be reachable for two hours. Every gathering is different. None of them are boring.</p>
+    </div>
+    <div class="faq-item">
+      <h3>"What cities are you in?"</h3>
+      <p>Savannah, GA is the founding chapter. New cities open as chapters fill — founding members vote on which city comes next. If your city isn't here yet, join anyway. Your vote counts, and you'll receive The Society Scroll and the full Founding Member package immediately.</p>
+    </div>
+    <div class="faq-item">
+      <h3>"Can I bring a friend?"</h3>
+      <p>Not to your first gathering — we want you to experience it without a social safety net. After that, you can invite one guest per gathering. Most members say the solo first experience is what made it special.</p>
+    </div>
+    <div class="faq-item">
+      <h3>"What's the phone policy, exactly?"</h3>
+      <p>Your phone goes into a velvet pouch at the door. It stays there until the gathering ends. If you have an emergency contact situation, let the host know — they'll keep your phone accessible. Otherwise, it's two hours without a screen. You'll survive. You might even thrive.</p>
+    </div>
+    <div class="faq-item">
+      <h3>"Are you anti-technology?"</h3>
+      <p>No. We're pro-human. Technology is a tool. The problem isn't that phones exist — it's that we've forgotten how to exist without them. We're not asking you to throw your phone in a river. We're asking you to put it in a pouch for two hours a month and remember what you're like without it.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ════════ FINAL CTA ════════ -->
+<section class="final">
+  <div class="container">
+    <h2>The Door Is Open.<br>But Not for Long.</h2>
+    <div class="spots">[XX] of 100 founding spots remaining — Savannah Chapter</div>
+    <p style="max-width:560px;margin:0 auto 20px;color:rgba(240,230,211,.8)">When 100 founding members join, the price rises to $55/month and the Founding Member Wall closes permanently. There is no waitlist hack. There is no "get in later at this price." The room is small on purpose.</p>
+    <p style="font-family:var(--serif);font-style:italic;color:var(--warm);margin-bottom:8px">You've scrolled long enough.</p>
+    <p style="color:rgba(240,230,211,.6);margin-bottom:32px">Put the phone down after this one last click.</p>
+    <div class="cta-wrap" style="margin-top:0">
+      <a href="#checkout" class="cta">Join the Secret Society — $33/mo</a>
+    </div>
+  </div>
+</section>
+
+<!-- ════════ FOOTER ════════ -->
+<footer>
+  <div class="container">
+    <p>The Secret Society of Humans Being</p>
+    <p style="margin-top:8px">Be here. Be bad at it. Be human.</p>
+    <p style="margin-top:16px">[PLACEHOLDER: Add legal links, contact email, social links]</p>
+  </div>
+</footer>
+
+</body>
+</html>
