@@ -8,298 +8,371 @@
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%94%A5%3C/text%3E%3C/svg%3E">
 <style>
 :root {
-  --bg: #0b1120;
-  --bg-2: #111827;
-  --card: #1e293b;
-  --card-2: #273449;
-  --border: #334155;
-  --text: #f1f5f9;
-  --text-dim: #94a3b8;
-  --text-mute: #64748b;
-  --accent: #f43f5e;
-  --accent-2: #ec4899;
-  --accent-3: #f59e0b;
-  --success: #10b981;
+  /* Brand — Win With Systems */
+  --ink: #060709;
+  --pink: #E8187A;
+  --pink-dark: #b81260;
+  --forest: #122C25;
+  --forest-2: #0b1e19;
+  --lime: #B8D43A;
+  --lime-dark: #8fa62b;
+  --cream: #FFFAFA;
+  --cream-2: #f5eeee;
+  --warm-border: #ecdede;
+  --warm-mute: #8a7f7f;
+  --warm-dim: #4a4040;
+
+  /* Semantic roles */
+  --bg: var(--cream);
+  --bg-2: var(--cream-2);
+  --card: #ffffff;
+  --card-2: var(--cream-2);
+  --border: var(--warm-border);
+  --text: var(--ink);
+  --text-dim: var(--warm-dim);
+  --text-mute: var(--warm-mute);
+  --accent: var(--pink);
+  --success: var(--lime);
   --warn: #f59e0b;
-  --danger: #ef4444;
-  --info: #3b82f6;
-  --shadow: 0 10px 30px rgba(0,0,0,0.4);
+  --danger: #d61a1a;
+  --info: var(--forest);
+
+  --shadow: 0 10px 30px rgba(6,7,9,0.08);
+  --shadow-lg: 0 20px 60px rgba(6,7,9,0.12);
   --radius: 16px;
-  --grad-hero: linear-gradient(135deg, #f43f5e 0%, #ec4899 50%, #a855f7 100%);
-  --grad-success: linear-gradient(135deg, #10b981 0%, #059669 100%);
-  --grad-fire: linear-gradient(135deg, #f59e0b 0%, #ef4444 100%);
-  --grad-cool: linear-gradient(135deg, #3b82f6 0%, #06b6d4 100%);
+  --radius-lg: 20px;
 }
 
 * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
-html, body { background: var(--bg); color: var(--text); font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif; overscroll-behavior-y: none; }
-body { min-height: 100vh; padding-bottom: 80px; }
+html, body {
+  background: var(--bg); color: var(--text);
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, system-ui, sans-serif;
+  font-feature-settings: 'ss01', 'cv11';
+  overscroll-behavior-y: none;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+body { min-height: 100vh; padding-bottom: 96px; }
+
+.display {
+  font-family: 'Bricolage Grotesque', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+  font-weight: 900;
+  letter-spacing: -0.04em;
+  line-height: 0.92;
+}
 
 .app { max-width: 720px; margin: 0 auto; padding: 16px; }
-@media (min-width: 1024px) { .app { max-width: 1100px; } body { padding-bottom: 20px; } }
+@media (min-width: 1024px) { .app { max-width: 1100px; padding: 24px; } body { padding-bottom: 24px; } }
 
-/* HEADER */
+/* SVG ICON DEFAULT */
+svg.ico { display: inline-block; vertical-align: middle; flex-shrink: 0; }
+
+/* MASTHEAD */
+.masthead {
+  padding: 20px 4px 4px;
+}
+.mast-brand {
+  font-family: 'Bricolage Grotesque', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+  font-weight: 900;
+  font-size: 56px;
+  line-height: 0.88;
+  letter-spacing: -0.05em;
+  color: var(--ink);
+  text-transform: uppercase;
+  display: flex; align-items: baseline; gap: 8px; flex-wrap: wrap;
+}
+@media (min-width: 720px) { .mast-brand { font-size: 84px; } }
+.mast-brand .mast-accent { color: var(--pink); }
+.mast-tagline {
+  font-size: 14px; font-weight: 500; color: var(--warm-dim); margin-top: 8px;
+  font-style: italic; letter-spacing: -0.01em;
+}
+@media (min-width: 720px) { .mast-tagline { font-size: 16px; } }
+
 .header {
   display: flex; justify-content: space-between; align-items: center;
-  padding: 12px 4px 20px;
+  padding: 20px 4px 4px;
 }
-.brand { display: flex; align-items: center; gap: 10px; }
-.brand-badge {
-  width: 40px; height: 40px; border-radius: 12px;
-  background: var(--grad-hero); display: grid; place-items: center;
-  font-size: 20px; box-shadow: 0 4px 20px rgba(244,63,94,0.4);
-}
-.brand-title { font-size: 15px; font-weight: 700; letter-spacing: -0.01em; }
-.brand-sub { font-size: 11px; color: var(--text-dim); text-transform: uppercase; letter-spacing: 0.08em; }
+.header-meta { display: flex; flex-direction: column; }
+.header-greeting { font-size: 13px; font-weight: 700; color: var(--warm-dim); text-transform: uppercase; letter-spacing: 0.08em; }
+.header-date { font-size: 12px; color: var(--warm-mute); margin-top: 2px; }
 .header-actions { display: flex; gap: 8px; }
 .icon-btn {
-  width: 40px; height: 40px; border-radius: 12px; border: 1px solid var(--border);
-  background: var(--card); color: var(--text); cursor: pointer; display: grid; place-items: center;
-  font-size: 18px; transition: all .15s;
+  width: 44px; height: 44px; border-radius: 14px; border: 1.5px solid var(--warm-border);
+  background: var(--card); color: var(--ink); cursor: pointer; display: grid; place-items: center;
+  transition: all .15s; padding: 0;
 }
-.icon-btn:hover { background: var(--card-2); transform: translateY(-1px); }
+.icon-btn:hover { background: var(--forest); color: var(--cream); border-color: var(--forest); transform: translateY(-1px); }
 .icon-btn:active { transform: translateY(1px); }
 
-/* HERO / MISSION CARD */
+/* MISSION CARD — forest hero */
 .mission-card {
-  background: var(--grad-hero); border-radius: 20px; padding: 20px;
-  color: white; box-shadow: 0 20px 60px rgba(244,63,94,0.3);
-  position: relative; overflow: hidden;
+  background: var(--forest); border-radius: var(--radius-lg); padding: 24px;
+  color: var(--cream); box-shadow: var(--shadow-lg);
+  position: relative; overflow: hidden; margin-top: 12px;
 }
 .mission-card::before {
-  content: ''; position: absolute; top: -50%; right: -20%; width: 200px; height: 200px;
-  background: radial-gradient(circle, rgba(255,255,255,0.15), transparent 70%);
+  content: ''; position: absolute; top: -40%; right: -20%; width: 320px; height: 320px;
+  background: radial-gradient(circle, rgba(184,212,58,0.15), transparent 65%);
+  pointer-events: none;
 }
 .mission-tag {
-  display: inline-block; background: rgba(255,255,255,0.2); padding: 4px 10px;
-  border-radius: 999px; font-size: 11px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase;
+  display: inline-block; background: var(--lime); color: var(--forest); padding: 5px 12px;
+  border-radius: 999px; font-size: 11px; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase;
 }
-.mission-title { font-size: 22px; font-weight: 800; margin-top: 8px; letter-spacing: -0.02em; line-height: 1.15; }
-@media (min-width: 720px) { .mission-title { font-size: 28px; } }
-.mission-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-top: 16px; position: relative; z-index: 1; }
+.mission-title {
+  font-family: 'Bricolage Grotesque', -apple-system, system-ui, sans-serif;
+  font-size: 32px; font-weight: 900; margin-top: 12px; letter-spacing: -0.03em; line-height: 1.0;
+  position: relative; z-index: 1;
+}
+@media (min-width: 720px) { .mission-title { font-size: 48px; } }
+.mission-title .lbs-down { color: var(--lime); }
+.mission-title .lbs-togo { color: var(--pink); }
+.mission-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-top: 20px; position: relative; z-index: 1; }
 .mission-stat { text-align: center; }
-.mission-stat-num { font-size: 22px; font-weight: 800; }
-.mission-stat-lbl { font-size: 10px; opacity: 0.85; text-transform: uppercase; letter-spacing: 0.06em; margin-top: 2px; }
+.mission-stat-num {
+  font-family: 'Bricolage Grotesque', -apple-system, system-ui, sans-serif;
+  font-size: 30px; font-weight: 900; line-height: 1; letter-spacing: -0.02em;
+}
+.mission-stat-lbl { font-size: 10px; opacity: 0.75; text-transform: uppercase; letter-spacing: 0.08em; margin-top: 4px; font-weight: 700; }
 
 .progress-bar {
-  height: 8px; background: rgba(255,255,255,0.2); border-radius: 999px; overflow: hidden;
-  margin-top: 14px; position: relative; z-index: 1;
+  height: 10px; background: rgba(255,250,250,0.15); border-radius: 999px; overflow: hidden;
+  margin-top: 20px; position: relative; z-index: 1;
 }
-.progress-fill { height: 100%; background: white; border-radius: 999px; transition: width .6s cubic-bezier(0.34, 1.56, 0.64, 1); }
+.progress-fill { height: 100%; background: var(--lime); border-radius: 999px; transition: width .6s cubic-bezier(0.34, 1.56, 0.64, 1); }
 
-.october-tracker { margin-top: 14px; padding: 12px; background: rgba(0,0,0,0.25); border-radius: 12px; position: relative; z-index: 1; }
-.oct-line { display: flex; justify-content: space-between; align-items: baseline; font-size: 12px; opacity: 0.9; }
-.oct-progress { height: 5px; background: rgba(255,255,255,0.2); border-radius: 999px; margin-top: 6px; overflow: hidden; }
-.oct-fill { height: 100%; background: #fde047; border-radius: 999px; box-shadow: 0 0 10px rgba(253,224,71,0.6); }
+.october-tracker { margin-top: 16px; padding: 14px 16px; background: rgba(255,250,250,0.08); border-radius: 12px; position: relative; z-index: 1; border: 1px solid rgba(255,250,250,0.12); }
+.oct-line { display: flex; justify-content: space-between; align-items: baseline; font-size: 12px; opacity: 0.95; font-weight: 600; }
+.oct-progress { height: 6px; background: rgba(255,250,250,0.15); border-radius: 999px; margin-top: 8px; overflow: hidden; }
+.oct-fill { height: 100%; background: var(--pink); border-radius: 999px; box-shadow: 0 0 12px rgba(232,24,122,0.5); }
 
 /* SECTIONS */
 .section-title {
-  font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em;
-  color: var(--text-dim); margin: 24px 4px 12px;
+  font-family: 'Bricolage Grotesque', -apple-system, system-ui, sans-serif;
+  font-size: 22px; font-weight: 900; letter-spacing: -0.02em;
+  color: var(--ink); margin: 28px 4px 12px; display: flex; align-items: center; gap: 10px;
 }
+.section-title::after { content: ''; flex: 1; height: 2px; background: var(--ink); opacity: 0.08; }
 
 /* QUICK ACTIONS */
 .quick-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; }
-@media (min-width: 720px) { .quick-grid { grid-template-columns: repeat(4, 1fr); } }
 .quick-btn {
-  background: var(--card); border: 1px solid var(--border); border-radius: 14px;
-  padding: 14px 8px; display: flex; flex-direction: column; align-items: center; gap: 6px;
-  cursor: pointer; transition: all .15s; color: var(--text); font-family: inherit;
+  background: var(--card); border: 1.5px solid var(--warm-border); border-radius: 16px;
+  padding: 16px 8px; display: flex; flex-direction: column; align-items: center; gap: 8px;
+  cursor: pointer; transition: all .15s; color: var(--ink); font-family: inherit;
 }
-.quick-btn:hover { background: var(--card-2); transform: translateY(-2px); border-color: var(--accent); }
+.quick-btn:hover { background: var(--forest); border-color: var(--forest); color: var(--cream); transform: translateY(-2px); }
+.quick-btn:hover .quick-icon { color: var(--lime); }
 .quick-btn:active { transform: translateY(0); }
-.quick-icon { font-size: 22px; }
-.quick-label { font-size: 11px; font-weight: 600; }
+.quick-icon { color: var(--pink); }
+.quick-label { font-size: 11px; font-weight: 700; letter-spacing: -0.01em; }
 
 /* CARDS */
 .card {
-  background: var(--card); border: 1px solid var(--border); border-radius: var(--radius);
-  padding: 16px; margin-bottom: 12px;
+  background: var(--card); border: 1.5px solid var(--warm-border); border-radius: var(--radius);
+  padding: 20px; margin-bottom: 12px;
 }
-.card-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
-.card-title { font-size: 15px; font-weight: 700; }
-.card-sub { font-size: 12px; color: var(--text-dim); }
+.card-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px; }
+.card-title { font-size: 16px; font-weight: 800; letter-spacing: -0.01em; }
+.card-sub { font-size: 12px; color: var(--warm-dim); font-weight: 500; }
 
 /* MACROS RINGS */
 .macros-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 8px; }
 .macro-ring { display: flex; flex-direction: column; align-items: center; gap: 6px; }
-.macro-ring svg { width: 60px; height: 60px; transform: rotate(-90deg); }
+.macro-ring svg.ring { width: 62px; height: 62px; transform: rotate(-90deg); }
 .macro-ring circle { fill: none; stroke-width: 6; }
-.macro-ring .bg { stroke: var(--border); }
+.macro-ring .bg { stroke: var(--warm-border); }
 .macro-ring .fg { stroke-dasharray: 157; stroke-dashoffset: 157; transition: stroke-dashoffset .6s ease; stroke-linecap: round; }
-.macro-num { font-size: 12px; font-weight: 700; text-align: center; }
-.macro-name { font-size: 10px; color: var(--text-dim); text-transform: uppercase; letter-spacing: 0.06em; }
+.macro-num { font-size: 12px; font-weight: 800; text-align: center; color: var(--ink); }
+.macro-num-total { color: var(--warm-mute); font-weight: 500; }
+.macro-name { font-size: 9px; color: var(--warm-mute); text-transform: uppercase; letter-spacing: 0.08em; font-weight: 700; }
 
 /* WEIGHT CHART */
-.chart-wrap { height: 180px; position: relative; margin-top: 12px; }
+.chart-wrap { height: 200px; position: relative; margin-top: 12px; }
 .chart-wrap svg { width: 100%; height: 100%; }
-.chart-line { fill: none; stroke: var(--accent); stroke-width: 2.5; }
-.chart-area { fill: url(#chart-grad); opacity: 0.4; }
-.chart-dot { fill: var(--accent); stroke: var(--card); stroke-width: 2; }
-.chart-goal { stroke: var(--success); stroke-dasharray: 4 4; stroke-width: 1.5; fill: none; opacity: 0.7; }
+.chart-line { fill: none; stroke: var(--pink); stroke-width: 3; }
+.chart-area { fill: url(#chart-grad); opacity: 0.6; }
+.chart-dot { fill: var(--pink); stroke: var(--cream); stroke-width: 2.5; }
+.chart-goal { stroke: var(--lime-dark); stroke-dasharray: 4 4; stroke-width: 2; fill: none; }
 
 /* STREAK */
 .streak-card {
-  background: var(--grad-fire); border-radius: var(--radius); padding: 16px; color: white;
-  display: flex; align-items: center; gap: 16px; box-shadow: 0 10px 30px rgba(245,158,11,0.25);
+  background: var(--pink); border-radius: var(--radius); padding: 20px; color: var(--cream);
+  display: flex; align-items: center; gap: 20px; box-shadow: 0 10px 30px rgba(232,24,122,0.25);
 }
-.streak-num { font-size: 42px; font-weight: 900; line-height: 1; }
-.streak-lbl { font-size: 11px; text-transform: uppercase; letter-spacing: 0.08em; opacity: 0.9; }
-.streak-sub { font-size: 13px; opacity: 0.95; margin-top: 4px; }
+.streak-num {
+  font-family: 'Bricolage Grotesque', -apple-system, system-ui, sans-serif;
+  font-size: 64px; font-weight: 900; line-height: 0.85; letter-spacing: -0.05em;
+}
+.streak-lbl { font-size: 11px; text-transform: uppercase; letter-spacing: 0.1em; opacity: 0.9; font-weight: 800; margin-top: 4px; }
+.streak-sub { font-size: 14px; opacity: 0.95; margin-top: 6px; font-weight: 500; line-height: 1.35; }
 
-/* WALL OF SHAME */
+/* WALL */
 .wall-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 6px; margin-top: 12px; }
 .wall-day {
-  aspect-ratio: 1; border-radius: 6px; background: var(--border); font-size: 9px;
-  display: grid; place-items: center; color: var(--text-mute); position: relative;
+  aspect-ratio: 1; border-radius: 8px; background: var(--warm-border); font-size: 9px;
+  display: grid; place-items: center; color: var(--warm-mute); position: relative; font-weight: 700;
+  line-height: 1.1;
 }
-.wall-day.logged { background: var(--success); color: white; font-weight: 700; }
-.wall-day.missed { background: var(--danger); color: white; font-weight: 700; }
-.wall-day.today { outline: 2px solid var(--accent); outline-offset: 2px; }
-.wall-day.future { background: transparent; border: 1px dashed var(--border); }
+.wall-day.logged { background: var(--lime); color: var(--forest); }
+.wall-day.missed { background: var(--danger); color: var(--cream); }
+.wall-day.today { outline: 2.5px solid var(--pink); outline-offset: 2px; }
+.wall-day.future { background: transparent; border: 1.5px dashed var(--warm-border); }
 
 /* STAKES */
 .stake-item {
-  padding: 12px; border-radius: 12px; background: var(--card-2); border: 1px solid var(--border);
+  padding: 14px 16px; border-radius: 12px; background: var(--cream-2); border: 1.5px solid var(--warm-border);
   margin-bottom: 8px; display: flex; justify-content: space-between; align-items: center; gap: 12px;
 }
-.stake-desc { font-size: 13px; font-weight: 600; }
-.stake-consequence { font-size: 11px; color: var(--text-dim); margin-top: 2px; }
+.stake-desc { font-size: 14px; font-weight: 700; }
+.stake-consequence { font-size: 12px; color: var(--warm-dim); margin-top: 2px; font-weight: 500; }
 
 /* BUTTONS */
 .btn {
-  padding: 10px 18px; border-radius: 12px; border: none; cursor: pointer; font-weight: 700;
+  padding: 14px 22px; border-radius: 14px; border: none; cursor: pointer; font-weight: 800;
   font-size: 14px; font-family: inherit; transition: all .15s; display: inline-flex;
-  align-items: center; gap: 6px; justify-content: center;
+  align-items: center; gap: 8px; justify-content: center; letter-spacing: 0.02em;
+  text-transform: uppercase;
 }
-.btn-primary { background: var(--grad-hero); color: white; box-shadow: 0 4px 16px rgba(244,63,94,0.3); }
-.btn-primary:hover { transform: translateY(-1px); box-shadow: 0 8px 24px rgba(244,63,94,0.4); }
-.btn-ghost { background: transparent; color: var(--text-dim); border: 1px solid var(--border); }
-.btn-ghost:hover { background: var(--card-2); color: var(--text); }
-.btn-danger { background: var(--danger); color: white; }
-.btn-success { background: var(--success); color: white; }
+.btn-primary { background: var(--pink); color: var(--cream); box-shadow: 0 4px 16px rgba(232,24,122,0.3); }
+.btn-primary:hover { background: var(--pink-dark); transform: translateY(-1px); box-shadow: 0 8px 24px rgba(232,24,122,0.35); }
+.btn-ghost { background: transparent; color: var(--ink); border: 1.5px solid var(--warm-border); }
+.btn-ghost:hover { background: var(--forest); color: var(--cream); border-color: var(--forest); }
+.btn-danger { background: var(--danger); color: var(--cream); }
+.btn-success { background: var(--lime); color: var(--forest); }
+.btn-forest { background: var(--forest); color: var(--cream); }
+.btn-forest:hover { background: var(--forest-2); }
 .btn-full { width: 100%; }
 
 /* BOTTOM NAV */
 .bottom-nav {
-  position: fixed; bottom: 0; left: 0; right: 0; background: rgba(15,23,42,0.95);
-  backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
-  border-top: 1px solid var(--border); padding: 8px 0 max(8px, env(safe-area-inset-bottom));
+  position: fixed; bottom: 0; left: 0; right: 0; background: var(--cream);
+  border-top: 1.5px solid var(--warm-border); padding: 10px 0 max(10px, env(safe-area-inset-bottom));
   display: flex; justify-content: space-around; z-index: 100;
 }
 @media (min-width: 1024px) { .bottom-nav { display: none; } }
 .nav-btn {
-  background: none; border: none; color: var(--text-dim); cursor: pointer;
-  display: flex; flex-direction: column; align-items: center; gap: 2px;
-  padding: 6px 12px; font-family: inherit; font-size: 10px; font-weight: 600;
+  background: none; border: none; color: var(--warm-mute); cursor: pointer;
+  display: flex; flex-direction: column; align-items: center; gap: 3px;
+  padding: 6px 12px; font-family: inherit; font-size: 10px; font-weight: 800;
+  letter-spacing: 0.03em; text-transform: uppercase;
 }
-.nav-btn.active { color: var(--accent); }
-.nav-btn-icon { font-size: 20px; }
+.nav-btn.active { color: var(--pink); }
+.nav-btn-icon { width: 22px; height: 22px; }
 
 /* DESKTOP NAV */
 .desktop-nav {
-  display: none; background: var(--card); border: 1px solid var(--border); border-radius: 14px;
+  display: none; background: var(--card); border: 1.5px solid var(--warm-border); border-radius: 16px;
   padding: 6px; margin-bottom: 16px; gap: 4px;
 }
-@media (min-width: 1024px) { .desktop-nav { display: flex; } .header { padding-top: 20px; } }
+@media (min-width: 1024px) { .desktop-nav { display: flex; } }
 .desktop-nav-btn {
-  padding: 10px 16px; background: transparent; border: none; color: var(--text-dim);
-  cursor: pointer; border-radius: 10px; font-family: inherit; font-weight: 600; font-size: 13px;
+  padding: 12px 18px; background: transparent; border: none; color: var(--warm-dim);
+  cursor: pointer; border-radius: 12px; font-family: inherit; font-weight: 800; font-size: 13px;
   display: flex; align-items: center; gap: 8px; transition: all .15s;
+  text-transform: uppercase; letter-spacing: 0.03em;
 }
-.desktop-nav-btn:hover { color: var(--text); background: var(--card-2); }
-.desktop-nav-btn.active { background: var(--grad-hero); color: white; }
+.desktop-nav-btn:hover { color: var(--ink); background: var(--cream-2); }
+.desktop-nav-btn.active { background: var(--forest); color: var(--cream); }
 
 /* MODAL */
 .modal-backdrop {
-  position: fixed; inset: 0; background: rgba(0,0,0,0.6); backdrop-filter: blur(6px);
+  position: fixed; inset: 0; background: rgba(6,7,9,0.55); backdrop-filter: blur(8px);
   display: none; align-items: flex-end; justify-content: center; z-index: 200; padding: 0;
 }
 @media (min-width: 720px) { .modal-backdrop { align-items: center; padding: 20px; } }
 .modal-backdrop.open { display: flex; animation: fadeIn .2s ease; }
 .modal {
-  background: var(--bg-2); width: 100%; max-width: 500px; border-radius: 24px 24px 0 0;
-  padding: 20px 20px max(20px, env(safe-area-inset-bottom));
+  background: var(--cream); width: 100%; max-width: 500px; border-radius: 24px 24px 0 0;
+  padding: 24px 20px max(24px, env(safe-area-inset-bottom));
   max-height: 90vh; overflow-y: auto; animation: slideUp .3s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 @media (min-width: 720px) { .modal { border-radius: 24px; max-height: 85vh; } }
-.modal-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; }
-.modal-title { font-size: 18px; font-weight: 800; }
+.modal-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
+.modal-title {
+  font-family: 'Bricolage Grotesque', -apple-system, system-ui, sans-serif;
+  font-size: 24px; font-weight: 900; letter-spacing: -0.02em;
+}
 .modal-close {
-  width: 32px; height: 32px; border-radius: 50%; background: var(--card); border: none;
-  color: var(--text); cursor: pointer; font-size: 16px; display: grid; place-items: center;
+  width: 36px; height: 36px; border-radius: 12px; background: var(--cream-2); border: 1.5px solid var(--warm-border);
+  color: var(--ink); cursor: pointer; display: grid; place-items: center;
 }
 
-.form-group { margin-bottom: 14px; }
-.form-label { font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: var(--text-dim); margin-bottom: 6px; display: block; }
+.form-group { margin-bottom: 16px; }
+.form-label { font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.1em; color: var(--warm-dim); margin-bottom: 6px; display: block; }
 .form-input, .form-textarea, .form-select {
-  width: 100%; padding: 12px 14px; background: var(--card); border: 1px solid var(--border);
-  border-radius: 12px; color: var(--text); font-family: inherit; font-size: 15px;
+  width: 100%; padding: 14px 16px; background: var(--cream-2); border: 1.5px solid var(--warm-border);
+  border-radius: 12px; color: var(--ink); font-family: inherit; font-size: 16px; font-weight: 500;
 }
 .form-input:focus, .form-textarea:focus, .form-select:focus {
-  outline: none; border-color: var(--accent); box-shadow: 0 0 0 3px rgba(244,63,94,0.15);
+  outline: none; border-color: var(--pink); background: var(--cream); box-shadow: 0 0 0 3px rgba(232,24,122,0.12);
 }
-.form-textarea { min-height: 80px; resize: vertical; }
-.form-hint { font-size: 11px; color: var(--text-mute); margin-top: 4px; }
+.form-textarea { min-height: 90px; resize: vertical; }
+.form-hint { font-size: 12px; color: var(--warm-mute); margin-top: 6px; font-weight: 500; }
 
 .chip-row { display: flex; flex-wrap: wrap; gap: 8px; }
 .chip {
-  padding: 8px 14px; border-radius: 999px; background: var(--card); border: 1px solid var(--border);
-  color: var(--text-dim); cursor: pointer; font-size: 13px; font-weight: 600; transition: all .15s;
+  padding: 10px 16px; border-radius: 999px; background: var(--cream-2); border: 1.5px solid var(--warm-border);
+  color: var(--warm-dim); cursor: pointer; font-size: 13px; font-weight: 700; transition: all .15s;
   font-family: inherit;
 }
-.chip:hover { border-color: var(--accent); }
-.chip.active { background: var(--accent); color: white; border-color: var(--accent); }
+.chip:hover { border-color: var(--pink); color: var(--ink); }
+.chip.active { background: var(--pink); color: var(--cream); border-color: var(--pink); }
 
 /* LOG ENTRIES */
 .log-entry {
-  padding: 10px 12px; border-radius: 10px; background: var(--card-2); margin-bottom: 6px;
+  padding: 12px 14px; border-radius: 12px; background: var(--cream-2); margin-bottom: 6px;
   display: flex; justify-content: space-between; align-items: center; gap: 10px;
   font-size: 13px;
 }
 .log-entry-main { flex: 1; }
-.log-entry-title { font-weight: 600; }
-.log-entry-sub { font-size: 11px; color: var(--text-dim); margin-top: 2px; }
+.log-entry-title { font-weight: 700; color: var(--ink); display: flex; align-items: center; gap: 8px; }
+.log-entry-title svg { color: var(--pink); flex-shrink: 0; }
+.log-entry-sub { font-size: 11px; color: var(--warm-dim); margin-top: 2px; font-weight: 500; }
 .log-entry-remove {
-  background: none; border: none; color: var(--text-mute); cursor: pointer; padding: 4px;
-  font-size: 14px;
+  background: none; border: none; color: var(--warm-mute); cursor: pointer; padding: 6px;
+  display: grid; place-items: center; border-radius: 8px;
 }
-.log-entry-remove:hover { color: var(--danger); }
+.log-entry-remove:hover { color: var(--danger); background: var(--cream); }
 
 /* FANFARE / TOAST */
 .fanfare {
   position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%);
   z-index: 500; pointer-events: none; text-align: center;
   animation: fanfarePop 1.8s cubic-bezier(0.34, 1.56, 0.64, 1);
+  background: var(--forest); color: var(--cream); padding: 32px 40px; border-radius: 24px;
+  box-shadow: var(--shadow-lg);
 }
-.fanfare-emoji { font-size: 80px; filter: drop-shadow(0 8px 30px rgba(244,63,94,0.6)); }
+.fanfare-icon { color: var(--lime); margin-bottom: 8px; display: grid; place-items: center; }
 .fanfare-text {
-  font-size: 24px; font-weight: 900; margin-top: 8px; text-transform: uppercase;
-  letter-spacing: 0.05em; background: var(--grad-hero); -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent; background-clip: text;
+  font-family: 'Bricolage Grotesque', -apple-system, system-ui, sans-serif;
+  font-size: 32px; font-weight: 900; text-transform: uppercase; letter-spacing: -0.02em;
+  color: var(--cream);
 }
+.fanfare-text .accent { color: var(--pink); }
 .confetti {
-  position: fixed; width: 10px; height: 10px; top: -10px; z-index: 490; pointer-events: none;
-  animation: confettiFall 3s linear;
+  position: fixed; width: 12px; height: 12px; top: -12px; z-index: 490; pointer-events: none;
+  animation: confettiFall 3s linear; border-radius: 2px;
 }
 
 .toast {
   position: fixed; top: 20px; left: 50%; transform: translateX(-50%);
-  background: var(--card); border: 1px solid var(--border); padding: 12px 20px; border-radius: 12px;
-  box-shadow: var(--shadow); z-index: 600; font-weight: 600; font-size: 14px;
+  background: var(--forest); color: var(--cream); border: 1.5px solid var(--forest); padding: 14px 22px; border-radius: 14px;
+  box-shadow: var(--shadow-lg); z-index: 600; font-weight: 700; font-size: 14px;
   animation: toastIn .3s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
-.toast.success { border-color: var(--success); color: var(--success); }
-.toast.error { border-color: var(--danger); color: var(--danger); }
+.toast.success { background: var(--lime); color: var(--forest); border-color: var(--lime); }
+.toast.error { background: var(--danger); color: var(--cream); border-color: var(--danger); }
 
 @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 @keyframes slideUp { from { transform: translateY(30px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
 @keyframes fanfarePop {
   0% { opacity: 0; transform: translate(-50%, -50%) scale(0.3); }
-  15% { opacity: 1; transform: translate(-50%, -50%) scale(1.2); }
+  15% { opacity: 1; transform: translate(-50%, -50%) scale(1.15); }
   30% { transform: translate(-50%, -50%) scale(1); }
   80% { opacity: 1; }
-  100% { opacity: 0; transform: translate(-50%, -50%) scale(0.8); }
+  100% { opacity: 0; transform: translate(-50%, -50%) scale(0.9); }
 }
 @keyframes confettiFall {
   0% { transform: translateY(0) rotate(0deg); opacity: 1; }
@@ -309,137 +382,179 @@ body { min-height: 100vh; padding-bottom: 80px; }
 
 /* HELPER TEXT */
 .empty {
-  text-align: center; padding: 30px 20px; color: var(--text-mute); font-size: 13px;
+  text-align: center; padding: 30px 20px; color: var(--warm-mute); font-size: 13px; font-weight: 500;
 }
 
-/* MOOD SLIDER */
+/* MOOD */
 .slider-row { display: flex; justify-content: space-between; gap: 8px; }
 .mood-btn {
-  flex: 1; aspect-ratio: 1; border-radius: 12px; background: var(--card); border: 1px solid var(--border);
-  cursor: pointer; font-size: 28px; transition: all .15s;
+  flex: 1; aspect-ratio: 1; border-radius: 14px; background: var(--cream-2); border: 1.5px solid var(--warm-border);
+  cursor: pointer; transition: all .15s; display: grid; place-items: center;
+  font-family: inherit; font-weight: 900; font-size: 16px; color: var(--ink);
 }
-.mood-btn:hover { transform: scale(1.1); }
-.mood-btn.active { background: var(--grad-hero); border-color: transparent; transform: scale(1.1); }
+.mood-btn:hover { transform: scale(1.05); border-color: var(--pink); }
+.mood-btn.active { background: var(--pink); color: var(--cream); border-color: var(--pink); transform: scale(1.05); }
 
 /* PROGRESS PHOTOS */
 .photo-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
 @media (min-width: 720px) { .photo-grid { grid-template-columns: repeat(4, 1fr); } }
 .photo-tile {
-  aspect-ratio: 3/4; border-radius: 12px; overflow: hidden; background: var(--card-2);
-  position: relative; cursor: pointer;
+  aspect-ratio: 3/4; border-radius: 14px; overflow: hidden; background: var(--cream-2);
+  position: relative; cursor: pointer; border: 1.5px solid var(--warm-border);
 }
 .photo-tile img { width: 100%; height: 100%; object-fit: cover; }
-.photo-date { position: absolute; bottom: 0; left: 0; right: 0; background: rgba(0,0,0,0.7); padding: 4px 6px; font-size: 10px; text-align: center; }
-.photo-empty { display: grid; place-items: center; color: var(--text-mute); font-size: 24px; }
+.photo-date { position: absolute; bottom: 0; left: 0; right: 0; background: rgba(6,7,9,0.8); color: var(--cream); padding: 4px 6px; font-size: 10px; text-align: center; font-weight: 700; }
+.photo-empty { display: grid; place-items: center; color: var(--warm-mute); }
 
 /* MILESTONES */
 .milestone-list { display: flex; flex-direction: column; gap: 8px; }
 .milestone {
-  display: flex; align-items: center; gap: 12px; padding: 12px; border-radius: 12px;
-  background: var(--card-2); border: 1px solid var(--border);
+  display: flex; align-items: center; gap: 14px; padding: 14px; border-radius: 14px;
+  background: var(--cream-2); border: 1.5px solid var(--warm-border);
 }
-.milestone.hit { background: linear-gradient(135deg, rgba(16,185,129,0.15), rgba(16,185,129,0.05)); border-color: var(--success); }
+.milestone.hit { background: var(--lime); border-color: var(--lime-dark); }
 .milestone-badge {
-  width: 40px; height: 40px; border-radius: 12px; background: var(--border);
-  display: grid; place-items: center; font-size: 18px;
+  width: 44px; height: 44px; border-radius: 12px; background: var(--warm-border); color: var(--warm-dim);
+  display: grid; place-items: center; font-family: 'Bricolage Grotesque', system-ui, sans-serif;
+  font-weight: 900; font-size: 16px; flex-shrink: 0;
 }
-.milestone.hit .milestone-badge { background: var(--grad-success); }
+.milestone.hit .milestone-badge { background: var(--forest); color: var(--lime); }
 .milestone-info { flex: 1; }
-.milestone-title { font-weight: 700; font-size: 14px; }
-.milestone-sub { font-size: 11px; color: var(--text-dim); }
+.milestone-title { font-weight: 800; font-size: 14px; letter-spacing: -0.01em; }
+.milestone-sub { font-size: 12px; color: var(--warm-dim); margin-top: 2px; font-weight: 500; }
+.milestone.hit .milestone-sub { color: var(--forest); opacity: 0.75; }
 
-/* HIDDEN INPUT */
+/* HIDDEN */
 .hidden { display: none !important; }
 
 /* SHARE PREVIEW */
 .share-preview {
-  background: var(--grad-hero); padding: 24px; border-radius: 16px; color: white;
-  text-align: center; margin-bottom: 12px;
+  background: var(--forest); padding: 32px 24px; border-radius: 20px; color: var(--cream);
+  text-align: center; margin-bottom: 12px; position: relative; overflow: hidden;
 }
-.share-preview-num { font-size: 48px; font-weight: 900; }
-.share-preview-lbl { font-size: 12px; text-transform: uppercase; letter-spacing: 0.08em; opacity: 0.9; }
+.share-preview::before {
+  content: ''; position: absolute; top: -30%; right: -20%; width: 240px; height: 240px;
+  background: radial-gradient(circle, rgba(184,212,58,0.2), transparent 70%);
+}
+.share-preview-num {
+  font-family: 'Bricolage Grotesque', system-ui, sans-serif;
+  font-size: 72px; font-weight: 900; line-height: 0.85; letter-spacing: -0.05em;
+  color: var(--pink); position: relative; z-index: 1;
+}
+.share-preview-lbl { font-size: 12px; text-transform: uppercase; letter-spacing: 0.1em; opacity: 0.85; font-weight: 800; position: relative; z-index: 1; margin-top: 8px; }
 .share-url {
-  background: var(--card); padding: 10px 12px; border-radius: 10px; font-family: monospace;
-  font-size: 11px; color: var(--text-dim); word-break: break-all; margin-top: 8px;
+  background: var(--cream-2); padding: 12px 14px; border-radius: 10px; font-family: 'JetBrains Mono', ui-monospace, SFMono-Regular, monospace;
+  font-size: 11px; color: var(--warm-dim); word-break: break-all; margin-top: 8px; border: 1.5px solid var(--warm-border);
 }
 
 /* ONBOARDING */
 .onboard-hero {
-  padding: 40px 20px; text-align: center; background: var(--grad-hero); border-radius: 24px;
-  color: white; margin-bottom: 20px;
+  padding: 48px 24px; text-align: center; background: var(--forest); border-radius: 24px;
+  color: var(--cream); margin-bottom: 20px; position: relative; overflow: hidden;
 }
-.onboard-hero h1 { font-size: 32px; font-weight: 900; letter-spacing: -0.02em; }
-.onboard-hero p { margin-top: 8px; opacity: 0.9; font-size: 15px; }
+.onboard-hero::before {
+  content: ''; position: absolute; top: -20%; right: -20%; width: 300px; height: 300px;
+  background: radial-gradient(circle, rgba(184,212,58,0.18), transparent 70%);
+}
+.onboard-hero h1 {
+  font-family: 'Bricolage Grotesque', system-ui, sans-serif;
+  font-size: 40px; font-weight: 900; letter-spacing: -0.04em; line-height: 0.95;
+  position: relative; z-index: 1;
+}
+.onboard-hero h1 .accent { color: var(--pink); }
+.onboard-hero p { margin-top: 12px; opacity: 0.85; font-size: 15px; position: relative; z-index: 1; font-weight: 500; }
 
-/* PILL BADGE */
+/* PILL */
 .pill {
-  display: inline-block; padding: 3px 10px; border-radius: 999px; font-size: 10px;
-  font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em;
+  display: inline-block; padding: 4px 10px; border-radius: 999px; font-size: 10px;
+  font-weight: 800; text-transform: uppercase; letter-spacing: 0.08em;
 }
-.pill.success { background: rgba(16,185,129,0.2); color: var(--success); }
-.pill.warn { background: rgba(245,158,11,0.2); color: var(--warn); }
-.pill.danger { background: rgba(239,68,68,0.2); color: var(--danger); }
-.pill.info { background: rgba(59,130,246,0.2); color: var(--info); }
+.pill.success { background: var(--lime); color: var(--forest); }
+.pill.warn { background: #fef3c7; color: #92400e; }
+.pill.danger { background: var(--danger); color: var(--cream); }
+.pill.info { background: var(--forest); color: var(--cream); }
 
 /* VIEW SWITCHING */
 .view { display: none; }
 .view.active { display: block; animation: fadeIn .2s ease; }
 
-/* DUAL COLUMN ON DESKTOP */
 @media (min-width: 1024px) {
   .desktop-cols { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; align-items: start; }
 }
 
 /* CHECKBOX ROWS */
 .check-row {
-  display: flex; align-items: center; gap: 10px; padding: 10px 12px; border-radius: 10px;
-  background: var(--card-2); margin-bottom: 6px; cursor: pointer;
+  display: flex; align-items: center; gap: 12px; padding: 12px 14px; border-radius: 12px;
+  background: var(--cream-2); margin-bottom: 6px; cursor: pointer; border: 1.5px solid transparent;
 }
-.check-row input { width: 18px; height: 18px; accent-color: var(--accent); }
-.check-row label { flex: 1; font-size: 14px; cursor: pointer; }
+.check-row:hover { border-color: var(--warm-border); }
+.check-row input { width: 20px; height: 20px; accent-color: var(--pink); }
+.check-row label { flex: 1; font-size: 14px; cursor: pointer; font-weight: 600; }
 
 /* GLUCOSE INDICATOR */
 .glucose-indicator {
-  display: inline-block; padding: 2px 8px; border-radius: 6px; font-size: 11px; font-weight: 700;
+  display: inline-block; padding: 3px 10px; border-radius: 6px; font-size: 10px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.06em;
 }
-.glucose-indicator.good { background: rgba(16,185,129,0.25); color: var(--success); }
-.glucose-indicator.warn { background: rgba(245,158,11,0.25); color: var(--warn); }
-.glucose-indicator.high { background: rgba(239,68,68,0.25); color: var(--danger); }
+.glucose-indicator.good { background: var(--lime); color: var(--forest); }
+.glucose-indicator.warn { background: #fef3c7; color: #92400e; }
+.glucose-indicator.high { background: var(--danger); color: var(--cream); }
+
+/* PROTOCOL DETAILS */
+details.protocol {
+  background: var(--forest); border-radius: var(--radius); padding: 0; margin-top: 16px;
+  border: none; color: var(--cream); overflow: hidden;
+}
+details.protocol summary {
+  padding: 18px 20px; cursor: pointer; font-weight: 800; font-size: 13px;
+  display: flex; justify-content: space-between; align-items: center;
+  text-transform: uppercase; letter-spacing: 0.08em; list-style: none;
+}
+details.protocol summary::-webkit-details-marker { display: none; }
+details.protocol summary::after {
+  content: '+'; font-size: 20px; font-weight: 900; color: var(--lime); transition: transform .2s;
+}
+details.protocol[open] summary::after { transform: rotate(45deg); }
+details.protocol > div { padding: 0 20px 20px; }
+.proto-item {
+  padding: 14px 16px; background: rgba(255,250,250,0.06); border-radius: 12px;
+  margin-bottom: 8px; font-size: 13px; line-height: 1.5; font-weight: 500;
+  border: 1px solid rgba(255,250,250,0.1);
+}
+.proto-item strong { color: var(--lime); font-weight: 800; }
+.proto-item.warn-item { background: rgba(232,24,122,0.12); border-color: rgba(232,24,122,0.3); }
+.proto-item.warn-item strong { color: var(--pink); }
 </style>
 </head>
 <body>
 
 <div class="app">
 
+  <!-- MASTHEAD -->
+  <div class="masthead">
+    <div class="mast-brand">Brit<span class="mast-accent">tany</span></div>
+    <div class="mast-tagline">everything I want is waiting for me</div>
+  </div>
+
   <!-- HEADER -->
   <div class="header">
-    <div class="brand">
-      <div class="brand-badge">🔥</div>
-      <div>
-        <div class="brand-title" id="brandGreeting">Let's go, Brittany</div>
-        <div class="brand-sub" id="brandDate"></div>
-      </div>
+    <div class="header-meta">
+      <div class="header-greeting" id="brandGreeting">Let's go</div>
+      <div class="header-date" id="brandDate"></div>
     </div>
     <div class="header-actions">
-      <button class="icon-btn" onclick="openShare()" title="Share progress">📤</button>
-      <button class="icon-btn" onclick="openView('settings')" title="Settings">⚙️</button>
+      <button class="icon-btn" onclick="openShare()" title="Share progress" id="btnShare"></button>
+      <button class="icon-btn" onclick="openView('settings')" title="Settings" id="btnSettings"></button>
     </div>
   </div>
 
   <!-- DESKTOP NAV -->
-  <div class="desktop-nav">
-    <button class="desktop-nav-btn active" data-view="today" onclick="openView('today')">🎯 Today</button>
-    <button class="desktop-nav-btn" data-view="log" onclick="openView('log')">➕ Log</button>
-    <button class="desktop-nav-btn" data-view="progress" onclick="openView('progress')">📊 Progress</button>
-    <button class="desktop-nav-btn" data-view="accountability" onclick="openView('accountability')">⚡ Accountability</button>
-    <button class="desktop-nav-btn" data-view="settings" onclick="openView('settings')">⚙️ Settings</button>
-  </div>
+  <div class="desktop-nav" id="desktopNav"></div>
 
   <!-- ONBOARDING VIEW -->
   <div id="view-onboard" class="view">
     <div class="onboard-hero">
-      <h1>The 100-Pound Mission</h1>
-      <p>Custom-built for you. INFJ, D, 7w8, ADHD. This tool doesn't fight your brain — it works with it.</p>
+      <h1>The <span class="accent">100</span><br>Pound Mission</h1>
+      <p>Everything I want is waiting for me. Built for the way YOU work.</p>
     </div>
     <div class="card">
       <div class="card-title" style="margin-bottom: 16px;">Set up your mission (60 seconds)</div>
@@ -469,7 +584,7 @@ body { min-height: 100vh; padding-bottom: 80px; }
         </div>
         <div class="form-hint">Tuned for you: high protein (elite-power-athlete muscle profile), moderate carbs from beans/fruit/veggies (insulin resistance), healthy fats from olive oil/nuts/fish (anti-inflammatory).</div>
       </div>
-      <button class="btn btn-primary btn-full" onclick="completeOnboarding()">🚀 Start My Mission</button>
+      <button class="btn btn-primary btn-full" onclick="completeOnboarding()">Start My Mission</button>
     </div>
   </div>
 
@@ -477,7 +592,7 @@ body { min-height: 100vh; padding-bottom: 80px; }
   <div id="view-today" class="view active">
     <!-- Mission Card -->
     <div class="mission-card">
-      <span class="mission-tag">100-Pound Mission · Day <span id="dayCount">1</span></span>
+      <span class="mission-tag">The 100 · Day <span id="dayCount">1</span></span>
       <div class="mission-title" id="missionTitle">Down 0.0 lbs · 100 to go</div>
       <div class="mission-stats">
         <div class="mission-stat">
@@ -496,11 +611,11 @@ body { min-height: 100vh; padding-bottom: 80px; }
       <div class="progress-bar"><div class="progress-fill" id="progressMain" style="width: 0%;"></div></div>
       <div class="october-tracker">
         <div class="oct-line">
-          <span>🎯 October 31 checkpoint (170 lbs)</span>
+          <span>October 31 checkpoint · 170 lbs</span>
           <span id="octPct">0%</span>
         </div>
         <div class="oct-progress"><div class="oct-fill" id="octFill" style="width: 0%;"></div></div>
-        <div class="oct-line" style="margin-top: 6px;">
+        <div class="oct-line" style="margin-top: 8px;">
           <span id="octRemaining">50 lbs to go</span>
           <span id="octDaysLeft">— days left</span>
         </div>
@@ -508,52 +623,22 @@ body { min-height: 100vh; padding-bottom: 80px; }
     </div>
 
     <!-- MY PROTOCOL (collapsible) -->
-    <details class="card" style="margin-top: 16px; padding: 0;">
-      <summary style="padding: 14px 16px; cursor: pointer; font-weight: 700; font-size: 14px; display: flex; justify-content: space-between; align-items: center;">
-        <span>📋 My Protocol · quick reference</span>
-        <span style="font-size: 11px; color: var(--text-dim);">tap to expand</span>
-      </summary>
-      <div style="padding: 0 16px 16px; font-size: 13px; line-height: 1.5;">
-        <div style="display: grid; gap: 10px; grid-template-columns: 1fr; margin-top: 4px;">
-          <div style="padding: 10px 12px; background: var(--card-2); border-radius: 10px;">
-            <strong>🍽️ Every meal:</strong> Protein first (30g+ — eggs, chicken, red meat, Greek yogurt, cottage cheese, edamame, whey), non-starchy veggies second, carbs last. 8–10 plant servings/day. Legumes when it works. <strong>Ground flax + chia daily</strong> (your omega-3 source). Olive oil is your friend.
-          </div>
-          <div style="padding: 10px 12px; background: var(--card-2); border-radius: 10px;">
-            <strong>🍫 Sugar strategy:</strong> One planned "designated sweet" per day, always paired with protein + fat (dark chocolate + almonds, berries + Greek yogurt). Never eat sugar alone. As IR improves, cravings drop 60–80%.
-          </div>
-          <div style="padding: 10px 12px; background: var(--card-2); border-radius: 10px;">
-            <strong>🚶 After every meal:</strong> 10–15 min walk. Drops your glucose spike ~30%. Non-negotiable.
-          </div>
-          <div style="padding: 10px 12px; background: var(--card-2); border-radius: 10px;">
-            <strong>🏋️ Weekly training (Phase 1 — weight-loss dominant):</strong> 3× strength (compound lifts — your power-athlete superpower) + <strong>1× easy zone-2 run/week</strong> keeping your ultra dream warm + daily post-meal walks. More running comes back in Phase 2 (after 30–40 lbs down).
-          </div>
-          <div style="padding: 10px 12px; background: var(--card-2); border-radius: 10px;">
-            <strong>🩸 Glucose targets:</strong> Fasting &lt;<span id="protoFasting">95</span>, post-meal (2hr) &lt;<span id="protoPost">140</span>, A1C &lt;<span id="protoA1c">5.6</span>%. Reversing insulin resistance = the lever that moves everything.
-          </div>
-          <div style="padding: 10px 12px; background: var(--card-2); border-radius: 10px;">
-            <strong>😴 Sleep 7.5+ hrs:</strong> Dark, cool room. No phone in bed. Poor sleep = insulin resistance next day. Ask your doc about a CGM.
-          </div>
-          <div style="padding: 10px 12px; background: var(--card-2); border-radius: 10px;">
-            <strong>💊 Daily supplement stack</strong> (see Settings): metformin, methyl-B12, inositol 40:1, D3+K2, magnesium PM, omega-3. Optional berberine (ask doc).
-          </div>
-          <div style="padding: 10px 12px; background: rgba(244,63,94,0.1); border: 1px solid rgba(244,63,94,0.3); border-radius: 10px; color: var(--text-dim);">
-            <strong>⚠️ Not medical advice.</strong> Run your protocol by your endocrinologist. Especially: berberine + metformin combo, any supplement changes, and target glucose ranges specific to your case.
-          </div>
-        </div>
+    <details class="protocol">
+      <summary>My Protocol · Quick Reference</summary>
+      <div>
+        <div class="proto-item"><strong>EVERY MEAL —</strong> Protein first (30g+ · eggs, chicken, red meat, Greek yogurt, cottage cheese, edamame, whey), non-starchy veggies second, carbs last. 8–10 plant servings/day. Legumes when it works. Ground flax + chia daily for omega-3s. Olive oil is your friend.</div>
+        <div class="proto-item"><strong>SUGAR STRATEGY —</strong> One planned "designated sweet" per day, always paired with protein + fat (dark chocolate + almonds, berries + Greek yogurt). Never eat sugar alone. As insulin resistance improves, cravings drop 60–80%.</div>
+        <div class="proto-item"><strong>AFTER EVERY MEAL —</strong> 10–15 min walk. Drops your glucose spike ~30%. Non-negotiable.</div>
+        <div class="proto-item"><strong>WEEKLY TRAINING (PHASE 1) —</strong> 3× strength (compound lifts · your power-athlete superpower) + 1× easy zone-2 run/week (keeping the ultra dream warm) + daily post-meal walks. Phase 2 adds more running after 30–40 lbs down.</div>
+        <div class="proto-item"><strong>GLUCOSE TARGETS —</strong> Fasting &lt;<span id="protoFasting">95</span>, post-meal (2hr) &lt;<span id="protoPost">140</span>, A1C &lt;<span id="protoA1c">5.6</span>%. Reversing insulin resistance is the lever that moves everything.</div>
+        <div class="proto-item"><strong>SLEEP 7.5+ HRS —</strong> Dark, cool room. No phone in bed. Poor sleep = insulin resistance next day. Ask your doc about a CGM.</div>
+        <div class="proto-item"><strong>DAILY SUPPLEMENT STACK —</strong> Metformin, methyl-B12, inositol 40:1, D3+K2, magnesium PM, algae omega-3. Optional berberine (ask doc first).</div>
+        <div class="proto-item warn-item"><strong>NOT MEDICAL ADVICE —</strong> Run your protocol by your endocrinologist. Especially berberine + metformin, supplement changes, and glucose ranges specific to your case.</div>
       </div>
     </details>
 
     <div class="section-title">Quick Log</div>
-    <div class="quick-grid">
-      <button class="quick-btn" onclick="openModal('food')"><div class="quick-icon">🍳</div><div class="quick-label">Food</div></button>
-      <button class="quick-btn" onclick="openModal('weight')"><div class="quick-icon">⚖️</div><div class="quick-label">Weight</div></button>
-      <button class="quick-btn" onclick="openModal('glucose')"><div class="quick-icon">🩸</div><div class="quick-label">Glucose</div></button>
-      <button class="quick-btn" onclick="openModal('water')"><div class="quick-icon">💧</div><div class="quick-label">Water</div></button>
-      <button class="quick-btn" onclick="openModal('exercise')"><div class="quick-icon">🏋️</div><div class="quick-label">Move</div></button>
-      <button class="quick-btn" onclick="openModal('sleep')"><div class="quick-icon">😴</div><div class="quick-label">Sleep</div></button>
-      <button class="quick-btn" onclick="openModal('mood')"><div class="quick-icon">💗</div><div class="quick-label">Mood</div></button>
-      <button class="quick-btn" onclick="openModal('photo')"><div class="quick-icon">📸</div><div class="quick-label">Photo</div></button>
-    </div>
+    <div class="quick-grid" id="quickGridToday"></div>
 
     <div class="desktop-cols">
       <div>
@@ -575,7 +660,7 @@ body { min-height: 100vh; padding-bottom: 80px; }
             <div class="streak-lbl">Day Streak</div>
           </div>
           <div style="flex: 1;">
-            <div class="streak-sub" id="streakMsg">Log something today to start your streak 🔥</div>
+            <div class="streak-sub" id="streakMsg">Log something today to start your streak</div>
           </div>
         </div>
 
@@ -594,21 +679,7 @@ body { min-height: 100vh; padding-bottom: 80px; }
   <!-- LOG VIEW -->
   <div id="view-log" class="view">
     <div class="section-title">Log Everything</div>
-    <div class="quick-grid" style="grid-template-columns: repeat(4, 1fr);">
-      <button class="quick-btn" onclick="openModal('food')"><div class="quick-icon">🍳</div><div class="quick-label">Food</div></button>
-      <button class="quick-btn" onclick="openModal('weight')"><div class="quick-icon">⚖️</div><div class="quick-label">Weight</div></button>
-      <button class="quick-btn" onclick="openModal('glucose')"><div class="quick-icon">🩸</div><div class="quick-label">Glucose</div></button>
-      <button class="quick-btn" onclick="openModal('water')"><div class="quick-icon">💧</div><div class="quick-label">Water</div></button>
-      <button class="quick-btn" onclick="openModal('exercise')"><div class="quick-icon">🏋️</div><div class="quick-label">Exercise</div></button>
-      <button class="quick-btn" onclick="openModal('sleep')"><div class="quick-icon">😴</div><div class="quick-label">Sleep</div></button>
-      <button class="quick-btn" onclick="openModal('mood')"><div class="quick-icon">💗</div><div class="quick-label">Mood</div></button>
-      <button class="quick-btn" onclick="openModal('cycle')"><div class="quick-icon">🌙</div><div class="quick-label">Cycle</div></button>
-      <button class="quick-btn" onclick="openModal('meds')"><div class="quick-icon">💊</div><div class="quick-label">Meds</div></button>
-      <button class="quick-btn" onclick="openModal('photo')"><div class="quick-icon">📸</div><div class="quick-label">Photo</div></button>
-      <button class="quick-btn" onclick="openModal('symptoms')"><div class="quick-icon">🧠</div><div class="quick-label">Symptoms</div></button>
-      <button class="quick-btn" onclick="openModal('notes')"><div class="quick-icon">📝</div><div class="quick-label">Notes</div></button>
-      <button class="quick-btn" onclick="openModal('lab')"><div class="quick-icon">🧪</div><div class="quick-label">Lab Result</div></button>
-    </div>
+    <div class="quick-grid" id="quickGridLog"></div>
 
     <div class="section-title">Today's Log</div>
     <div class="card" id="fullTodayLog"></div>
@@ -642,13 +713,13 @@ body { min-height: 100vh; padding-bottom: 80px; }
     <div class="section-title">Labs</div>
     <div class="card">
       <div id="labsPanel"></div>
-      <button class="btn btn-primary btn-full" style="margin-top: 12px;" onclick="openModal('lab')">🧪 Log Lab Result</button>
+      <button class="btn btn-primary btn-full" style="margin-top: 12px;" onclick="openModal('lab')">Log Lab Result</button>
     </div>
 
     <div class="section-title">Progress Photos</div>
     <div class="card">
       <div class="photo-grid" id="photoGrid"></div>
-      <button class="btn btn-primary btn-full" style="margin-top: 12px;" onclick="openModal('photo')">📸 Add Photo</button>
+      <button class="btn btn-primary btn-full" style="margin-top: 12px;" onclick="openModal('photo')">Add Photo</button>
     </div>
 
     <div class="section-title">Weekly Summary</div>
@@ -663,7 +734,7 @@ body { min-height: 100vh; padding-bottom: 80px; }
         <div class="streak-lbl">Day Streak</div>
       </div>
       <div style="flex: 1;">
-        <div class="streak-sub" id="streakMsg2">Log something today to start 🔥</div>
+        <div class="streak-sub" id="streakMsg2">Log something today to start</div>
         <div style="font-size: 11px; opacity: 0.85; margin-top: 4px;">Longest: <span id="longestStreak">0</span> days</div>
       </div>
     </div>
@@ -677,21 +748,21 @@ body { min-height: 100vh; padding-bottom: 80px; }
     <div class="section-title">Stakes & Consequences</div>
     <div class="card">
       <div id="stakesList"></div>
-      <button class="btn btn-primary btn-full" style="margin-top: 12px;" onclick="openModal('stake')">+ Add a Stake</button>
+      <button class="btn btn-primary btn-full" style="margin-top: 12px;" onclick="openModal('stake')">Add a Stake</button>
     </div>
 
     <div class="section-title">Accountability Buddies</div>
     <div class="card">
       <div class="card-sub" style="margin-bottom: 10px;">People who get your public dashboard link. Their eyes on you = fuel.</div>
       <div id="buddiesList"></div>
-      <button class="btn btn-ghost btn-full" style="margin-top: 10px;" onclick="openModal('buddy')">+ Add Buddy</button>
+      <button class="btn btn-ghost btn-full" style="margin-top: 10px;" onclick="openModal('buddy')">Add Buddy</button>
     </div>
 
     <div class="section-title">Weekly Accountability Post</div>
     <div class="card">
       <div class="card-sub" style="margin-bottom: 12px;">Auto-generated. Copy → paste on IG, FB, wherever your people are.</div>
       <div id="weeklyPost" style="background: var(--card-2); padding: 14px; border-radius: 12px; font-size: 14px; line-height: 1.5; white-space: pre-wrap;"></div>
-      <button class="btn btn-primary btn-full" style="margin-top: 10px;" onclick="copyWeeklyPost()">📋 Copy Post</button>
+      <button class="btn btn-primary btn-full" style="margin-top: 10px;" onclick="copyWeeklyPost()">Copy Post</button>
     </div>
   </div>
 
@@ -759,10 +830,10 @@ body { min-height: 100vh; padding-bottom: 80px; }
 
     <div class="section-title">Data</div>
     <div class="card">
-      <button class="btn btn-ghost btn-full" style="margin-bottom: 8px;" onclick="exportData()">📥 Export All Data</button>
-      <button class="btn btn-ghost btn-full" style="margin-bottom: 8px;" onclick="document.getElementById('importFile').click()">📤 Import Data</button>
+      <button class="btn btn-ghost btn-full" style="margin-bottom: 8px;" onclick="exportData()">Export All Data</button>
+      <button class="btn btn-ghost btn-full" style="margin-bottom: 8px;" onclick="document.getElementById('importFile').click()">Import Data</button>
       <input type="file" id="importFile" class="hidden" accept=".json" onchange="importData(event)">
-      <button class="btn btn-danger btn-full" onclick="resetApp()">🗑️ Reset Everything</button>
+      <button class="btn btn-danger btn-full" onclick="resetApp()">Reset Everything</button>
     </div>
 
     <div style="text-align: center; margin-top: 30px; font-size: 11px; color: var(--text-mute);">
@@ -774,20 +845,7 @@ body { min-height: 100vh; padding-bottom: 80px; }
 </div>
 
 <!-- BOTTOM NAV (MOBILE) -->
-<nav class="bottom-nav">
-  <button class="nav-btn active" data-view="today" onclick="openView('today')">
-    <div class="nav-btn-icon">🎯</div><div>Today</div>
-  </button>
-  <button class="nav-btn" data-view="log" onclick="openView('log')">
-    <div class="nav-btn-icon">➕</div><div>Log</div>
-  </button>
-  <button class="nav-btn" data-view="progress" onclick="openView('progress')">
-    <div class="nav-btn-icon">📊</div><div>Progress</div>
-  </button>
-  <button class="nav-btn" data-view="accountability" onclick="openView('accountability')">
-    <div class="nav-btn-icon">⚡</div><div>Stakes</div>
-  </button>
-</nav>
+<nav class="bottom-nav" id="bottomNav"></nav>
 
 <!-- MODALS -->
 <div class="modal-backdrop" id="modalBackdrop">
@@ -795,6 +853,54 @@ body { min-height: 100vh; padding-bottom: 80px; }
 </div>
 
 <script>
+// ============================================================================
+// ICON LIBRARY (Lucide-style line icons)
+// ============================================================================
+const ICONS = {
+  flame: '<path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z"/>',
+  share: '<path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"/><polyline points="16 6 12 2 8 6"/><line x1="12" y1="2" x2="12" y2="15"/>',
+  settings: '<circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/>',
+  target: '<circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/>',
+  utensils: '<path d="M3 2v7c0 1.1.9 2 2 2h4a2 2 0 0 0 2-2V2"/><path d="M7 2v20"/><path d="M21 15V2v0a5 5 0 0 0-5 5v6c0 1.1.9 2 2 2h3zm0 0v7"/>',
+  scale: '<path d="M16 16.5c0-.6.4-1 1-1h5V6a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2v9.5h5c.6 0 1 .4 1 1V19a2 2 0 0 0 2 2h4a2 2 0 0 0 2-2v-2.5z"/><path d="M7 12h10"/>',
+  droplet: '<path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"/>',
+  droplet_blood: '<path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"/><circle cx="12" cy="14" r="2" fill="currentColor"/>',
+  dumbbell: '<path d="M6 5v14"/><path d="M18 5v14"/><path d="M2 9v6"/><path d="M22 9v6"/><path d="M6 12h12"/>',
+  moon: '<path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>',
+  heart: '<path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>',
+  camera: '<path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/>',
+  cycle: '<circle cx="12" cy="12" r="9"/><path d="M15 8a4 4 0 0 1 0 8"/><path d="M9 16a4 4 0 0 1 0-8"/>',
+  pill: '<path d="M10.5 20.5 3.5 13.5a5 5 0 0 1 7-7l7 7a5 5 0 0 1-7 7z"/><path d="M8.5 8.5l7 7"/>',
+  brain: '<path d="M9.5 2A2.5 2.5 0 0 1 12 4.5v15a2.5 2.5 0 0 1-4.96.44 2.5 2.5 0 0 1-2.96-3.08 3 3 0 0 1-.34-5.58 2.5 2.5 0 0 1 1.32-4.24 2.5 2.5 0 0 1 4.44-2.04A2.5 2.5 0 0 1 9.5 2z"/><path d="M14.5 2A2.5 2.5 0 0 0 12 4.5v15a2.5 2.5 0 0 0 4.96.44 2.5 2.5 0 0 0 2.96-3.08 3 3 0 0 0 .34-5.58 2.5 2.5 0 0 0-1.32-4.24 2.5 2.5 0 0 0-4.44-2.04A2.5 2.5 0 0 0 14.5 2z"/>',
+  pencil: '<path d="M17 3a2.85 2.85 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"/>',
+  flask: '<path d="M10 2v7.31"/><path d="M14 9.3V1.99"/><path d="M8.5 2h7"/><path d="M14 9.3a6.5 6.5 0 1 1-4 0"/>',
+  clipboard: '<path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><rect x="8" y="2" width="8" height="4" rx="1" ry="1"/><line x1="8" y1="10" x2="16" y2="10"/><line x1="8" y1="14" x2="16" y2="14"/><line x1="8" y1="18" x2="12" y2="18"/>',
+  footprints: '<path d="M4 16v-2a4 4 0 0 1 8 0v2"/><path d="M12 20v-4"/><path d="M8 20v-2"/><path d="M14 6a3 3 0 1 0 6 0 3 3 0 0 0-6 0z"/>',
+  cookie: '<path d="M12 2a10 10 0 1 0 10 10 4 4 0 0 1-5-5 4 4 0 0 1-5-5"/><path d="M8.5 8.5v.01"/><path d="M16 15.5v.01"/><path d="M12 12v.01"/><path d="M11 17v.01"/><path d="M7 14v.01"/>',
+  plus: '<line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/>',
+  chart: '<line x1="12" y1="20" x2="12" y2="10"/><line x1="18" y1="20" x2="18" y2="4"/><line x1="6" y1="20" x2="6" y2="16"/>',
+  bolt: '<polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>',
+  x: '<line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>',
+  check: '<polyline points="20 6 9 17 4 12"/>',
+  party: '<path d="M5.8 11.3 2 22l10.7-3.79"/><path d="M4 3h.01"/><path d="M22 8h.01"/><path d="M15 2h.01"/><path d="M22 20h.01"/><path d="m22 2-2.24.75a2.9 2.9 0 0 0-1.96 3.12v0c.1.86-.57 1.63-1.45 1.63h-.38c-.86 0-1.6.6-1.76 1.44L14 10"/><path d="m22 13-1.31.68a2.28 2.28 0 0 0-1.11 2.65v0c.24.8-.44 1.55-1.27 1.42V17.75c-.83-.13-1.62.35-1.75 1.18v0c-.13.83.35 1.62 1.18 1.75l.19.03"/><path d="M11 2 9.98 3.75c-.34.58-.05 1.32.57 1.5v0c.62.18.91.92.57 1.5L10 8.75"/>',
+  users: '<path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/>',
+  download: '<path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/>',
+  upload: '<path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/>',
+  trash: '<polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/>',
+  rocket: '<path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z"/><path d="M12 15l-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z"/><path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 0 5 0"/><path d="M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5"/>',
+  bar: '<line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/>',
+  lock: '<rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/>',
+  copy: '<rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/>',
+  external: '<path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/>',
+  eye: '<path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/>',
+  award: '<circle cx="12" cy="8" r="7"/><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"/>'
+};
+function icon(name, size) {
+  size = size || 20;
+  const path = ICONS[name] || ICONS.plus;
+  return `<svg class="ico" width="${size}" height="${size}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">${path}</svg>`;
+}
+
 // ============================================================================
 // DATA LAYER
 // ============================================================================
@@ -1089,6 +1195,8 @@ function render() {
     return;
   }
   renderHeader();
+  renderBottomNav();
+  renderQuickGrids();
   renderMission();
   renderMacros();
   renderTodayFoodList();
@@ -1111,13 +1219,79 @@ function render() {
   renderMeds();
 }
 
+const QUICK_ACTIONS = [
+  { key: 'food', label: 'Food', icon: 'utensils' },
+  { key: 'weight', label: 'Weight', icon: 'scale' },
+  { key: 'glucose', label: 'Glucose', icon: 'droplet_blood' },
+  { key: 'water', label: 'Water', icon: 'droplet' },
+  { key: 'exercise', label: 'Move', icon: 'dumbbell' },
+  { key: 'sleep', label: 'Sleep', icon: 'moon' },
+  { key: 'mood', label: 'Mood', icon: 'heart' },
+  { key: 'photo', label: 'Photo', icon: 'camera' },
+  { key: 'cycle', label: 'Cycle', icon: 'cycle' },
+  { key: 'meds', label: 'Meds', icon: 'pill' },
+  { key: 'symptoms', label: 'Symptoms', icon: 'brain' },
+  { key: 'notes', label: 'Notes', icon: 'pencil' },
+  { key: 'lab', label: 'Lab', icon: 'flask' }
+];
+
+function renderBottomNav() {
+  const el = document.getElementById('bottomNav');
+  if (!el) return;
+  const items = [
+    { view: 'today', label: 'Today', ico: 'target' },
+    { view: 'log', label: 'Log', ico: 'plus' },
+    { view: 'progress', label: 'Progress', ico: 'bar' },
+    { view: 'accountability', label: 'Stakes', ico: 'bolt' }
+  ];
+  el.innerHTML = items.map(i =>
+    `<button class="nav-btn" data-view="${i.view}" onclick="openView('${i.view}')"><div class="nav-btn-icon">${icon(i.ico, 22)}</div><div>${i.label}</div></button>`
+  ).join('');
+  const activeView = document.querySelector('.view.active');
+  if (activeView) {
+    const name = activeView.id.replace('view-', '');
+    el.querySelectorAll(`[data-view="${name}"]`).forEach(b => b.classList.add('active'));
+  }
+}
+
+function renderQuickGrids() {
+  const todayGrid = document.getElementById('quickGridToday');
+  if (todayGrid) {
+    todayGrid.innerHTML = QUICK_ACTIONS.slice(0, 8).map(a =>
+      `<button class="quick-btn" onclick="openModal('${a.key}')"><div class="quick-icon">${icon(a.icon, 24)}</div><div class="quick-label">${a.label}</div></button>`
+    ).join('');
+  }
+  const logGrid = document.getElementById('quickGridLog');
+  if (logGrid) {
+    logGrid.innerHTML = QUICK_ACTIONS.map(a =>
+      `<button class="quick-btn" onclick="openModal('${a.key}')"><div class="quick-icon">${icon(a.icon, 24)}</div><div class="quick-label">${a.label}</div></button>`
+    ).join('');
+  }
+}
+
 function renderHeader() {
   const hour = new Date().getHours();
-  let greeting = 'Good morning, ';
-  if (hour >= 12 && hour < 18) greeting = 'Good afternoon, ';
-  else if (hour >= 18) greeting = 'Good evening, ';
-  document.getElementById('brandGreeting').textContent = greeting + (state.profile.name || 'you');
-  document.getElementById('brandDate').textContent = new Date().toLocaleDateString('en-US', { weekday: 'long', month: 'short', day: 'numeric' });
+  let greeting = 'GOOD MORNING';
+  if (hour >= 12 && hour < 18) greeting = 'GOOD AFTERNOON';
+  else if (hour >= 18) greeting = 'GOOD EVENING';
+  document.getElementById('brandGreeting').textContent = greeting;
+  document.getElementById('brandDate').textContent = new Date().toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric' });
+  document.getElementById('btnShare').innerHTML = icon('share', 20);
+  document.getElementById('btnSettings').innerHTML = icon('settings', 20);
+  document.getElementById('desktopNav').innerHTML = `
+    <button class="desktop-nav-btn active" data-view="today" onclick="openView('today')">${icon('target', 16)} Today</button>
+    <button class="desktop-nav-btn" data-view="log" onclick="openView('log')">${icon('plus', 16)} Log</button>
+    <button class="desktop-nav-btn" data-view="progress" onclick="openView('progress')">${icon('bar', 16)} Progress</button>
+    <button class="desktop-nav-btn" data-view="accountability" onclick="openView('accountability')">${icon('bolt', 16)} Accountability</button>
+    <button class="desktop-nav-btn" data-view="settings" onclick="openView('settings')">${icon('settings', 16)} Settings</button>
+  `;
+  // Re-highlight active view button
+  const activeView = document.querySelector('.view.active');
+  if (activeView) {
+    const name = activeView.id.replace('view-', '');
+    document.querySelectorAll('.desktop-nav-btn').forEach(b => b.classList.remove('active'));
+    document.querySelectorAll(`.desktop-nav-btn[data-view="${name}"]`).forEach(b => b.classList.add('active'));
+  }
 }
 
 function renderMission() {
@@ -1133,7 +1307,7 @@ function renderMission() {
   const daysLeft = Math.max(0, 365 - daysPassed);
 
   document.getElementById('dayCount').textContent = daysPassed + 1;
-  document.getElementById('missionTitle').textContent = `Down ${lost.toFixed(1)} lbs · ${toGo.toFixed(1)} to go`;
+  document.getElementById('missionTitle').innerHTML = `<span class="lbs-down">Down ${lost.toFixed(1)}</span> · <span class="lbs-togo">${toGo.toFixed(1)} to go</span>`;
   document.getElementById('statCurrent').textContent = current.toFixed(0);
   document.getElementById('statGoal').textContent = goal;
   document.getElementById('statDays').textContent = daysLeft;
@@ -1147,7 +1321,7 @@ function renderMission() {
   const octDaysLeft = Math.max(0, daysBetween(today(), state.profile.octDate));
   document.getElementById('octPct').textContent = octPct.toFixed(0) + '%';
   document.getElementById('octFill').style.width = octPct + '%';
-  document.getElementById('octRemaining').textContent = octRemaining > 0 ? `${octRemaining.toFixed(1)} lbs to go` : `🎉 Checkpoint hit!`;
+  document.getElementById('octRemaining').textContent = octRemaining > 0 ? `${octRemaining.toFixed(1)} lbs to go` : `Checkpoint hit`;
   document.getElementById('octDaysLeft').textContent = `${octDaysLeft} days left`;
 }
 
@@ -1183,7 +1357,7 @@ function renderTodayFoodList() {
   const log = todayLog();
   const el = document.getElementById('todayFoodList');
   if (!log.food.length) {
-    el.innerHTML = '<div class="empty">No food logged yet today. Tap 🍳 to add.</div>';
+    el.innerHTML = '<div class="empty">No food logged yet today. Tap the utensils icon to add.</div>';
     return;
   }
   el.innerHTML = log.food.map((f, i) => `
@@ -1192,7 +1366,7 @@ function renderTodayFoodList() {
         <div class="log-entry-title">${f.qty}${f.unit ? ' ' + f.unit : ''} · ${f.name}</div>
         <div class="log-entry-sub">${f.cal} cal · ${f.p.toFixed(0)}p / ${f.c.toFixed(0)}c / ${f.f.toFixed(0)}f</div>
       </div>
-      <button class="log-entry-remove" onclick="removeFood(${i})">✕</button>
+      <button class="log-entry-remove" onclick="removeFood(${i})">×</button>
     </div>
   `).join('');
 }
@@ -1211,10 +1385,10 @@ function renderSnapshot() {
     const total = log.exercise.reduce((s, e) => s + (parseInt(e.duration) || 0), 0);
     parts.push(`<div><strong>${total} min</strong> movement · ${log.exercise.length} session${log.exercise.length !== 1 ? 's' : ''}</div>`);
   }
-  if (log.sleep) parts.push(`<div><strong>${log.sleep.hours}h</strong> sleep · ${'⭐'.repeat(log.sleep.quality || 0)}</div>`);
-  if (log.mood) parts.push(`<div>Mood: ${['😞','😕','😐','🙂','😄'][log.mood - 1]} · Energy: ${['🪫','🔋','🔋','🔋','⚡'][log.energy - 1] || '—'}</div>`);
+  if (log.sleep) parts.push(`<div><strong>${log.sleep.hours}h</strong> sleep · ${(log.sleep.quality || 0) + '/5'}</div>`);
+  if (log.mood) parts.push(`<div>Mood: ${['Awful','Meh','OK','Good','Great'][log.mood - 1]} · Energy: ${['Low','Low+','Med','High','Peak'][log.energy - 1] || '—'}</div>`);
   if (log.cycle) parts.push(`<div>Cycle: <span class="pill info">${log.cycle}</span></div>`);
-  if (log.meds && log.meds.length) parts.push(`<div>💊 ${log.meds.length} med${log.meds.length !== 1 ? 's' : ''} taken</div>`);
+  if (log.meds && log.meds.length) parts.push(`<div>${log.meds.length} med${log.meds.length !== 1 ? 's' : ''} taken</div>`);
   if (log.notes) parts.push(`<div style="font-style: italic; color: var(--text-dim); font-size: 13px;">"${log.notes}"</div>`);
   document.getElementById('snapshotCard').innerHTML = parts.length ? parts.join('<div style="height: 8px;"></div>') : '<div class="empty">Nothing logged yet. Every log = fuel.</div>';
 }
@@ -1225,7 +1399,7 @@ function renderStreak() {
   document.getElementById('streakNum2').textContent = current;
   document.getElementById('longestStreak').textContent = longest;
 
-  let msg = 'Log something today to keep the fire alive 🔥';
+  let msg = 'Log something today to keep momentum alive';
   if (current === 0) msg = 'Log ANYTHING today to start your streak. Water counts.';
   else if (current === 1) msg = 'Day 1 done. Do it again tomorrow.';
   else if (current < 7) msg = `${current} days strong. Don't break the chain.`;
@@ -1285,20 +1459,20 @@ function renderFullTodayLog() {
   log.food.forEach((f, i) => items.push(`
     <div class="log-entry">
       <div class="log-entry-main">
-        <div class="log-entry-title">🍳 ${f.qty}${f.unit ? ' ' + f.unit : ''} · ${f.name}</div>
+        <div class="log-entry-title">${icon('utensils', 16)} <span>${f.qty}${f.unit ? ' ' + f.unit : ''} · ${f.name}</div>
         <div class="log-entry-sub">${f.cal} cal · ${f.p.toFixed(0)}p / ${f.c.toFixed(0)}c / ${f.f.toFixed(0)}f</div>
       </div>
     </div>`));
-  if (log.weight != null) items.push(`<div class="log-entry"><div class="log-entry-main"><div class="log-entry-title">⚖️ ${log.weight} lbs</div></div></div>`);
-  (log.glucose || []).forEach(g => items.push(`<div class="log-entry"><div class="log-entry-main"><div class="log-entry-title">🩸 ${g.value} mg/dL</div><div class="log-entry-sub">${g.context}</div></div></div>`));
-  if (log.water > 0) items.push(`<div class="log-entry"><div class="log-entry-main"><div class="log-entry-title">💧 ${log.water} oz water</div></div></div>`);
-  (log.exercise || []).forEach(e => items.push(`<div class="log-entry"><div class="log-entry-main"><div class="log-entry-title">🏋️ ${e.type} · ${e.duration} min</div><div class="log-entry-sub">${e.intensity || ''} ${e.notes ? '· ' + e.notes : ''}</div></div></div>`));
-  if (log.sleep) items.push(`<div class="log-entry"><div class="log-entry-main"><div class="log-entry-title">😴 ${log.sleep.hours}h sleep</div><div class="log-entry-sub">Quality: ${'⭐'.repeat(log.sleep.quality || 0)}</div></div></div>`);
-  if (log.mood) items.push(`<div class="log-entry"><div class="log-entry-main"><div class="log-entry-title">💗 Mood: ${['😞','😕','😐','🙂','😄'][log.mood - 1]} · Energy: ${['🪫','🔋','🔋','🔋','⚡'][log.energy - 1] || '—'}</div></div></div>`);
-  if (log.cycle) items.push(`<div class="log-entry"><div class="log-entry-main"><div class="log-entry-title">🌙 Cycle: ${log.cycle}</div></div></div>`);
-  (log.meds || []).forEach(m => items.push(`<div class="log-entry"><div class="log-entry-main"><div class="log-entry-title">💊 ${m}</div></div></div>`));
-  if (log.photo) items.push(`<div class="log-entry"><div class="log-entry-main"><div class="log-entry-title">📸 Progress photo saved</div></div></div>`);
-  if (log.notes) items.push(`<div class="log-entry"><div class="log-entry-main"><div class="log-entry-title">📝 ${log.notes}</div></div></div>`);
+  if (log.weight != null) items.push(`<div class="log-entry"><div class="log-entry-main"><div class="log-entry-title">${icon('scale', 16)} <span>${log.weight} lbs</span></div></div></div>`);
+  (log.glucose || []).forEach(g => items.push(`<div class="log-entry"><div class="log-entry-main"><div class="log-entry-title">${icon('droplet_blood', 16)} <span>${g.value} mg/dL</span></div><div class="log-entry-sub">${g.context}</div></div></div>`));
+  if (log.water > 0) items.push(`<div class="log-entry"><div class="log-entry-main"><div class="log-entry-title">${icon('droplet', 16)} <span>${log.water} oz water</span></div></div></div>`);
+  (log.exercise || []).forEach(e => items.push(`<div class="log-entry"><div class="log-entry-main"><div class="log-entry-title">${icon('dumbbell', 16)} <span>${e.type} · ${e.duration} min</span></div><div class="log-entry-sub">${e.intensity || ''} ${e.notes ? '· ' + e.notes : ''}</div></div></div>`));
+  if (log.sleep) items.push(`<div class="log-entry"><div class="log-entry-main"><div class="log-entry-title">${icon('moon', 16)} <span>${log.sleep.hours}h sleep</span></div><div class="log-entry-sub">Quality: ${(log.sleep.quality || 0) + '/5'}</div></div></div>`);
+  if (log.mood) items.push(`<div class="log-entry"><div class="log-entry-main"><div class="log-entry-title">${icon('heart', 16)} <span>Mood: ${['Awful','Meh','OK','Good','Great'][log.mood - 1]} · Energy: ${['Low','Low+','Med','High','Peak'][log.energy - 1] || '—'}</div></div></div>`);
+  if (log.cycle) items.push(`<div class="log-entry"><div class="log-entry-main"><div class="log-entry-title">${icon('cycle', 16)} <span>Cycle: ${log.cycle}</span></div></div></div>`);
+  (log.meds || []).forEach(m => items.push(`<div class="log-entry"><div class="log-entry-main"><div class="log-entry-title">${icon('pill', 16)} <span>${m}</span></div></div></div>`));
+  if (log.photo) items.push(`<div class="log-entry"><div class="log-entry-main"><div class="log-entry-title">${icon('camera', 16)} <span>Progress photo saved</span></div></div></div>`);
+  if (log.notes) items.push(`<div class="log-entry"><div class="log-entry-main"><div class="log-entry-title">${icon('pencil', 16)} <span>${log.notes}</span></div></div></div>`);
   document.getElementById('fullTodayLog').innerHTML = items.length ? items.join('') : '<div class="empty">Nothing yet. Log anything to start.</div>';
 }
 
@@ -1379,22 +1553,22 @@ function renderMilestones() {
   const current = currentWeight();
   const lost = start - current;
   const milestones = [
-    { lbs: 5, label: 'First 5 pounds', reward: '🎉 Loose-fitting clothes' },
-    { lbs: 10, label: '10 pounds down', reward: '🎁 Non-food treat (mani, book, etc.)' },
-    { lbs: 15, label: '15 pounds down', reward: '👗 Buy something new' },
-    { lbs: 25, label: 'Quarter century', reward: '💆 Massage or spa day' },
-    { lbs: 35, label: '35 pounds down', reward: '📸 Photoshoot' },
-    { lbs: 50, label: '50 lbs — HALFWAY 🎯', reward: '✈️ Weekend getaway' },
-    { lbs: 65, label: '65 pounds', reward: '💃 New wardrobe piece' },
-    { lbs: 75, label: '75 pounds down', reward: '🎪 Something wild' },
-    { lbs: 90, label: '90 pounds', reward: '💎 Something you\'ve been eyeing' },
-    { lbs: 100, label: '100 POUNDS — MISSION ACCOMPLISHED', reward: '🏆 CELEBRATE HARD' }
+    { lbs: 5, label: 'First 5 pounds', reward: 'Loose-fitting clothes fit again' },
+    { lbs: 10, label: '10 pounds down', reward: 'Non-food treat (mani, book, whatever)' },
+    { lbs: 15, label: '15 pounds down', reward: 'Buy something new to wear' },
+    { lbs: 25, label: 'Quarter century', reward: 'Massage or spa day' },
+    { lbs: 35, label: '35 pounds down', reward: 'Book a photoshoot' },
+    { lbs: 50, label: '50 lbs — HALFWAY', reward: 'Weekend getaway' },
+    { lbs: 65, label: '65 pounds', reward: 'New wardrobe piece' },
+    { lbs: 75, label: '75 pounds down', reward: 'Something wild you\'ve been wanting' },
+    { lbs: 90, label: '90 pounds', reward: 'Something you\'ve been eyeing' },
+    { lbs: 100, label: '100 POUNDS — MISSION ACCOMPLISHED', reward: 'CELEBRATE HARD' }
   ];
   const html = milestones.map(m => {
     const hit = lost >= m.lbs;
     const progress = Math.min(100, (lost / m.lbs) * 100);
     return `<div class="milestone ${hit ? 'hit' : ''}">
-      <div class="milestone-badge">${hit ? '✅' : m.lbs}</div>
+      <div class="milestone-badge">${hit ? icon('check', 20) : m.lbs}</div>
       <div class="milestone-info">
         <div class="milestone-title">${m.label}</div>
         <div class="milestone-sub">${m.reward}${!hit ? ` · ${progress.toFixed(0)}%` : ''}</div>
@@ -1443,7 +1617,7 @@ function renderGlucoseSummary() {
 function renderPhotoGrid() {
   const dates = Object.keys(state.logs).filter(d => state.logs[d].photo).sort().reverse();
   if (!dates.length) {
-    document.getElementById('photoGrid').innerHTML = '<div class="photo-tile photo-empty">📸</div>'.repeat(6);
+    document.getElementById('photoGrid').innerHTML = '<div class="photo-tile photo-empty"></div>'.repeat(6);
     return;
   }
   document.getElementById('photoGrid').innerHTML = dates.map(d => `
@@ -1566,7 +1740,7 @@ function renderLabs() {
           <div style="font-size: 11px; color: var(--text-dim); margin-top: 2px;">${new Date(latest.date).toLocaleDateString()} · ${arr.length} reading${arr.length !== 1 ? 's' : ''}</div>
           ${latest.notes ? `<div style="font-size: 11px; color: var(--text-dim); font-style: italic; margin-top: 2px;">${latest.notes}</div>` : ''}
         </div>
-        <button class="log-entry-remove" onclick="removeLab(${state.labs.indexOf(latest)})">✕</button>
+        <button class="log-entry-remove" onclick="removeLab(${state.labs.indexOf(latest)})">×</button>
       </div>
     `;
   }).join('');
@@ -1584,7 +1758,7 @@ function renderStakes() {
         <div class="stake-desc">${s.trigger}</div>
         <div class="stake-consequence">→ ${s.consequence}</div>
       </div>
-      <button class="log-entry-remove" onclick="removeStake(${i})">✕</button>
+      <button class="log-entry-remove" onclick="removeStake(${i})">×</button>
     </div>
   `).join('');
 }
@@ -1600,7 +1774,7 @@ function renderBuddies() {
         <div class="stake-desc">${b.name}</div>
         <div class="stake-consequence">${b.contact || 'No contact'}</div>
       </div>
-      <button class="log-entry-remove" onclick="removeBuddy(${i})">✕</button>
+      <button class="log-entry-remove" onclick="removeBuddy(${i})">×</button>
     </div>
   `).join('');
 }
@@ -1621,14 +1795,14 @@ function renderWeeklyPost() {
   }
   const loggedDays = week.filter(d => isLogged(d)).length;
 
-  const post = `Week ${Math.floor(daysIn / 7) + 1} update on my 100-pound mission ⚡
+  const post = `Week ${Math.floor(daysIn / 7) + 1} update on my 100-pound mission
 
-📉 Total down: ${lost.toFixed(1)} lbs (${daysIn} days in)
-🔥 Current streak: ${streak} days logged
-✅ This week: ${loggedDays}/7 days
-🎯 Oct 31 checkpoint: ${octRemaining.toFixed(1)} lbs to go
+Total down: ${lost.toFixed(1)} lbs (${daysIn} days in)
+Current streak: ${streak} days logged
+This week: ${loggedDays}/7 days
+Oct 31 checkpoint: ${octRemaining.toFixed(1)} lbs to go
 
-${lost >= 5 ? 'The receipts are showing up. 💪' : 'Slow is still forward. Not giving up.'}
+${lost >= 5 ? 'The receipts are showing up.' : 'Slow is still forward. Not giving up.'}
 
 Follow along here — I\'m doing this in public on purpose.`;
 
@@ -1659,7 +1833,7 @@ function renderMeds() {
   list.innerHTML = state.meds.map((m, i) => `
     <div class="log-entry">
       <div class="log-entry-main"><div class="log-entry-title">${m}</div></div>
-      <button class="log-entry-remove" onclick="removeMed(${i})">✕</button>
+      <button class="log-entry-remove" onclick="removeMed(${i})">×</button>
     </div>
   `).join('');
 }
@@ -1705,21 +1879,21 @@ function buildModalHTML(type) {
     case 'food':
       return `
         <div class="modal-header">
-          <div class="modal-title">🍳 Log Food</div>
-          <button class="modal-close" onclick="closeModal()">✕</button>
+          <div class="modal-title">Log Food</div>
+          <button class="modal-close" onclick="closeModal()" id="modalCloseBtn">CLOSE</button>
         </div>
         <div class="form-group">
           <label class="form-label">What did you eat?</label>
           <textarea class="form-textarea" id="foodInput" placeholder="2 eggs, avocado toast, black coffee"></textarea>
-          <div class="form-hint">${state.apiKey ? '✨ AI-powered parsing enabled' : '💡 Add API key in Settings for smarter parsing. Fallback uses built-in database.'}</div>
+          <div class="form-hint">${state.apiKey ? 'AI-powered parsing enabled' : 'Add API key in Settings for smarter parsing. Fallback uses built-in database.'}</div>
         </div>
         <button class="btn btn-primary btn-full" onclick="submitFood()">Add to Today's Log</button>
       `;
     case 'weight':
       return `
         <div class="modal-header">
-          <div class="modal-title">⚖️ Log Weight</div>
-          <button class="modal-close" onclick="closeModal()">✕</button>
+          <div class="modal-title">Log Weight</div>
+          <button class="modal-close" onclick="closeModal()" id="modalCloseBtn">CLOSE</button>
         </div>
         <div class="form-group">
           <label class="form-label">Weight (lbs)</label>
@@ -1730,8 +1904,8 @@ function buildModalHTML(type) {
     case 'glucose':
       return `
         <div class="modal-header">
-          <div class="modal-title">🩸 Log Glucose</div>
-          <button class="modal-close" onclick="closeModal()">✕</button>
+          <div class="modal-title">Log Glucose</div>
+          <button class="modal-close" onclick="closeModal()" id="modalCloseBtn">CLOSE</button>
         </div>
         <div class="form-group">
           <label class="form-label">Reading (mg/dL)</label>
@@ -1752,8 +1926,8 @@ function buildModalHTML(type) {
     case 'water':
       return `
         <div class="modal-header">
-          <div class="modal-title">💧 Water</div>
-          <button class="modal-close" onclick="closeModal()">✕</button>
+          <div class="modal-title">Water</div>
+          <button class="modal-close" onclick="closeModal()" id="modalCloseBtn">CLOSE</button>
         </div>
         <div class="form-group">
           <label class="form-label">Currently: ${log.water || 0} oz today</label>
@@ -1778,8 +1952,8 @@ function buildModalHTML(type) {
     case 'exercise':
       return `
         <div class="modal-header">
-          <div class="modal-title">🏋️ Log Movement</div>
-          <button class="modal-close" onclick="closeModal()">✕</button>
+          <div class="modal-title">Log Movement</div>
+          <button class="modal-close" onclick="closeModal()" id="modalCloseBtn">CLOSE</button>
         </div>
         <div class="form-group">
           <label class="form-label">Type</label>
@@ -1812,8 +1986,8 @@ function buildModalHTML(type) {
     case 'sleep':
       return `
         <div class="modal-header">
-          <div class="modal-title">😴 Log Sleep</div>
-          <button class="modal-close" onclick="closeModal()">✕</button>
+          <div class="modal-title">Log Sleep</div>
+          <button class="modal-close" onclick="closeModal()" id="modalCloseBtn">CLOSE</button>
         </div>
         <div class="form-group">
           <label class="form-label">Hours slept</label>
@@ -1830,19 +2004,19 @@ function buildModalHTML(type) {
     case 'mood':
       return `
         <div class="modal-header">
-          <div class="modal-title">💗 Mood & Energy</div>
-          <button class="modal-close" onclick="closeModal()">✕</button>
+          <div class="modal-title">Mood & Energy</div>
+          <button class="modal-close" onclick="closeModal()" id="modalCloseBtn">CLOSE</button>
         </div>
         <div class="form-group">
           <label class="form-label">Mood</label>
           <div class="slider-row" id="moodPick">
-            ${['😞','😕','😐','🙂','😄'].map((e, i) => `<button class="mood-btn ${log.mood === i + 1 ? 'active' : ''}" data-val="${i + 1}" onclick="selectMood(this)">${e}</button>`).join('')}
+            ${['1','2','3','4','5'].map((n, i) => `<button class="mood-btn ${log.mood === i + 1 ? 'active' : ''}" data-val="${i + 1}" onclick="selectMood(this)"><div>${n}</div><div style="font-size: 9px; opacity: 0.7; margin-top: 2px; font-weight: 700; letter-spacing: 0.05em;">${['AWFUL','MEH','OK','GOOD','GREAT'][i]}</div></button>`).join('')}
           </div>
         </div>
         <div class="form-group">
           <label class="form-label">Energy</label>
           <div class="slider-row" id="energyPick">
-            ${['🪫','🔋','🔋','🔋','⚡'].map((e, i) => `<button class="mood-btn ${log.energy === i + 1 ? 'active' : ''}" data-val="${i + 1}" onclick="selectMood(this)">${e}</button>`).join('')}
+            ${['1','2','3','4','5'].map((n, i) => `<button class="mood-btn ${log.energy === i + 1 ? 'active' : ''}" data-val="${i + 1}" onclick="selectMood(this)"><div>${n}</div><div style="font-size: 9px; opacity: 0.7; margin-top: 2px; font-weight: 700; letter-spacing: 0.05em;">${['LOW','LOW+','MED','HIGH','PEAK'][i]}</div></button>`).join('')}
           </div>
         </div>
         <button class="btn btn-primary btn-full" onclick="submitMood()">Save</button>
@@ -1850,8 +2024,8 @@ function buildModalHTML(type) {
     case 'cycle':
       return `
         <div class="modal-header">
-          <div class="modal-title">🌙 Cycle</div>
-          <button class="modal-close" onclick="closeModal()">✕</button>
+          <div class="modal-title">Cycle</div>
+          <button class="modal-close" onclick="closeModal()" id="modalCloseBtn">CLOSE</button>
         </div>
         <div class="form-group">
           <label class="form-label">Current phase</label>
@@ -1864,8 +2038,8 @@ function buildModalHTML(type) {
     case 'meds':
       return `
         <div class="modal-header">
-          <div class="modal-title">💊 Medications</div>
-          <button class="modal-close" onclick="closeModal()">✕</button>
+          <div class="modal-title">Medications</div>
+          <button class="modal-close" onclick="closeModal()" id="modalCloseBtn">CLOSE</button>
         </div>
         <div class="form-group">
           <label class="form-label">Check what you took today</label>
@@ -1881,8 +2055,8 @@ function buildModalHTML(type) {
     case 'photo':
       return `
         <div class="modal-header">
-          <div class="modal-title">📸 Progress Photo</div>
-          <button class="modal-close" onclick="closeModal()">✕</button>
+          <div class="modal-title">Progress Photo</div>
+          <button class="modal-close" onclick="closeModal()" id="modalCloseBtn">CLOSE</button>
         </div>
         <div class="form-group">
           <label class="form-label">Choose photo</label>
@@ -1895,8 +2069,8 @@ function buildModalHTML(type) {
     case 'symptoms':
       return `
         <div class="modal-header">
-          <div class="modal-title">🧠 Symptoms</div>
-          <button class="modal-close" onclick="closeModal()">✕</button>
+          <div class="modal-title">Symptoms</div>
+          <button class="modal-close" onclick="closeModal()" id="modalCloseBtn">CLOSE</button>
         </div>
         <div class="form-group">
           <label class="form-label">Tap all that apply</label>
@@ -1909,8 +2083,8 @@ function buildModalHTML(type) {
     case 'notes':
       return `
         <div class="modal-header">
-          <div class="modal-title">📝 Daily Note</div>
-          <button class="modal-close" onclick="closeModal()">✕</button>
+          <div class="modal-title">Daily Note</div>
+          <button class="modal-close" onclick="closeModal()" id="modalCloseBtn">CLOSE</button>
         </div>
         <div class="form-group">
           <label class="form-label">How's today?</label>
@@ -1921,8 +2095,8 @@ function buildModalHTML(type) {
     case 'stake':
       return `
         <div class="modal-header">
-          <div class="modal-title">⚡ Set a Stake</div>
-          <button class="modal-close" onclick="closeModal()">✕</button>
+          <div class="modal-title">Set a Stake</div>
+          <button class="modal-close" onclick="closeModal()" id="modalCloseBtn">CLOSE</button>
         </div>
         <div class="card-sub" style="margin-bottom: 14px;">You avoid pain. Use that. Set a consequence you REALLY don't want.</div>
         <div class="form-group">
@@ -1938,8 +2112,8 @@ function buildModalHTML(type) {
     case 'lab':
       return `
         <div class="modal-header">
-          <div class="modal-title">🧪 Log Lab Result</div>
-          <button class="modal-close" onclick="closeModal()">✕</button>
+          <div class="modal-title">Log Lab Result</div>
+          <button class="modal-close" onclick="closeModal()" id="modalCloseBtn">CLOSE</button>
         </div>
         <div class="form-group">
           <label class="form-label">Test</label>
@@ -1989,8 +2163,8 @@ function buildModalHTML(type) {
     case 'buddy':
       return `
         <div class="modal-header">
-          <div class="modal-title">👥 Add Accountability Buddy</div>
-          <button class="modal-close" onclick="closeModal()">✕</button>
+          <div class="modal-title">Add Accountability Buddy</div>
+          <button class="modal-close" onclick="closeModal()" id="modalCloseBtn">CLOSE</button>
         </div>
         <div class="form-group">
           <label class="form-label">Name</label>
@@ -2051,7 +2225,7 @@ async function submitFood() {
   const log = todayLog();
   items.forEach(i => log.food.push(i));
   saveState();
-  fanfare('🍽️ Logged!', ['👏','🎉','⚡','💪'][Math.floor(Math.random() * 4)]);
+  fanfare('Logged', 'utensils');
   closeModal();
   render();
   checkAchievements();
@@ -2066,12 +2240,12 @@ function submitWeight() {
   saveState();
   const change = prevWeight - v;
   if (change > 0) {
-    fanfare(`⚖️ -${change.toFixed(1)} lbs!`, '🎯');
+    fanfare(`Down ${change.toFixed(1)} lbs`, 'target');
     confetti();
   } else if (change < 0) {
-    toast(`Logged ${v} lbs — tomorrow's another day 💪`, 'success');
+    toast(`Logged ${v} lbs — tomorrow's another day`, 'success');
   } else {
-    fanfare('⚖️ Logged!', '📊');
+    fanfare('Weight logged', 'scale');
   }
   closeModal();
   render();
@@ -2084,7 +2258,7 @@ function submitGlucose() {
   const ctx = getActiveChipVal('glucoseContext') || 'random';
   todayLog().glucose.push({ value: v, context: ctx, time: now() });
   saveState();
-  fanfare('🩸 Tracked!', v < 100 ? '🎯' : v < 140 ? '👍' : '📊');
+  fanfare('Tracked', v < 100 ? 'target' : v < 140 ? 'check' : 'bar');
   closeModal();
   render();
 }
@@ -2101,10 +2275,10 @@ function addWater(v) {
   saveState();
   const pct = Math.round((log.water / state.macroTargets.water) * 100);
   if (pct >= 100 && (log.water - v) < state.macroTargets.water) {
-    fanfare('💧 Water goal hit!', '🌊');
+    fanfare('Water goal hit', 'droplet');
     confetti();
   } else {
-    fanfare('💧 +' + v + ' oz', '💦');
+    fanfare('+' + v + ' oz water', 'droplet');
   }
   closeModal();
   render();
@@ -2118,7 +2292,7 @@ function submitExercise() {
   if (!duration) return toast('Enter duration', 'error');
   todayLog().exercise.push({ type, duration, intensity, notes, time: now() });
   saveState();
-  fanfare(`🏋️ ${duration} min!`, '💪');
+  fanfare(`${duration} min logged`, 'dumbbell');
   confetti();
   closeModal();
   render();
@@ -2130,7 +2304,7 @@ function submitSleep() {
   if (!hours) return toast('Enter hours', 'error');
   todayLog().sleep = { hours, quality: quality || 3 };
   saveState();
-  fanfare('😴 Logged!', hours >= 7 ? '🌙' : '☕');
+  fanfare('Sleep logged', 'moon');
   closeModal();
   render();
 }
@@ -2142,7 +2316,7 @@ function submitMood() {
   if (mood) log.mood = mood;
   if (energy) log.energy = energy;
   saveState();
-  fanfare('💗 Noted!', '✨');
+  fanfare('Noted', 'heart');
   closeModal();
   render();
 }
@@ -2151,7 +2325,7 @@ function submitCycle() {
   const phase = getActiveChipVal('cyclePhase');
   todayLog().cycle = phase;
   saveState();
-  fanfare('🌙 Tracked!', '🌸');
+  fanfare('Cycle tracked', 'cycle');
   closeModal();
   render();
 }
@@ -2160,7 +2334,7 @@ function submitMeds() {
   const log = todayLog();
   log.meds = state.meds.filter((m, i) => document.getElementById('med-' + i).checked);
   saveState();
-  fanfare('💊 Meds logged!', '✅');
+  fanfare('Meds logged', 'check');
   closeModal();
   render();
 }
@@ -2182,7 +2356,7 @@ function submitPhoto() {
       canvas.getContext('2d').drawImage(img, 0, 0, w, h);
       todayLog().photo = canvas.toDataURL('image/jpeg', 0.7);
       saveState();
-      fanfare('📸 Captured!', '✨');
+      fanfare('Photo captured', 'camera');
       confetti();
       closeModal();
       render();
@@ -2195,7 +2369,7 @@ function submitPhoto() {
 function submitSymptoms() {
   todayLog().symptoms = getActiveChips('symptomsPick');
   saveState();
-  fanfare('🧠 Noted!', '📝');
+  fanfare('Symptoms noted', 'brain');
   closeModal();
   render();
 }
@@ -2203,7 +2377,7 @@ function submitSymptoms() {
 function submitNotes() {
   todayLog().notes = document.getElementById('notesInput').value;
   saveState();
-  fanfare('📝 Saved!', '💭');
+  fanfare('Saved', 'pencil');
   closeModal();
   render();
 }
@@ -2214,7 +2388,7 @@ function submitStake() {
   if (!trigger || !consequence) return toast('Fill both fields', 'error');
   state.stakes.push({ trigger, consequence, createdAt: now() });
   saveState();
-  fanfare('⚡ LOCKED IN', '🔒');
+  fanfare('Locked in', 'lock');
   closeModal();
   render();
 }
@@ -2232,7 +2406,7 @@ function submitLab() {
   if (isNaN(value)) return toast('Enter a value', 'error');
   state.labs.push({ name, value, unit, date, notes, createdAt: now() });
   saveState();
-  fanfare('🧪 Logged!', '📊');
+  fanfare('Lab logged', 'flask');
   closeModal();
   render();
 }
@@ -2250,7 +2424,7 @@ function submitBuddy() {
   if (!name) return toast('Enter a name', 'error');
   state.buddies.push({ name, contact, createdAt: now() });
   saveState();
-  fanfare('👥 Added!', '💗');
+  fanfare('Buddy added', 'users');
   closeModal();
   render();
 }
@@ -2306,24 +2480,24 @@ function openShare() {
   })));
   modal.innerHTML = `
     <div class="modal-header">
-      <div class="modal-title">📤 Share Progress</div>
-      <button class="modal-close" onclick="closeModal()">✕</button>
+      <div class="modal-title">Share Progress</div>
+      <button class="modal-close" onclick="closeModal()" id="modalCloseBtn">CLOSE</button>
     </div>
     <div class="share-preview">
       <div class="mission-tag">100-Pound Mission · Day ${daysIn}</div>
       <div class="share-preview-num">${lost.toFixed(1)}</div>
       <div class="share-preview-lbl">pounds down</div>
       <div style="margin-top: 14px; font-size: 14px;">
-        <div>${current} → ${state.profile.goalWeight} lbs · ${streak}-day streak 🔥</div>
+        <div>${current} → ${state.profile.goalWeight} lbs · ${streak}-day streak</div>
       </div>
     </div>
     <div class="form-group">
       <label class="form-label">Your public dashboard link</label>
       <div class="share-url">${dataUrl}</div>
-      <button class="btn btn-primary btn-full" style="margin-top: 8px;" onclick="copyToClipboard('${dataUrl.replace(/'/g, "\\'")}')">📋 Copy Link</button>
+      <button class="btn btn-primary btn-full" style="margin-top: 8px;" onclick="copyToClipboard('${dataUrl.replace(/'/g, "\\'")}')">Copy Link</button>
     </div>
     <div class="form-group">
-      <label class="form-label">Screenshot this card 👆</label>
+      <label class="form-label">Screenshot this card</label>
       <div class="form-hint">Post it. The more eyes on you, the more accountability. That's the whole game.</div>
     </div>
     <button class="btn btn-ghost btn-full" onclick="closeModal()">Done</button>
@@ -2409,7 +2583,7 @@ function completeOnboarding() {
   state.macroTargets.carbs = parseInt(document.getElementById('obC').value) || 100;
   state.macroTargets.fat = parseInt(document.getElementById('obF').value) || 70;
   saveState();
-  fanfare('🚀 MISSION LIVE', '🔥');
+  fanfare('Mission live', 'flame');
   confetti();
   setTimeout(() => { openView('today'); }, 500);
 }
@@ -2421,10 +2595,10 @@ function checkAchievements() {
   // Placeholder for future achievement system
 }
 
-function fanfare(text, emoji) {
+function fanfare(text, iconName) {
   const el = document.createElement('div');
   el.className = 'fanfare';
-  el.innerHTML = `<div class="fanfare-emoji">${emoji}</div><div class="fanfare-text">${text}</div>`;
+  el.innerHTML = `<div class="fanfare-icon">${icon(iconName || 'check', 56)}</div><div class="fanfare-text">${text}</div>`;
   document.body.appendChild(el);
   setTimeout(() => el.remove(), 2000);
 }
@@ -2474,7 +2648,7 @@ function renderShareOnlyView(d) {
     <div class="app" style="padding: 20px;">
       <div class="header">
         <div class="brand">
-          <div class="brand-badge">🔥</div>
+          <div class="brand-badge"></div>
           <div>
             <div class="brand-title">${d.n}'s 100-Pound Mission</div>
             <div class="brand-sub">Public dashboard</div>
@@ -2482,7 +2656,7 @@ function renderShareOnlyView(d) {
         </div>
       </div>
       <div class="mission-card">
-        <span class="mission-tag">Day ${d.di} · ${d.st} day streak 🔥</span>
+        <span class="mission-tag">Day ${d.di} · ${d.st} day streak</span>
         <div class="mission-title" style="margin-top: 10px;">Down ${lost.toFixed(1)} lbs · ${toGo.toFixed(1)} to go</div>
         <div class="mission-stats">
           <div class="mission-stat"><div class="mission-stat-num">${d.cw.toFixed(0)}</div><div class="mission-stat-lbl">Current</div></div>
