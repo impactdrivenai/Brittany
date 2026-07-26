@@ -462,12 +462,12 @@ body { min-height: 100vh; padding-bottom: 80px; }
       <div class="form-group">
         <label class="form-label">Daily Macro Targets</label>
         <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px;">
-          <input type="number" class="form-input" id="obCal" placeholder="Calories" value="1500">
-          <input type="number" class="form-input" id="obP" placeholder="Protein (g)" value="140">
+          <input type="number" class="form-input" id="obCal" placeholder="Calories" value="1600">
+          <input type="number" class="form-input" id="obP" placeholder="Protein (g)" value="150">
           <input type="number" class="form-input" id="obC" placeholder="Carbs (g)" value="100">
-          <input type="number" class="form-input" id="obF" placeholder="Fat (g)" value="60">
+          <input type="number" class="form-input" id="obF" placeholder="Fat (g)" value="70">
         </div>
-        <div class="form-hint">Optimized for T2D + insulin resistance: high protein, moderate carbs, healthy fat. Adjust anytime.</div>
+        <div class="form-hint">Tuned for you: high protein (elite-power-athlete muscle profile), moderate carbs from beans/fruit/veggies (insulin resistance), healthy fats from olive oil/nuts/fish (anti-inflammatory).</div>
       </div>
       <button class="btn btn-primary btn-full" onclick="completeOnboarding()">🚀 Start My Mission</button>
     </div>
@@ -506,6 +506,39 @@ body { min-height: 100vh; padding-bottom: 80px; }
         </div>
       </div>
     </div>
+
+    <!-- MY PROTOCOL (collapsible) -->
+    <details class="card" style="margin-top: 16px; padding: 0;">
+      <summary style="padding: 14px 16px; cursor: pointer; font-weight: 700; font-size: 14px; display: flex; justify-content: space-between; align-items: center;">
+        <span>📋 My Protocol · quick reference</span>
+        <span style="font-size: 11px; color: var(--text-dim);">tap to expand</span>
+      </summary>
+      <div style="padding: 0 16px 16px; font-size: 13px; line-height: 1.5;">
+        <div style="display: grid; gap: 10px; grid-template-columns: 1fr; margin-top: 4px;">
+          <div style="padding: 10px 12px; background: var(--card-2); border-radius: 10px;">
+            <strong>🍽️ Every meal:</strong> Protein first (30g+), non-starchy veggies second, carbs last. Aim for 8–10 plant servings/day. Legumes daily. Fatty fish 2–3×/week. Olive oil is your friend.
+          </div>
+          <div style="padding: 10px 12px; background: var(--card-2); border-radius: 10px;">
+            <strong>🚶 After every meal:</strong> 10–15 min walk. Drops your glucose spike ~30%. Non-negotiable.
+          </div>
+          <div style="padding: 10px 12px; background: var(--card-2); border-radius: 10px;">
+            <strong>🏋️ 3–4× per week:</strong> Heavy strength (compound lifts — squat, deadlift, press, row). Your genetics are literally built for this.
+          </div>
+          <div style="padding: 10px 12px; background: var(--card-2); border-radius: 10px;">
+            <strong>🩸 Glucose targets:</strong> Fasting &lt;<span id="protoFasting">95</span>, post-meal (2hr) &lt;<span id="protoPost">140</span>, A1C &lt;<span id="protoA1c">5.6</span>%. Reversing insulin resistance = the lever that moves everything.
+          </div>
+          <div style="padding: 10px 12px; background: var(--card-2); border-radius: 10px;">
+            <strong>😴 Sleep 7.5+ hrs:</strong> Dark, cool room. No phone in bed. Poor sleep = insulin resistance next day. Ask your doc about a CGM.
+          </div>
+          <div style="padding: 10px 12px; background: var(--card-2); border-radius: 10px;">
+            <strong>💊 Daily supplement stack</strong> (see Settings): metformin, methyl-B12, inositol 40:1, D3+K2, magnesium PM, omega-3. Optional berberine (ask doc).
+          </div>
+          <div style="padding: 10px 12px; background: rgba(244,63,94,0.1); border: 1px solid rgba(244,63,94,0.3); border-radius: 10px; color: var(--text-dim);">
+            <strong>⚠️ Not medical advice.</strong> Run your protocol by your endocrinologist. Especially: berberine + metformin combo, any supplement changes, and target glucose ranges specific to your case.
+          </div>
+        </div>
+      </div>
+    </details>
 
     <div class="section-title">Quick Log</div>
     <div class="quick-grid">
@@ -571,6 +604,7 @@ body { min-height: 100vh; padding-bottom: 80px; }
       <button class="quick-btn" onclick="openModal('photo')"><div class="quick-icon">📸</div><div class="quick-label">Photo</div></button>
       <button class="quick-btn" onclick="openModal('symptoms')"><div class="quick-icon">🧠</div><div class="quick-label">Symptoms</div></button>
       <button class="quick-btn" onclick="openModal('notes')"><div class="quick-icon">📝</div><div class="quick-label">Notes</div></button>
+      <button class="quick-btn" onclick="openModal('lab')"><div class="quick-icon">🧪</div><div class="quick-label">Lab Result</div></button>
     </div>
 
     <div class="section-title">Today's Log</div>
@@ -600,6 +634,12 @@ body { min-height: 100vh; padding-bottom: 80px; }
     <div class="section-title">Blood Glucose Trend</div>
     <div class="card">
       <div id="glucoseSummary"></div>
+    </div>
+
+    <div class="section-title">Labs</div>
+    <div class="card">
+      <div id="labsPanel"></div>
+      <button class="btn btn-primary btn-full" style="margin-top: 12px;" onclick="openModal('lab')">🧪 Log Lab Result</button>
     </div>
 
     <div class="section-title">Progress Photos</div>
@@ -765,7 +805,7 @@ let state = loadState();
 function loadState() {
   const raw = localStorage.getItem(STORAGE_KEY);
   if (raw) {
-    try { return JSON.parse(raw); } catch (e) {}
+    try { return migrate(JSON.parse(raw)); } catch (e) {}
   }
   return null;
 }
@@ -785,15 +825,33 @@ function defaultState() {
       octDate: '2026-10-31',
       goalDate: null // computed as startDate + 365
     },
-    macroTargets: { calories: 1500, protein: 140, carbs: 100, fat: 60, fiber: 30, water: 100 },
+    macroTargets: { calories: 1600, protein: 150, carbs: 100, fat: 70, fiber: 35, water: 100 },
+    glucoseTargets: { fasting: 95, postMeal: 140, a1c: 5.6 },
     logs: {},
+    labs: [],
     stakes: [],
     buddies: [],
-    meds: ['Metformin 500mg'],
+    meds: [
+      'Metformin 500mg',
+      'Myo-inositol + D-chiro (40:1)',
+      'Methylcobalamin B12',
+      'Vitamin D3 + K2',
+      'Magnesium glycinate (PM)',
+      'Omega-3 (EPA/DHA 2g)',
+      'Berberine (ask doc first)'
+    ],
     apiKey: null,
     createdAt: now(),
     shareId: Math.random().toString(36).slice(2, 10)
   };
+}
+
+// Migrate older state shape to current
+function migrate(s) {
+  if (!s) return s;
+  if (!s.labs) s.labs = [];
+  if (!s.glucoseTargets) s.glucoseTargets = { fasting: 95, postMeal: 140, a1c: 5.6 };
+  return s;
 }
 
 function getLog(date) {
@@ -1042,6 +1100,7 @@ function render() {
   renderPhotoGrid();
   renderWeeklySummary();
   renderMonthWall();
+  renderLabs();
   renderStakes();
   renderBuddies();
   renderWeeklyPost();
@@ -1430,6 +1489,87 @@ function renderWeeklySummary() {
   `;
 }
 
+// Target ranges by test name — {ideal: [lo, hi], warn: [lo, hi], direction: 'lower'|'higher'|'range'}
+const LAB_TARGETS = {
+  'A1C': { ideal: [4.0, 5.6], warn: [5.6, 6.4], direction: 'lower' },
+  'Fasting Glucose': { ideal: [70, 99], warn: [100, 125], direction: 'lower' },
+  'Fasting Insulin': { ideal: [2, 8], warn: [8, 12], direction: 'lower' },
+  'HOMA-IR': { ideal: [0, 1.5], warn: [1.5, 3], direction: 'lower' },
+  'Total Testosterone': { ideal: [15, 70], warn: [70, 80], direction: 'lower' }, // female ref
+  'Free Testosterone': { ideal: [0.6, 6.8], warn: [6.8, 10], direction: 'lower' },
+  'SHBG': { ideal: [40, 120], warn: [30, 40], direction: 'higher' },
+  'Vitamin B12': { ideal: [500, 1100], warn: [300, 500], direction: 'higher' },
+  'Vitamin D': { ideal: [50, 80], warn: [30, 50], direction: 'higher' },
+  'hs-CRP': { ideal: [0, 1.0], warn: [1.0, 3.0], direction: 'lower' },
+  'ALT': { ideal: [7, 25], warn: [25, 35], direction: 'lower' },
+  'TSH': { ideal: [0.5, 2.5], warn: [2.5, 4.5], direction: 'range' },
+  'Triglycerides': { ideal: [0, 100], warn: [100, 150], direction: 'lower' },
+  'HDL': { ideal: [60, 120], warn: [50, 60], direction: 'higher' },
+  'LDL': { ideal: [0, 100], warn: [100, 130], direction: 'lower' },
+  'eGFR': { ideal: [90, 200], warn: [60, 90], direction: 'higher' }
+};
+
+function labStatus(name, value) {
+  const t = LAB_TARGETS[name];
+  if (!t) return { cls: 'info', label: '—' };
+  const [ilo, ihi] = t.ideal;
+  const [wlo, whi] = t.warn;
+  if (value >= ilo && value <= ihi) return { cls: 'success', label: 'IN RANGE' };
+  if (t.direction === 'lower') {
+    if (value < ilo) return { cls: 'success', label: 'GOOD' };
+    if (value <= whi) return { cls: 'warn', label: 'WATCH' };
+    return { cls: 'danger', label: 'HIGH' };
+  }
+  if (t.direction === 'higher') {
+    if (value > ihi) return { cls: 'success', label: 'GOOD' };
+    if (value >= wlo) return { cls: 'warn', label: 'LOW-ish' };
+    return { cls: 'danger', label: 'LOW' };
+  }
+  return { cls: 'warn', label: 'OUT' };
+}
+
+function renderLabs() {
+  const el = document.getElementById('labsPanel');
+  if (!state.labs || !state.labs.length) {
+    el.innerHTML = '<div class="empty">No labs yet. Log your baseline A1C, fasting glucose, testosterone, B12, and hs-CRP — then repeat every 3 months.</div>';
+    return;
+  }
+  // Group by name — show latest per, plus trend
+  const byName = {};
+  state.labs.forEach(l => {
+    if (!byName[l.name]) byName[l.name] = [];
+    byName[l.name].push(l);
+  });
+  Object.values(byName).forEach(arr => arr.sort((a, b) => a.date.localeCompare(b.date)));
+
+  const html = Object.entries(byName).map(([name, arr]) => {
+    const latest = arr[arr.length - 1];
+    const prev = arr.length > 1 ? arr[arr.length - 2] : null;
+    const status = labStatus(name, latest.value);
+    let arrow = '';
+    if (prev) {
+      const diff = latest.value - prev.value;
+      if (Math.abs(diff) > 0.01) {
+        const t = LAB_TARGETS[name];
+        const goodDirection = t && (t.direction === 'lower' ? diff < 0 : diff > 0);
+        arrow = ` <span style="color: ${goodDirection ? 'var(--success)' : 'var(--danger)'}; font-size: 12px;">${diff > 0 ? '▲' : '▼'} ${Math.abs(diff).toFixed(2)}</span>`;
+      }
+    }
+    return `
+      <div class="stake-item">
+        <div style="flex:1;">
+          <div style="font-weight: 700; font-size: 14px;">${name} <span class="pill ${status.cls}">${status.label}</span></div>
+          <div style="font-size: 20px; font-weight: 800; margin-top: 4px;">${latest.value} <span style="font-size: 11px; color: var(--text-dim); font-weight: 400;">${latest.unit || ''}</span>${arrow}</div>
+          <div style="font-size: 11px; color: var(--text-dim); margin-top: 2px;">${new Date(latest.date).toLocaleDateString()} · ${arr.length} reading${arr.length !== 1 ? 's' : ''}</div>
+          ${latest.notes ? `<div style="font-size: 11px; color: var(--text-dim); font-style: italic; margin-top: 2px;">${latest.notes}</div>` : ''}
+        </div>
+        <button class="log-entry-remove" onclick="removeLab(${state.labs.indexOf(latest)})">✕</button>
+      </div>
+    `;
+  }).join('');
+  el.innerHTML = html;
+}
+
 function renderStakes() {
   if (!state.stakes.length) {
     document.getElementById('stakesList').innerHTML = '<div class="empty">No stakes set. Make a promise you can\'t break.</div>';
@@ -1792,6 +1932,57 @@ function buildModalHTML(type) {
         </div>
         <button class="btn btn-primary btn-full" onclick="submitStake()">Lock It In</button>
       `;
+    case 'lab':
+      return `
+        <div class="modal-header">
+          <div class="modal-title">🧪 Log Lab Result</div>
+          <button class="modal-close" onclick="closeModal()">✕</button>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Test</label>
+          <select class="form-select" id="labType" onchange="document.getElementById('customLabRow').style.display = this.value.startsWith('custom') ? 'block' : 'none';">
+            <option value="A1C|%">A1C (%)</option>
+            <option value="Fasting Glucose|mg/dL">Fasting Glucose (mg/dL)</option>
+            <option value="Fasting Insulin|µIU/mL">Fasting Insulin (µIU/mL)</option>
+            <option value="HOMA-IR|">HOMA-IR</option>
+            <option value="Total Testosterone|ng/dL">Total Testosterone (ng/dL)</option>
+            <option value="Free Testosterone|pg/mL">Free Testosterone (pg/mL)</option>
+            <option value="SHBG|nmol/L">SHBG (nmol/L)</option>
+            <option value="Estradiol|pg/mL">Estradiol (pg/mL)</option>
+            <option value="Progesterone|ng/mL">Progesterone (ng/mL)</option>
+            <option value="TSH|mIU/L">TSH (mIU/L)</option>
+            <option value="Free T4|ng/dL">Free T4 (ng/dL)</option>
+            <option value="Vitamin B12|pg/mL">Vitamin B12 (pg/mL)</option>
+            <option value="Vitamin D|ng/mL">Vitamin D (ng/mL)</option>
+            <option value="Ferritin|ng/mL">Ferritin (ng/mL)</option>
+            <option value="hs-CRP|mg/L">hs-CRP inflammation (mg/L)</option>
+            <option value="ALT|U/L">ALT liver (U/L)</option>
+            <option value="AST|U/L">AST liver (U/L)</option>
+            <option value="Triglycerides|mg/dL">Triglycerides (mg/dL)</option>
+            <option value="HDL|mg/dL">HDL (mg/dL)</option>
+            <option value="LDL|mg/dL">LDL (mg/dL)</option>
+            <option value="eGFR|mL/min">eGFR kidney (mL/min)</option>
+            <option value="custom|">Other (specify below)</option>
+          </select>
+        </div>
+        <div class="form-group" id="customLabRow" style="display: none;">
+          <label class="form-label">Custom test name</label>
+          <input type="text" class="form-input" id="labCustom" placeholder="e.g. DHEA-S">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Value</label>
+          <input type="number" step="0.01" class="form-input" id="labValue" placeholder="6.5">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Date drawn</label>
+          <input type="date" class="form-input" id="labDate" value="${today()}">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Notes (optional)</label>
+          <input type="text" class="form-input" id="labNotes" placeholder="Fasted 12hr, drawn after cycle day X, etc.">
+        </div>
+        <button class="btn btn-primary btn-full" onclick="submitLab()">Save Lab</button>
+      `;
     case 'buddy':
       return `
         <div class="modal-header">
@@ -2025,6 +2216,31 @@ function submitStake() {
   render();
 }
 
+function submitLab() {
+  const typeVal = document.getElementById('labType').value;
+  let [name, unit] = typeVal.split('|');
+  if (name === 'custom') {
+    name = document.getElementById('labCustom').value.trim();
+    if (!name) return toast('Enter a test name', 'error');
+  }
+  const value = parseFloat(document.getElementById('labValue').value);
+  const date = document.getElementById('labDate').value || today();
+  const notes = document.getElementById('labNotes').value;
+  if (isNaN(value)) return toast('Enter a value', 'error');
+  state.labs.push({ name, value, unit, date, notes, createdAt: now() });
+  saveState();
+  fanfare('🧪 Logged!', '📊');
+  closeModal();
+  render();
+}
+
+function removeLab(i) {
+  if (!confirm('Delete this lab entry?')) return;
+  state.labs.splice(i, 1);
+  saveState();
+  render();
+}
+
 function submitBuddy() {
   const name = document.getElementById('buddyName').value;
   const contact = document.getElementById('buddyContact').value;
@@ -2185,10 +2401,10 @@ function completeOnboarding() {
   state.profile.startWeight = parseFloat(document.getElementById('obStart').value) || 220;
   state.profile.goalWeight = parseFloat(document.getElementById('obGoal').value) || 120;
   state.profile.octGoal = parseFloat(document.getElementById('obOct').value) || 170;
-  state.macroTargets.calories = parseInt(document.getElementById('obCal').value) || 1500;
-  state.macroTargets.protein = parseInt(document.getElementById('obP').value) || 140;
+  state.macroTargets.calories = parseInt(document.getElementById('obCal').value) || 1600;
+  state.macroTargets.protein = parseInt(document.getElementById('obP').value) || 150;
   state.macroTargets.carbs = parseInt(document.getElementById('obC').value) || 100;
-  state.macroTargets.fat = parseInt(document.getElementById('obF').value) || 60;
+  state.macroTargets.fat = parseInt(document.getElementById('obF').value) || 70;
   saveState();
   fanfare('🚀 MISSION LIVE', '🔥');
   confetti();
