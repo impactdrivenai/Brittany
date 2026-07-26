@@ -44,16 +44,51 @@ Plant-based worked because it was accidentally **low glycemic + high fiber + ant
 2. **Non-starchy veggies second** — half the plate.
 3. **Carbs last** — this order alone drops glucose spikes ~30%.
 
-### Foods to lean into (evidence-backed for YOUR labs)
+### Foods to lean into (evidence-backed for YOUR labs) — no-fish version
 
-- **Legumes daily** (lentils, black beans, chickpeas) — high fiber + protein + resistant starch = massive glucose benefit
-- **Fatty fish 2–3×/week** (salmon, sardines) — omega-3s reduce inflammation and improve insulin sensitivity
+**Protein anchors (rotate these, aim for 30g+ per meal):**
+- **Eggs** — 2–3/day is fine, high protein + choline + B vitamins
+- **Chicken breast / thighs** — cheap, versatile, high protein
+- **Turkey** — ground turkey for meat sauce, tacos, meatballs
+- **Lean red meat** — grass-fed beef, bison — iron + creatine + B12 boost
+- **Greek yogurt (plain, full-fat 5%)** — 20g protein/cup, probiotics, satiating
+- **Cottage cheese** — 24g protein/cup, great snack
+- **Whey or grass-fed whey isolate** — quick backup protein when time is thin
+- **Tofu, tempeh, edamame** — if you like them, huge protein + fiber combo
+- **Legumes when it works** (lentils, black beans, chickpeas) — aim for 4+ days/week if daily feels forced. Bag of pre-cooked lentils in the fridge = zero-effort add.
+
+**Omega-3s (replacing fish):**
+- **Ground flax** — 2 tbsp/day, sprinkle on yogurt, oatmeal, salads
+- **Chia seeds** — 1 tbsp/day, into smoothies or yogurt
+- **Walnuts** — small handful daily
+- **Hemp seeds** — 2 tbsp/day, nutty flavor
+- **Algae oil supplement** — vegan EPA/DHA (see supplement stack). This is where fish actually get their omega-3s from — you're just skipping the middle-fish.
+
+**Rest of the plant-forward pieces:**
 - **Berries daily** — highest-fiber lowest-glycemic fruits
 - **Cruciferous veggies** (broccoli, cauliflower, cabbage, brussels sprouts) — support estrogen metabolism, help with androgen excess
-- **Extra virgin olive oil** — 1–2 tbsp/day. Anti-inflammatory. Also the Mediterranean diet MVP.
-- **Nuts & seeds** — walnuts, almonds, chia, flax. Fiber + healthy fats.
+- **Extra virgin olive oil** — 1–2 tbsp/day. Anti-inflammatory. The Mediterranean diet MVP.
+- **Nuts** — almonds, cashews, pistachios. Fiber + healthy fats.
 - **Cinnamon** in your coffee/oatmeal — modest insulin-sensitivity boost.
 - **Fermented foods** — kimchi, sauerkraut, plain Greek yogurt. Gut health = insulin sensitivity.
+
+### If legumes are a hard sell — fiber replacement plan
+
+Legumes are the best single fiber source, but not the only one. Hit 35g fiber/day with these instead when needed:
+
+| Food | Fiber | Easy sneak-in |
+|---|---|---|
+| **Chia seeds** (2 tbsp) | 10g | In yogurt, oatmeal, or "chia pudding" the night before |
+| **Ground flax** (2 tbsp) | 4g | On top of anything, in smoothies |
+| **Raspberries** (1 cup) | 8g | Snack, on yogurt |
+| **Avocado** (1 whole) | 10g | Half at breakfast, half at lunch |
+| **Broccoli** (1 cup cooked) | 5g | Side at dinner |
+| **Artichoke** (1 whole) | 7g | Steam + dip in olive oil |
+| **Pear** (1 with skin) | 6g | Afternoon snack |
+| **Sweet potato with skin** (1 cup) | 4g | Roasted, with cinnamon |
+| **Brussels sprouts** (1 cup) | 4g | Roasted with olive oil + salt |
+
+Two chia+yogurt breakfasts + a cup of raspberries + a serving of broccoli at dinner = 26g fiber before you've done anything hard.
 
 ### Foods to be strategic about
 
@@ -107,7 +142,7 @@ Loaded into the app under Settings → Medications. Check these off daily.
 | **Methylcobalamin B12** | Metformin depletes B12. Your MTHFR variant means take methylated form. 1000mcg/day. | Non-negotiable while on metformin |
 | **Vitamin D3 + K2** | ~5000 IU D3 + 100mcg K2/day (test level first — most IR women are deficient) | Insulin sensitivity, mood, immunity |
 | **Magnesium glycinate** | 300–400mg at night. Improves insulin sensitivity + sleep. | Glycinate = gentle, doesn't cause GI issues |
-| **Omega-3 (EPA/DHA 2g)** | Anti-inflammatory. Improves IR. | Look for 3rd-party tested (Nordic Naturals, Thorne) |
+| **Algae Oil (EPA/DHA 2g)** — vegan omega-3 since you don't eat fish | Anti-inflammatory. Improves IR. Same active ingredient as fish oil, sourced directly from algae. | **Nordic Naturals Algae Omega**, **Nutrigold Triple Strength Omega-3 Vegan**, or **Ovega-3**. Look for 500mg+ combined EPA/DHA per serving. |
 | **Berberine (optional)** | "Nature's metformin" — 500mg 3× daily with meals. Powerful glucose-lowering. | ⚠️ Don't stack with metformin without doctor OK — can drop glucose too much |
 | **Creatine (optional)** | 5g/day. Strength training performance, brain health. | Safe, well-studied. Great combo with your power-athlete profile |
 
