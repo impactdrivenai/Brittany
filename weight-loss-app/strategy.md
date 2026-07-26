@@ -49,13 +49,14 @@ Plant-based worked because it was accidentally **low glycemic + high fiber + ant
 **Protein anchors (rotate these, aim for 30g+ per meal):**
 - **Eggs** — 2–3/day is fine, high protein + choline + B vitamins
 - **Chicken breast / thighs** — cheap, versatile, high protein
-- **Turkey** — ground turkey for meat sauce, tacos, meatballs
 - **Lean red meat** — grass-fed beef, bison — iron + creatine + B12 boost
 - **Greek yogurt (plain, full-fat 5%)** — 20g protein/cup, probiotics, satiating
 - **Cottage cheese** — 24g protein/cup, great snack
 - **Whey or grass-fed whey isolate** — quick backup protein when time is thin
-- **Tofu, tempeh, edamame** — if you like them, huge protein + fiber combo
+- **Edamame** — you're good with whole edamame even though processed soy (tofu, tempeh, soy milk) is off the list. 1 cup shelled = 18g protein + 8g fiber. Great snack, salt + squeeze of lime.
 - **Legumes when it works** (lentils, black beans, chickpeas) — aim for 4+ days/week if daily feels forced. Bag of pre-cooked lentils in the fridge = zero-effort add.
+
+**Off the list (respected):** fish, seafood, turkey, tofu/tempeh/soy milk.
 
 **Omega-3s (replacing fish):**
 - **Ground flax** — 2 tbsp/day, sprinkle on yogurt, oatmeal, salads
@@ -105,21 +106,128 @@ Two chia+yogurt breakfasts + a cup of raspberries + a serving of broccoli at din
 
 ---
 
-## Training Framework
+## Sugar & Sweets — The Real Strategy
 
-Your 23andMe literally says "elite power athlete muscle composition." Your body was built for **strength and power**, not marathon cardio.
+**First, the truth:** Sugar cravings on your metabolic profile are not a willpower problem. Your insulin resistance is *literally driving them*. When your blood sugar spikes and crashes, your brain screams for more sugar to bring itself back up. Then it crashes again. That's a physiological loop, not a moral failing. You're not weak — you're stuck in a hormone cycle that white-knuckling won't fix.
 
-### Weekly template
+**The good news:** as insulin sensitivity improves (via inositol, metformin, strength training, walking, sleep, protein), the cravings drop dramatically. Give it 6–8 weeks of the protocol and this problem gets 60–80% easier without you fighting it. Right now feels like the hardest it will ever be.
 
-- **3–4× strength training** (45–60 min each)
-  - Compound lifts: squat, deadlift, bench, overhead press, row, hip thrust
-  - Progressive overload: add weight or reps weekly
-  - Rep range: 5–12 for hypertrophy + strength
-- **Daily walks after meals** — this is your cardio. 30–45 min of walking/day, split up. Drops glucose spikes better than 30 min at once.
-- **1–2× "fun" cardio** — dancing, hiking, bike, skating — whatever's fun for your ADHD brain. Optional.
-- **Zone 2 (optional)** — 1× 30-min steady-state at conversational pace helps mitochondria & IR long-term.
+**What actually works** (not "just have more willpower"):
 
-### Why not "more cardio"?
+### 1. Front-load protein — the highest-ROI move
+
+**30–40g of protein at breakfast** eliminates 60–70% of afternoon/evening sugar cravings for most people. This isn't optional if you want to break the cycle.
+
+Fast breakfast that hits it:
+- 3 eggs + Greek yogurt + berries (~35g protein)
+- Cottage cheese + berries + chia + almonds (~30g)
+- Whey protein shake + PB + banana + almond milk (~35g)
+
+### 2. Never eat sugar alone — always pair with fat + protein
+
+Sugar alone = spike + crash + more cravings. Sugar + fat + protein = slower absorption, steadier blood sugar, less rebound craving.
+
+- Dark chocolate? → With a handful of almonds.
+- Fruit? → With almond butter or Greek yogurt.
+- Craving something sweet after dinner? → Greek yogurt + berries + a square of 85% dark chocolate.
+
+### 3. The "designated sweet" strategy
+
+**Do not white-knuckle.** Your 7w8 will backlash and binge. Instead, plan ONE guilt-free sweet per day. It's expected. It's on the schedule. It's not "breaking."
+
+**Low-glycemic sweet options that satisfy** (rotate — variety kills cravings):
+- **Berry-yogurt-cocoa bowl**: Greek yogurt + berries + 1 tsp cocoa + drizzle of maple + almonds
+- **Chia chocolate pudding**: chia + almond milk + cocoa + maple, sits overnight
+- **Protein "ice cream"**: frozen banana + whey + almond milk + PB, blended
+- **1–2 squares of 85% dark chocolate** with almonds
+- **Apple + 2 tbsp almond butter + cinnamon**
+- **Cottage cheese + honey + cinnamon + berries** (sounds weird, tastes like cheesecake)
+- **Protein-baked oatmeal cup** (whey + oats + PB + berries + baked)
+
+### 4. Time-restrict eating (12-hour window minimum)
+
+Stop eating 3 hours before bed. Example: 7am–7pm. This alone cuts nighttime sugar because the craving window is closed. Also improves insulin sensitivity independently.
+
+### 5. Address the WHY — pattern > willpower
+
+When you reach for sugar, note WHEN and WHY. Log it in the app under Notes. Common triggers:
+- **3pm slump** → protein was too low at breakfast/lunch; carry a protein bar
+- **Post-kid-bedtime wind-down** → the ritual is "eat something." Replace with tea + a low-glycemic sweet you planned
+- **Stress** → 5-minute walk first. Craving usually drops 40%.
+- **"I deserve it" feeling** → your reward system is running the show. Pick a non-food reward from the milestone list
+
+### 6. Supplements that specifically reduce cravings
+
+- **Berberine** (with doctor's OK) — hits sugar cravings directly by improving insulin sensitivity
+- **Inositol** (already in your stack) — massive craving reducer for women with IR/PCOS-like patterns, often noticeable by week 4
+- **Chromium picolinate** (200–400mcg with meals) — modest evidence for reducing sugar cravings
+- **L-glutamine** (2–5g when a craving hits, dissolved in water) — feeds gut and can shut down acute cravings in 15 min
+
+### 7. The 14-day "sugar reset" (optional — if you want to break the cycle fast)
+
+Not forever. Just 14 days.
+- Days 1–14: no added sugar (except honey/maple in your designated sweet), no artificial sweeteners either
+- Fruit, dark chocolate, and your designated sweet are IN
+- Days 1–4 will suck (withdrawal is real — headache, moodiness, cravings)
+- By day 7 the taste of "regular sweet" starts to seem too much
+- By day 14 your taste buds have reset and you have data on what triggered you
+
+Then reintroduce with intention — a "planned" dessert on your terms, not a reflex.
+
+### What NOT to do
+
+- Don't go cold turkey / eliminate all sweets forever → 7w8 backlash guaranteed
+- Don't use artificial sweeteners as a "safe" swap → they keep the sweet-seeking neural loop intact and mess with your gut
+- Don't skip meals to "save calories" → the crash guarantees a sugar binge later
+- Don't shame yourself when you slip → 3 days of self-loathing is worse than one cookie
+
+---
+
+## Training Framework — Weight Loss Now, Ultra in 5 Years
+
+Your 23andMe says "elite power athlete muscle composition" — so strength is your superpower. But you also want to run an ultra in 5 years, which means you need to start building an aerobic base NOW (even minimally), because you can't cram 5 years of aerobic adaptation into year 5.
+
+The good news: **the strategy for both goals overlaps almost perfectly.** Building a strong body with a slowly growing aerobic base is exactly how successful ultra runners start. The mistake most beginner ultra runners make is running too much too fast → injury or burnout. You get to skip that.
+
+### Phased approach (matches your priorities)
+
+**Phase 1 — Fat Loss Dominant (Months 0–3)** ← YOU ARE HERE
+- **3× strength training/week** (45–60 min): compound lifts (squat, deadlift, bench, overhead press, row, hip thrust). Progressive overload.
+- **Daily walks after meals** — 30–45 min total, split into 10–15 min chunks. This is your primary cardio + glucose control.
+- **1× easy zone-2 run/week** — 30 min, conversational pace (you can talk in full sentences). Keep the ultra dream warm without stealing recovery from strength or triggering cortisol/hunger. This alone builds meaningful aerobic base over months.
+- **Optional**: dance, hike, skate — whatever's fun. Not required.
+
+**Phase 2 — Balance (Months 3–9)** — after ~30–40 lbs down
+- **3× strength/week** (maintain)
+- **2× run/week** — one 30-min easy, one 45–60-min easy long run. Both zone 2.
+- **Daily walks continue**
+
+**Phase 3 — Aerobic Base Building (Months 9–18)** — after weight is stable-ish
+- **2–3× strength/week**
+- **3–4× run/week** — one long run building from 60 → 90 → 120 min, two easy 30–45 min, one optional speed/hill day
+- **Follow a real ultra base-building plan** (Uphill Athletes, Jason Koop's book *Training Essentials for Ultrarunning*, or a coach)
+
+**Phase 4 — Ultra Training (Years 2–5)**
+- Formal periodized ultra training with a coach or plan targeted to your race
+- Strength drops to 2×/week maintenance
+- By year 3, pick a 50K goal race
+- By year 5, target the ultra distance you want
+
+### Why the strength stays high (even for a future ultra runner)
+
+Most ultra runners who get injured do so because they neglected strength. You get to build the "resilient body" foundation first. When you start real ultra training in year 2–3, you'll be starting from a body that's rebuilt itself — not from injury and burnout.
+
+### Zone 2 — the ultra runner's superpower (and your IR reversal tool)
+
+"Zone 2" = conversational pace. You can talk in full sentences, breathing is elevated but easy. This:
+- Builds mitochondrial density (the base of ALL endurance)
+- Improves insulin sensitivity dramatically
+- Doesn't spike cortisol or hunger the way harder training does
+- Is the foundation of every legit endurance program
+
+If a 30-min "run" means walk 1 min / jog 2 min for 30 min, that's fine. Start where you are. The consistency > intensity for the next 12 months.
+
+### Why not "more cardio for faster weight loss"?
 
 - Strength preserves muscle during weight loss (critical — muscle is your glucose sink)
 - Muscle mass = more insulin sensitivity 24/7
