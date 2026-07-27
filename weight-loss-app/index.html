@@ -622,6 +622,9 @@ details.protocol > div { padding: 0 20px 20px; }
       </div>
     </div>
 
+    <!-- TODAY'S WORKOUT -->
+    <div class="card" style="margin-top: 16px;" id="todayWorkoutCard"></div>
+
     <!-- MY PROTOCOL (collapsible) -->
     <details class="protocol">
       <summary>My Protocol · Quick Reference</summary>
@@ -678,6 +681,9 @@ details.protocol > div { padding: 0 20px 20px; }
 
   <!-- LOG VIEW -->
   <div id="view-log" class="view">
+    <div class="section-title">This Week</div>
+    <div class="card" id="weeklySchedule"></div>
+
     <div class="section-title">Log Everything</div>
     <div class="quick-grid" id="quickGridLog"></div>
 
@@ -1198,6 +1204,8 @@ function render() {
   renderBottomNav();
   renderQuickGrids();
   renderMission();
+  renderTodayWorkout();
+  renderWeeklySchedule();
   renderMacros();
   renderTodayFoodList();
   renderSnapshot();
@@ -1217,6 +1225,102 @@ function render() {
   renderWeeklyPost();
   renderSettings();
   renderMeds();
+}
+
+// ============================================================================
+// WEEKLY WORKOUT PLAN
+// ============================================================================
+// dayIndex: 0=Sun ... 6=Sat
+const WORKOUT_PLAN = [
+  { day: 'SUN', title: 'Rest Day', main: { name: 'Rest', detail: 'True recovery — adaptation happens today', duration: 0, icon: 'moon' }, easy: { name: 'Trampoline + Mailbox walk', detail: '10 min easy bounce + 15 min stroll', duration: 25, icon: 'footprints' }, why: 'Recovery is when your body actually adapts to the work you did all week. Do not skip.' },
+  { day: 'MON', title: 'Upper Body Strength', main: { name: 'Tonal — Upper Body', detail: 'Bench, rows, shoulder press, curls, tricep extensions. Progressive overload.', duration: 35, icon: 'dumbbell' }, easy: { name: 'Trampoline', detail: '8 min easy bounce', duration: 8, icon: 'footprints' }, why: 'Kick off the week strong. Sets tone. Strength is your genetic superpower.' },
+  { day: 'TUE', title: 'Zone 2 Run', main: { name: 'Treadmill — Zone 2', detail: '5 min brisk walk warmup + 2min jog / 2min walk × 5 + 5 min cooldown. Conversational pace ONLY.', duration: 30, icon: 'footprints' }, easy: { name: 'Post-dinner mailbox walk', detail: '10 min stroll', duration: 10, icon: 'footprints' }, why: 'Aerobic base for the ultra + huge insulin sensitivity payoff. Slow = the point.' },
+  { day: 'WED', title: 'Lower Body Strength', main: { name: 'Tonal — Lower Body', detail: 'Squats, RDL, lunges, hip thrusts, calf raises. Progressive overload.', duration: 35, icon: 'dumbbell' }, easy: { name: 'Trampoline', detail: '8 min easy bounce', duration: 8, icon: 'footprints' }, why: 'Legs are your biggest glucose sink. Highest-ROI day for A1C reversal.' },
+  { day: 'THU', title: 'Fun Cardio', main: { name: 'Supernatural VR', detail: 'Flow if energy is meh, Boxing if you\'re fired up. Whatever you\'ll actually do.', duration: 30, icon: 'bolt' }, easy: { name: 'Post-lunch mailbox walk', detail: '10 min stroll', duration: 10, icon: 'footprints' }, why: 'Dopamine cardio. Feeds the ADHD/7w8 brain so you keep coming back.' },
+  { day: 'FRI', title: 'Full Body / Conditioning', main: { name: 'Tonal — Full Body', detail: 'Goblet squats, thrusters, kettlebell swings, farmer carries. Metabolic finisher.', duration: 35, icon: 'dumbbell' }, easy: { name: 'Trampoline', detail: '8 min easy bounce', duration: 8, icon: 'footprints' }, why: 'End the strength week with a burn. Builds endurance strength for future ultras.' },
+  { day: 'SAT', title: 'Hill Day', main: { name: 'Hill Hike', detail: '45–60 min moderate pace — can talk in short sentences. Water + podcast.', duration: 55, icon: 'target' }, easy: { name: 'Mailbox walk (anytime)', detail: '10 min stroll', duration: 10, icon: 'footprints' }, why: 'Longer aerobic + bone density (crucial in perimenopause) + it\'s outside. Highest-ROI cardio in your week.' }
+];
+
+function todayWorkout() {
+  return WORKOUT_PLAN[new Date().getDay()];
+}
+
+function renderTodayWorkout() {
+  const el = document.getElementById('todayWorkoutCard');
+  if (!el) return;
+  const w = todayWorkout();
+  const log = todayLog();
+  const totalMin = (log.exercise || []).reduce((s, e) => s + (parseInt(e.duration) || 0), 0);
+  const goalMin = (w.main.duration || 0) + (w.easy.duration || 0);
+  const pct = goalMin > 0 ? Math.min(100, (totalMin / goalMin) * 100) : 0;
+  el.innerHTML = `
+    <div style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 4px;">
+      <div style="font-size: 11px; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase; color: var(--warm-mute);">Today · ${w.day}</div>
+      <div style="font-size: 11px; font-weight: 800; letter-spacing: 0.08em; color: ${pct >= 100 ? 'var(--lime-dark)' : 'var(--warm-mute)'}; text-transform: uppercase;">${totalMin}/${goalMin} min · ${Math.round(pct)}%</div>
+    </div>
+    <div style="font-family: 'Bricolage Grotesque', system-ui, sans-serif; font-size: 28px; font-weight: 900; letter-spacing: -0.02em; line-height: 1; margin-bottom: 14px;">${w.title}</div>
+    <div style="display: grid; gap: 10px;">
+      <div style="padding: 14px 16px; background: var(--forest); color: var(--cream); border-radius: 12px; display: flex; gap: 12px; align-items: flex-start;">
+        <div style="color: var(--pink); flex-shrink: 0; margin-top: 2px;">${icon(w.main.icon, 22)}</div>
+        <div style="flex: 1;">
+          <div style="font-size: 11px; text-transform: uppercase; letter-spacing: 0.1em; opacity: 0.7; font-weight: 800;">Main · ${w.main.duration} min</div>
+          <div style="font-weight: 800; margin-top: 4px; font-size: 15px;">${w.main.name}</div>
+          <div style="font-size: 12px; opacity: 0.85; margin-top: 4px; line-height: 1.4;">${w.main.detail}</div>
+        </div>
+        <button class="btn btn-primary" style="padding: 8px 12px; font-size: 11px;" onclick="logPlannedWorkout('main')">DONE</button>
+      </div>
+      <div style="padding: 14px 16px; background: var(--lime); color: var(--forest); border-radius: 12px; display: flex; gap: 12px; align-items: flex-start;">
+        <div style="color: var(--forest); flex-shrink: 0; margin-top: 2px;">${icon(w.easy.icon, 22)}</div>
+        <div style="flex: 1;">
+          <div style="font-size: 11px; text-transform: uppercase; letter-spacing: 0.1em; opacity: 0.7; font-weight: 800;">Easy · ${w.easy.duration} min</div>
+          <div style="font-weight: 800; margin-top: 4px; font-size: 15px;">${w.easy.name}</div>
+          <div style="font-size: 12px; opacity: 0.85; margin-top: 4px; line-height: 1.4;">${w.easy.detail}</div>
+        </div>
+        <button class="btn btn-forest" style="padding: 8px 12px; font-size: 11px;" onclick="logPlannedWorkout('easy')">DONE</button>
+      </div>
+    </div>
+    <div style="margin-top: 12px; font-size: 12px; color: var(--warm-dim); font-style: italic; padding: 0 4px;">${w.why}</div>
+  `;
+}
+
+function logPlannedWorkout(kind) {
+  const w = todayWorkout();
+  const block = kind === 'main' ? w.main : w.easy;
+  if (block.duration === 0) {
+    fanfare('Rest day counts', 'moon');
+    return;
+  }
+  const log = todayLog();
+  log.exercise.push({
+    type: block.name,
+    duration: String(block.duration),
+    intensity: kind === 'main' ? 'Moderate' : 'Easy',
+    notes: 'Planned workout completed',
+    time: now()
+  });
+  saveState();
+  fanfare(`${block.duration} min logged`, block.icon);
+  confetti();
+  render();
+}
+
+function renderWeeklySchedule() {
+  const el = document.getElementById('weeklySchedule');
+  if (!el) return;
+  const todayIdx = new Date().getDay();
+  el.innerHTML = WORKOUT_PLAN.map((w, i) => `
+    <div style="padding: 12px 14px; border-radius: 12px; border: 1.5px solid ${i === todayIdx ? 'var(--pink)' : 'var(--warm-border)'}; background: ${i === todayIdx ? 'var(--cream)' : 'var(--cream-2)'}; margin-bottom: 6px; display: flex; gap: 12px; align-items: center;">
+      <div style="width: 44px; text-align: center;">
+        <div style="font-family: 'Bricolage Grotesque', system-ui, sans-serif; font-weight: 900; font-size: 16px; color: ${i === todayIdx ? 'var(--pink)' : 'var(--ink)'};">${w.day}</div>
+        <div style="font-size: 9px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--warm-mute); font-weight: 800; margin-top: 2px;">${(w.main.duration || 0) + (w.easy.duration || 0)}min</div>
+      </div>
+      <div style="flex: 1;">
+        <div style="font-weight: 800; font-size: 14px; letter-spacing: -0.01em;">${w.title}</div>
+        <div style="font-size: 11px; color: var(--warm-dim); margin-top: 2px; font-weight: 500;">${w.main.name}${w.main.duration ? '' : ''} · ${w.easy.name}</div>
+      </div>
+      ${i === todayIdx ? '<span class="pill" style="background: var(--pink); color: var(--cream);">TODAY</span>' : ''}
+    </div>
+  `).join('');
 }
 
 const QUICK_ACTIONS = [

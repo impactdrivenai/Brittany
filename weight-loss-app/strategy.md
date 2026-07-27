@@ -183,6 +183,64 @@ Then reintroduce with intention — a "planned" dessert on your terms, not a ref
 
 ---
 
+## Your Weekly Workout Plan (Phase 1)
+
+You have: **Tonal, Treadmill, Hill, Supernatural VR, Trampoline, Mailbox walk.**
+
+Rule: **2 movement blocks per day.** One "main" workout (30-45 min) + one "easy" pairing (5-15 min). 6 working days + 1 easy day for recovery. This gives your body 3 strength sessions (your genetic superpower), 3 aerobic sessions (weight loss + ultra prep), and enough rest to actually adapt.
+
+### The Week
+
+| Day | Main (Hard) | Easy Pair | Time | Why |
+|---|---|---|---|---|
+| **MON** | **Tonal — Upper Body Strength** (35 min) — bench, rows, shoulder press, curls, tricep ext. Progressive overload. | Trampoline 8 min | 43 min | Kickoff strength. Sets tone for the week. |
+| **TUE** | **Treadmill — Zone 2** (30 min) — 5 min brisk walk warmup, then 2 min slow jog / 2 min walk × 5 rounds, 5 min cool down | Mailbox walk 10 min (post-dinner) | 40 min | Aerobic base for ultra + insulin sensitivity. Conversational pace ONLY. |
+| **WED** | **Tonal — Lower Body Strength** (35 min) — squats, RDL, lunges, hip thrusts, calf raises | Trampoline 8 min | 43 min | Legs are your biggest glucose sink. This is high-ROI for A1C. |
+| **THU** | **Supernatural VR** (30 min) — Flow if energy is meh, Boxing if you're fired up | Mailbox walk 10 min (post-lunch) | 40 min | Fun cardio for the ADHD/7w8 brain. Sustained dopamine. |
+| **FRI** | **Tonal — Full Body / Conditioning** (35 min) — goblet squats, thrusters, kettlebell swings, farmer carries | Trampoline 8 min | 43 min | Metabolic finisher. Burns hard, builds endurance strength. |
+| **SAT** | **Hill Hike** (45-60 min) — moderate pace, can talk in short sentences | Mailbox walk 10 min (whenever) | 55-70 min | Longer aerobic. Great for perimenopause bone density + ultra base + it's outside. |
+| **SUN** | **REST DAY** — Trampoline 10 min easy bounce (with kid?) | Mailbox walk 15 min (whenever) | 25 min | Recovery is when adaptation happens. Do NOT skip. |
+
+### Weekly totals
+- **3 strength sessions** (Tonal)
+- **3 aerobic sessions** (Treadmill, VR, Hill)
+- **1 true rest day**
+- **~4-5 hours of movement/week** — realistic for a working mom, not overkill
+
+### Notes on each
+
+**Tonal:** Use built-in programs. Look for "Get Started with Strength" or intermediate strength programs 4-8 weeks long. Let Tonal manage the weights — it auto-progresses. If you're brand new to lifting, start with beginner programs. Don't ego-lift; form > weight in month one.
+
+**Treadmill Zone 2:** "Conversational pace" is the ONLY rule. If you can't talk in full sentences, you're going too hard. If today's "run" is 30 min of pure walking, that's fine. The magic is consistency, not intensity. Slight incline (1-2%) is good.
+
+**Supernatural VR:** Both Flow and Boxing count. Flow = sustained cardio, meditative. Boxing = higher intensity, more like HIIT. Pick based on mood — the fact that you'll DO it matters more than which one.
+
+**Hill Hike:** Just walk uphill for 45-60 min at conversational pace. Bring water and a podcast if that helps your brain. This is possibly the highest-ROI workout in your week — walking uphill is elite cardio for someone in weight loss phase.
+
+**Trampoline (rebounding):** 5-10 min of easy bouncing. Bonus benefits for perimenopause: lymphatic drainage, low-impact bone loading, pelvic floor. Great with kid.
+
+**Mailbox walks:** Any time, but ideally right after a meal. Even 5 min drops your glucose spike. Multiple per day are a bonus — none are ever wasted.
+
+### If a day gets blown up
+
+Rules for the ADHD/business/mom reality:
+1. **If you miss the main workout**, still do the easy one. Never zero.
+2. **If you miss both**, log at least a 5-min mailbox walk. Preserve the streak.
+3. **Never miss two hard days in a row.** Rearrange the week if needed but keep 3 strength + 3 aerobic somewhere.
+4. **Cycle day 1-2 or migraine day?** Downgrade to trampoline + mailbox. Rest is not weakness.
+
+### Progression (in ~4 weeks re-visit)
+
+By week 4-6 you'll want to:
+- Increase Tonal weights (Tonal will nudge you)
+- Add 5-10 min to treadmill jog intervals
+- Extend hill hike to 75-90 min
+- Consider a second run day (Wed or Fri could add a mid-week short run)
+
+We'll retune this together as your body adapts.
+
+---
+
 ## Training Framework — Weight Loss Now, Ultra in 5 Years
 
 Your 23andMe says "elite power athlete muscle composition" — so strength is your superpower. But you also want to run an ultra in 5 years, which means you need to start building an aerobic base NOW (even minimally), because you can't cram 5 years of aerobic adaptation into year 5.
