@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+# Thin launcher so you can run ./reel <command> from the engine folder (or add it to PATH).
+HERE="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+exec python3 "$HERE/reel.py" "$@"

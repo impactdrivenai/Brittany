@@ -1,0 +1,34 @@
+{
+  "name": "brittany",
+  "label": "Brittany / Impact Driven AI (editorial, cinematic, designed)",
+  "colors": {
+    "accent": "#E8187A", "win": "#B8D43A", "dark": "#122C25", "dark2": "#2E7663",
+    "ink": "#060709", "light": "#FFFAFA", "light_dim": "#F4EDEB"
+  },
+  "fonts": {
+    "caption": "Manrope SemiBold", "caption_file": "Manrope-SemiBold.ttf",
+    "caption_bold": "Manrope ExtraBold", "caption_bold_file": "Manrope-ExtraBold.ttf",
+    "hero": "Fraunces SemiBold", "hero_italic": true, "hero_file": "Fraunces-SemiBoldItalic.ttf",
+    "title": "Fraunces Bold", "title_file": "Fraunces-Bold.ttf",
+    "annotation": "Caveat Brush", "annotation_file": "CaveatBrush-Regular.ttf"
+  },
+  "captions": {
+    "mode": "editorial_split", "zone": "upper", "size": 58, "hero_scale": 1.9,
+    "max_words": 4, "text_color": "light", "hero_color": "accent", "number_color": "win",
+    "shadow": true, "pop": true, "case": "normal"
+  },
+  "cut": {
+    "max_pause": 0.35, "keep_pause": 0.12, "min_segment": 0.25, "speed": 1.0,
+    "jump_cut_punch": true, "punch_scale": 1.12,
+    "fillers": ["um", "uh", "uhm", "erm", "hmm", "mm", "mhm", "ah"],
+    "cut_stutters": true
+  },
+  "grade": { "look": "warm_moody", "grain": 5, "vignette": 0.30, "denoise": true },
+  "sound": {
+    "sfx": "light", "sfx_every": [8, 10], "sfx_db_under_voice": 15,
+    "banned": ["whoosh", "swish"], "music_db_under_voice": 20, "voice_lufs": -14
+  },
+  "end_card": { "enabled": true, "duration": 1.5, "line1": "Impact Driven AI", "line2": "@womenthrivewithai", "bg": "light", "fg": "dark", "sfx": "pop-soft" },
+  "cta": { "style": "button", "template": "Comment {keyword}", "seconds": 2.5, "bg": "accent", "fg": "light" },
+  "rules": { "all_caps": false, "emojis": false, "banned_words": ["um yes please", "quiet", "quietly", "ship", "shipping", "heavy lifting", "you're not behind"] }
+}

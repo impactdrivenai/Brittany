@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Reels Editing Engine</title>
+<style>
+:root{--ink:#060709;--bg:#FFFAFA;--dim:#F4EDEB;--accent:#E8187A;--forest:#122C25;--lime:#B8D43A}
+*{box-sizing:border-box}body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;background:var(--bg);color:var(--ink)}
+header{display:flex;align-items:center;gap:16px;padding:14px 20px;border-bottom:1px solid var(--dim)}
+header h1{font-size:18px;margin:0;font-weight:700}header .status{font-size:13px;color:#555;flex:1}
+main{display:grid;grid-template-columns:360px 1fr;gap:20px;padding:20px;min-height:calc(100vh - 60px)}
+.player{position:sticky;top:20px;align-self:start}
+video{width:324px;height:576px;background:#000;border-radius:18px;display:block;box-shadow:0 10px 40px rgba(0,0,0,.2)}
+.overlay{position:absolute;inset:0;width:324px;height:576px;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700;border-radius:18px;background:rgba(0,0,0,.45);pointer-events:none;opacity:0;transition:opacity .2s}
+.overlay.on{opacity:1}
+.meta{font-size:12px;color:#666;margin-top:10px}
+.words{line-height:2.2;font-size:17px;user-select:none}
+.sent{margin-bottom:10px;padding:8px 10px;border-radius:10px;background:#fff;border:1px solid var(--dim)}
+.w{display:inline-block;padding:2px 6px;margin:1px;border-radius:6px;cursor:pointer;border:1px solid transparent}
+.w:hover{border-color:#ccc}.w.sel{background:#FFE3F0;border-color:var(--accent)}
+.w.removed{text-decoration:line-through;color:#aaa;background:#f4f4f4}.w.removed.sel{background:#ffd4e6}
+.w.hook{background:#EAF5C4;border-color:var(--lime)}
+.bar{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 12px}
+button{font:inherit;font-size:13px;padding:8px 12px;border-radius:999px;border:1px solid var(--forest);background:#fff;cursor:pointer}
+button.primary{background:var(--accent);border-color:var(--accent);color:#fff;font-weight:700}
+button.ghost{border-color:#ccc;color:#444}
+select,input{font:inherit;font-size:13px;padding:7px 10px;border-radius:8px;border:1px solid #ccc;background:#fff}
+.row{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:6px 0}
+label{font-size:12px;color:#555}
+.panel{background:#fff;border:1px solid var(--dim);border-radius:12px;padding:12px 14px;margin-bottom:14px}
+.err{background:#fff0f0;color:#900;padding:8px 10px;border-radius:8px;font-size:12px;white-space:pre-wrap}
+@media (max-width:820px){main{grid-template-columns:1fr}.player{position:static}video,.overlay{width:270px;height:480px}}
+</style></head>
+<body>
+<header><h1>Reels Editing Engine</h1><div class="status" id="status">loading…</div><button class="primary" onclick="post('/api/render',{})">Render final 1080p</button></header>
+<main>
+  <div class="player">
+    <div style="position:relative;width:324px"><video id="v" controls autoplay muted loop playsinline></video><div class="overlay" id="ov">rendering…</div></div>
+    <div class="meta" id="meta"></div>
+  </div>
+  <div>
+    <div class="panel">
+      <div class="bar">
+        <button class="primary" onclick="cutSel()">Cut selected</button>
+        <button onclick="restoreSel()">Restore selected</button>
+        <button onclick="hookSel()">Make selected the hook</button>
+        <button class="ghost" onclick="post('/api/hook',{range:null})">Clear hook</button>
+        <button class="ghost" onclick="sel.clear();draw()">Clear selection</button>
+      </div>
+      <div class="row">
+        <label>Look</label><select id="style" onchange="post('/api/style',{style:this.value})"></select>
+        <label>Captions</label><select id="mode" onchange="post('/api/captions',{mode:this.value||null})"><option value="">style default</option><option value="editorial_split">editorial split</option><option value="word_pop">word pop</option><option value="sentence">sentence</option></select>
+        <select id="zone" onchange="post('/api/captions',{zone:this.value||null})"><option value="">zone: default</option><option value="top">top</option><option value="upper">upper</option><option value="center">center</option><option value="lower">lower</option></select>
+        <label>Speed</label><input id="speed" style="width:70px" placeholder="1.00" onchange="post('/api/speed',{speed:this.value})">
+      </div>
+      <div class="row">
+        <label>CTA</label><select id="ctatype"><option value="">none</option><option value="keyword">comment keyword</option><option value="share">share</option><option value="follow">follow</option><option value="save">save</option></select>
+        <input id="ctakw" placeholder="KEYWORD" style="width:120px"><input id="ctatext" placeholder="custom text (optional)" style="width:240px">
+        <button onclick="post('/api/cta',{type:q('ctatype').value,keyword:q('ctakw').value,text:q('ctatext').value})">Apply CTA</button>
+      </div>
+      <div class="row">
+        <label>Fix a word</label><input id="fixidx" placeholder="#" style="width:60px"><input id="fixtxt" placeholder="correct spelling" style="width:200px"><button onclick="post('/api/fix',{index:q('fixidx').value,text:q('fixtxt').value})">Fix caption</button>
+        <label>Zoom (output s)</label><input id="z1" placeholder="4.5" style="width:60px"><input id="z2" placeholder="6.0" style="width:60px"><input id="zs" placeholder="1.2" style="width:60px"><button onclick="post('/api/zoom',{start:q('z1').value,end:q('z2').value,scale:q('zs').value||1.2})">Add zoom</button><button class="ghost" onclick="post('/api/zoom',{clear:true})">Clear zooms</button>
+      </div>
+      <div id="err"></div>
+    </div>
+    <div class="words" id="words"></div>
+    <p style="font-size:12px;color:#666">Click words to select (shift-click for a range). Struck words are cut. Green words are the hook that opens the reel. Every change re-renders the preview on its own; the final 1080p render is one click.</p>
+  </div>
+</main>
+<script>
+const q=id=>document.getElementById(id);let S=null,sel=new Set(),lastClick=null,vver=0,wasRendering=false;
+async function post(path,body){const r=await fetch(path,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(body)});const j=await r.json();if(!j.ok){q('err').innerHTML='<div class="err">'+(j.error||'error')+'</div>'}else{q('err').innerHTML=''}refresh();}
+function cutSel(){if(!sel.size)return;post('/api/cut',{indices:[...sel]});sel.clear()}
+function restoreSel(){if(!sel.size)return;post('/api/restore',{indices:[...sel]});sel.clear()}
+function hookSel(){if(!sel.size)return;const a=[...sel];post('/api/hook',{range:[Math.min(...a),Math.max(...a)]});sel.clear()}
+function clickWord(e,i){if(e.shiftKey&&lastClick!==null){const [a,b]=[Math.min(lastClick,i),Math.max(lastClick,i)];for(let k=a;k<=b;k++)sel.add(k)}else{sel.has(i)?sel.delete(i):sel.add(i)}lastClick=i;draw()}
+function draw(){if(!S)return;const hook=S.edit.hook;const el=q('words');let html='';for(const s of S.sentences){html+='<div class="sent">';for(const i of s){const w=S.words[i];const cls=['w'];if(w.removed)cls.push('removed');if(sel.has(i))cls.push('sel');if(hook&&i>=hook[0]&&i<=hook[1])cls.push('hook');html+=`<span class="${cls.join(' ')}" title="#${i} · ${w.s.toFixed(1)}s" onclick="clickWord(event,${i})">${w.w}</span>`}html+='</div>'}el.innerHTML=html;
+ q('status').textContent=`${S.name} · ${S.log}${S.duration?` · ${S.duration.toFixed(1)}s, ${S.segments} cuts`:''}`;
+ q('ov').classList.toggle('on',S.rendering||S.dirty);q('meta').textContent=S.dir;
+ q('err').innerHTML=S.error?'<div class="err">'+S.error+'</div>':'';
+ const st=q('style');if(st.options.length!==S.styles.length+((S.styles.includes(S.style))?0:1)){st.innerHTML='';for(const n of S.styles)st.add(new Option(n,n));if(!S.styles.includes(S.style))st.add(new Option('custom (project)',S.style))}st.value=S.style;
+ if(document.activeElement!==q('mode'))q('mode').value=S.captions.mode||'';if(document.activeElement!==q('zone'))q('zone').value=(typeof S.captions.zone==='string')?S.captions.zone:'';
+ if(document.activeElement!==q('speed'))q('speed').value=S.edit.speed||'';
+ if(document.activeElement!==q('ctatype')){q('ctatype').value=S.cta.type||'';q('ctakw').value=S.cta.keyword||'';}
+ if(S.video.exists&&S.video.version!==vver){vver=S.video.version;const v=q('v');const t=v.currentTime;v.src='/video?v='+vver;v.load();v.play().catch(()=>{});}
+}
+async function refresh(){try{const r=await fetch('/api/state');S=await r.json();draw()}catch(e){q('status').textContent='server not reachable'}}
+refresh();setInterval(refresh,1500);
+</script></body></html>

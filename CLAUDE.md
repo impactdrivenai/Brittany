@@ -1,5 +1,12 @@
 # Idea-to-Website Generator
 
+# Reels Editing Engine (video, not funnels)
+
+If the user drops in a video file, mentions a raw video, or asks to edit / cut / caption / render a reel, carousel or stories, do
+NOT run the funnel workflow below. Load the `reels-editing-engine` skill (`.claude/skills/reels-editing-engine/SKILL.md`) and
+drive `reels-editing-engine/reel.py`. Finished reels land in `reels/<date>-<slug>/exports/`.
+
+
 ## How This Works
 
 When a user messages an idea (product, service, course, coaching program, digital product, membership, etc.), automatically run the **FULL GENERATION WORKFLOW** below. Do NOT ask clarifying questions — make smart assumptions and generate everything. The user can refine later.

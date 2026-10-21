@@ -1,0 +1,34 @@
+{
+  "name": "playful",
+  "label": "Playful: bright colors, bouncy word pops, lively sounds.",
+  "colors": {
+    "accent": "#FF4FA3", "win": "#FFD43B", "dark": "#1B1464", "dark2": "#3A86FF",
+    "ink": "#0D0B1E", "light": "#FFFFFF", "light_dim": "#F1EEFF"
+  },
+  "fonts": {
+    "caption": "Manrope ExtraBold", "caption_file": "Manrope-ExtraBold.ttf",
+    "caption_bold": "Manrope ExtraBold", "caption_bold_file": "Manrope-ExtraBold.ttf",
+    "hero": "Manrope ExtraBold", "hero_italic": false, "hero_file": "Manrope-ExtraBold.ttf",
+    "title": "Fraunces Bold", "title_file": "Fraunces-Bold.ttf",
+    "annotation": "Caveat Brush", "annotation_file": "CaveatBrush-Regular.ttf"
+  },
+  "captions": {
+    "mode": "word_pop", "zone": "chest", "size": 120, "hero_scale": 1.0,
+    "max_words": 1, "text_color": "light", "hero_color": "win", "number_color": "win",
+    "shadow": true, "pop": true, "case": "upper"
+  },
+  "cut": {
+    "max_pause": 0.3, "keep_pause": 0.10, "min_segment": 0.2, "speed": 1.05,
+    "jump_cut_punch": true, "punch_scale": 1.18,
+    "fillers": ["um", "uh", "uhm", "erm", "hmm", "mm", "mhm", "like"],
+    "cut_stutters": true
+  },
+  "grade": { "look": "bright", "grain": 0, "vignette": 0.0, "denoise": true },
+  "sound": {
+    "sfx": "lively", "sfx_every": [5, 6], "sfx_db_under_voice": 12,
+    "banned": ["whoosh", "swish"], "music_db_under_voice": 16, "voice_lufs": -14
+  },
+  "end_card": { "enabled": false, "duration": 1.5, "line1": "", "line2": "", "bg": "accent", "fg": "light", "sfx": "pop-bubble" },
+  "cta": { "style": "button", "template": "Comment {keyword}", "seconds": 2.5, "bg": "win", "fg": "ink" },
+  "rules": { "all_caps": true, "emojis": false, "banned_words": [] }
+}

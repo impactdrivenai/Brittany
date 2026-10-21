@@ -1,0 +1,34 @@
+{
+  "name": "butter",
+  "label": "Butter (free look): warm, soft, simple. Big friendly captions on cream.",
+  "colors": {
+    "accent": "#F2B93B", "win": "#F2B93B", "dark": "#2B2520", "dark2": "#6B5A4A",
+    "ink": "#17120E", "light": "#FFF8EC", "light_dim": "#F6EBD5"
+  },
+  "fonts": {
+    "caption": "Manrope ExtraBold", "caption_file": "Manrope-ExtraBold.ttf",
+    "caption_bold": "Manrope ExtraBold", "caption_bold_file": "Manrope-ExtraBold.ttf",
+    "hero": "Manrope ExtraBold", "hero_italic": false, "hero_file": "Manrope-ExtraBold.ttf",
+    "title": "Fraunces Bold", "title_file": "Fraunces-Bold.ttf",
+    "annotation": "Caveat Brush", "annotation_file": "CaveatBrush-Regular.ttf"
+  },
+  "captions": {
+    "mode": "word_pop", "zone": "chest", "size": 110, "hero_scale": 1.0,
+    "max_words": 1, "text_color": "light", "hero_color": "accent", "number_color": "accent",
+    "shadow": true, "pop": true, "case": "normal"
+  },
+  "cut": {
+    "max_pause": 0.4, "keep_pause": 0.15, "min_segment": 0.25, "speed": 1.0,
+    "jump_cut_punch": true, "punch_scale": 1.10,
+    "fillers": ["um", "uh", "uhm", "erm", "hmm", "mm", "mhm"],
+    "cut_stutters": true
+  },
+  "grade": { "look": "clean", "grain": 3, "vignette": 0.15, "denoise": true },
+  "sound": {
+    "sfx": "light", "sfx_every": [8, 10], "sfx_db_under_voice": 15,
+    "banned": ["whoosh", "swish"], "music_db_under_voice": 20, "voice_lufs": -14
+  },
+  "end_card": { "enabled": false, "duration": 1.5, "line1": "", "line2": "", "bg": "light", "fg": "dark", "sfx": "pop-soft" },
+  "cta": { "style": "button", "template": "Comment {keyword}", "seconds": 2.5, "bg": "accent", "fg": "ink" },
+  "rules": { "all_caps": false, "emojis": false, "banned_words": [] }
+}
