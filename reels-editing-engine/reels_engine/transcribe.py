@@ -13,14 +13,53 @@ def extract_audio(video, out_wav):
     return out_wav
 
 
-def transcribe(video, out_json, model_size="small", language=None, device="auto", compute_type="auto", work_dir=None):
+def transcribe(video, out_json, model_size="small", language=None, device="auto", compute_type="auto", work_dir=None, engine="auto"):
+    """engine: auto (faster-whisper, falling back to pocketsphinx when its model cannot be loaded), whisper, or sphinx."""
     work_dir = Path(work_dir or Path(out_json).parent)
     wav = work_dir / "audio16k.wav"
     extract_audio(video, wav)
+    if engine in ("auto", "whisper"):
+        try:
+            return _whisper(wav, out_json, model_size, language, device, compute_type)
+        except Exception as e:
+            if engine == "whisper":
+                raise
+            log(f"faster-whisper unavailable ({str(e).splitlines()[0][:140]}); falling back to pocketsphinx (offline, less accurate: check every caption)")
+    return _sphinx(wav, out_json)
+
+
+def _sphinx(wav, out_json):
+    try:
+        from pocketsphinx import Decoder
+    except ImportError:
+        raise RuntimeError("no transcriber available: pip install pocketsphinx (offline) or faster-whisper, or import an SRT with reel import-transcript")
+    import wave
+    log("transcribing with pocketsphinx (bundled offline model)...")
+    d = Decoder(logfn="/dev/null" if Path("/dev/null").exists() else None)
+    with wave.open(str(wav)) as w:
+        data = w.readframes(w.getnframes())
+    d.start_utt(); d.process_raw(data, False, True); d.end_utt()
+    words = []
+    for seg in d.seg():
+        tok = seg.word
+        if tok.startswith(("<", "[")):
+            continue
+        tok = re.sub(r"\(\d+\)$", "", tok)
+        words.append({"i": len(words), "w": tok, "s": round(seg.start_frame / 100, 3), "e": round(seg.end_frame / 100, 3), "p": round(float(getattr(seg, "prob", 0.5) or 0.5), 2)})
+    if not words:
+        raise RuntimeError("pocketsphinx heard no words; is the audio audible?")
+    data = _finish(words, _segments_from_words(words), source="pocketsphinx", language="en")
+    data["needs_review"] = True
+    write_json(out_json, data)
+    log(f"transcript: {len(words)} words (pocketsphinx). Review transcript.md and fix misheard words with: reel fix")
+    return data
+
+
+def _whisper(wav, out_json, model_size, language, device, compute_type):
     try:
         from faster_whisper import WhisperModel
     except ImportError:
-        raise RuntimeError("faster-whisper is not installed. Run: pip install -r requirements.txt  (or: reel setup)")
+        raise RuntimeError("faster-whisper is not installed")
     log(f"transcribing with faster-whisper '{model_size}' (first run downloads the model)...")
     model = WhisperModel(model_size, device=device, compute_type=compute_type)
     segments, info = model.transcribe(str(wav), word_timestamps=True, language=language, vad_filter=True,

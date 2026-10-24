@@ -62,7 +62,7 @@ def cmd_setup(a):
     for b in ("ffmpeg", "ffprobe"):
         print(f"  {'ok ' if have(b) else 'MISSING'} {b}")
         ok &= have(b)
-    for mod in ("numpy", "PIL", "faster_whisper"):
+    for mod in ("numpy", "PIL", "faster_whisper", "pocketsphinx"):
         try:
             __import__(mod); print(f"  ok  python {mod}")
         except ImportError:
@@ -82,14 +82,14 @@ def cmd_new(a):
     p = Project.create(a.video, name=a.name, style=a.style, reels_dir=a.reels_dir)
     print(p.dir)
     if a.transcribe:
-        a.project = str(p.dir); a.model = a.model or "small"; a.language = None
+        a.project = str(p.dir); a.model = a.model or "small"; a.language = None; a.engine = "auto"
         cmd_transcribe(a)
 
 
 def cmd_transcribe(a):
     p = proj(a.project)
     from reels_engine.transcribe import transcribe
-    tr = transcribe(p.raw, p.transcript_file, model_size=a.model or "small", language=a.language, work_dir=p.work)
+    tr = transcribe(p.raw, p.transcript_file, model_size=a.model or "small", language=a.language, work_dir=p.work, engine=a.engine)
     _after_transcript(p, tr)
 
 
@@ -301,7 +301,7 @@ def main(argv=None):
     sub = ap.add_subparsers(dest="cmd", required=True)
     s = sub.add_parser("setup"); s.add_argument("--model", help="also download this whisper model (tiny/base/small/medium)"); s.set_defaults(fn=cmd_setup)
     s = sub.add_parser("new"); s.add_argument("video"); s.add_argument("--name"); s.add_argument("--style", default="brittany"); s.add_argument("--reels-dir"); s.add_argument("--transcribe", action="store_true"); s.add_argument("--model"); s.set_defaults(fn=cmd_new)
-    s = sub.add_parser("transcribe"); s.add_argument("project", nargs="?"); s.add_argument("--model"); s.add_argument("--language"); s.set_defaults(fn=cmd_transcribe)
+    s = sub.add_parser("transcribe"); s.add_argument("project", nargs="?"); s.add_argument("--model"); s.add_argument("--language"); s.add_argument("--engine", choices=["auto", "whisper", "sphinx"], default="auto"); s.set_defaults(fn=cmd_transcribe)
     s = sub.add_parser("import-transcript"); s.add_argument("project"); s.add_argument("file"); s.set_defaults(fn=cmd_import_transcript)
     s = sub.add_parser("words"); s.add_argument("project", nargs="?"); s.set_defaults(fn=cmd_words)
     s = sub.add_parser("cut"); s.add_argument("project"); s.add_argument("words", nargs="+"); s.set_defaults(fn=cmd_cut)

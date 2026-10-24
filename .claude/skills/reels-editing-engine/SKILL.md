@@ -12,6 +12,27 @@ taste: normal case only, no whoosh, no emojis, hook on screen by 0.5s, something
 Run every command from the repo root as `python3 reels-editing-engine/reel.py <command>` (or `./reels-editing-engine/reel <command>`).
 Reel projects live in `reels/` (one folder per reel, ignored by git). `reel --help` lists everything.
 
+## Running in a Claude Code cloud session (nothing installed on her computer)
+
+ffmpeg, Python, Pillow and the fonts are already in the cloud container; `.claude/settings.json` installs the Python
+transcribers at session start. Three things differ from a laptop:
+
+1. **Getting the video in.** Check, in this order: a file she attached to the chat (look in the working directory and
+   the scratchpad for new video files); a file she pushed to the repo (`git pull`, e.g. an `inbox/` folder); a Google Drive
+   file. The Drive connector (`mcp__Google_Drive__search_files` / `download_file_content`) only downloads files under 10 MB;
+   a saved tool result is decoded with `python3 reels-editing-engine/tools/drive_result_to_file.py <tool-result.txt> <dir>`.
+   For bigger Drive files she must either attach the file here or add `drive.google.com`, `drive.usercontent.google.com`
+   and `www.googleapis.com` to the environment's Allowed domains, after which a link shared as "anyone with the link"
+   downloads with `curl -L "https://drive.usercontent.google.com/download?id=<ID>&export=download&confirm=t"`.
+2. **Transcription.** `reel transcribe` tries faster-whisper first. Its model host (`huggingface.co`, `cdn-lfs.huggingface.co`)
+   is blocked unless she adds it to the environment's Allowed domains; it then falls back to pocketsphinx, which is offline
+   and rougher. With pocketsphinx, read transcript.md against the audio sense, fix every misheard word with `reel fix` (or the
+   `fixes` map) before rendering, and say in the delivery note that captions were proofread by you, not Whisper.
+   If she can paste a transcript (Instagram, Descript, CapCut, Notes), `reel import-transcript` beats both.
+3. **Getting the reel out.** Send `exports/<name>.mp4`, `cover.jpg` and `cut-notes.md` to her with the SendUserFile tool
+   (status normal, display attach). Drive uploads through the connector are text-sized only, so do not push video that way.
+   Commit nothing under `reels/` (it is git-ignored).
+
 ## The workflow (do not skip steps)
 
 1. **Setup once**: `reel setup` (checks ffmpeg, python deps, fonts, sound bank). If anything is MISSING, fix it first:

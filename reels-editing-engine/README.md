@@ -13,6 +13,16 @@ Claude Code drives it from plain language; the `reel` CLI and a live browser edi
 
 Phone footage over about 400 MB: film 1080p at 30 fps or in short takes.
 
+## Using it inside a Claude Code cloud session (no installs)
+
+The container already has ffmpeg, Python and the fonts, and `.claude/settings.json` installs the transcribers when a
+session starts. Open a session in this repo, give Claude the video (attach it in chat, push it to the repo, or point at a
+Google Drive file under 10 MB) and say "edit this reel". Claude runs every command below for you and sends the finished
+files back into the chat. Two optional one-time settings in the cloud environment (Network access, Allowed domains) make
+it better: `huggingface.co` + `cdn-lfs.huggingface.co` turns on accurate Whisper transcription (otherwise the offline
+pocketsphinx fallback is used and Claude proofreads the captions), and `drive.google.com` +
+`drive.usercontent.google.com` + `www.googleapis.com` lets Claude pull large videos straight from a shared Drive link.
+
 ## Use
 
 ```
@@ -52,7 +62,7 @@ Everything is a separate file in the project folder so one fix never means rebui
 
 ## Honest limits
 
-- Transcription needs a Whisper model download on first run (internet once). No internet: import an SRT/VTT/JSON with `reel import-transcript`.
+- Transcription: faster-whisper (downloads a model on first run) with an offline pocketsphinx fallback (bundled model, rougher; proofread captions). Or import an SRT/VTT/JSON with `reel import-transcript`.
 - Captions avoid the bottom 20 percent and sit in the zone you pick; there is no face detection, so if a caption lands on a face, change `--zone`.
 - The editable hand-off is a clean cut + SRT + EDL + PNG overlays, not a native CapCut draft file. CapCut imports the SRT and the clips; the look carries through the style tokens and the fonts folder.
 - Sound effects ship as a small synthesized starter bank. Drop your own WAV/MP3 files into `sfx/` with descriptive names (anything named whoosh or swish is ignored).
